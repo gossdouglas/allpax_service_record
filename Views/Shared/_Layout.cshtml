@@ -17,13 +17,22 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("About", "About", "Home")</li>
+        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                    <li>@Html.ActionLink("Customers", "Index", "customers")</li>
+                    <li>@Html.ActionLink("Daily Report", "Index", "dailyReport")</li>
+                    <li>@Html.ActionLink("Daily Report Time Entry", "Index", "dailyReportTimeEntry")</li>
+                    <li>@Html.ActionLink("Job Correspondents", "Index", "jobCorrespondents")</li>
+                    <li>@Html.ActionLink("Job Resource Types", "Index", "jobResourceTypes")</li>
+                    <li>@Html.ActionLink("Jobs", "Index", "jobs")</li>
+                    <li>@Html.ActionLink("Resource Types", "Index", "resourceTypes")</li>
+                    <li>@Html.ActionLink("Sub Job Types", "Index", "subJobTypes")</li>
+                    <li>@Html.ActionLink("Users", "Index", "users")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
