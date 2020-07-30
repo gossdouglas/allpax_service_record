@@ -19,6 +19,9 @@ namespace allpax_service_record.Models
 
         public decimal rate { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int id { get; set; }
+
         public virtual tbl_Jobs tbl_Jobs { get; set; }
 
         public virtual tbl_resourceTypes tbl_resourceTypes { get; set; }

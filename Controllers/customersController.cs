@@ -17,103 +17,42 @@ namespace allpax_service_record.Controllers
         // GET: customers
         public ActionResult Index()
         {
-            return View(db.tbl_customers.ToList());
+            //return View(db.tbl_customers.ToList());
+            var sql = db.tbl_customers.SqlQuery("SELECT * from tbl_customers").ToList();
+
+            return View(sql.ToList());
         }
 
-        // GET: customers/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbl_customers tbl_customers = db.tbl_customers.Find(id);
-            if (tbl_customers == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbl_customers);
-        }
-
-        // GET: customers/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: customers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //begin CMPS 411 controller code
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "customerCode,customerName,address")] tbl_customers tbl_customers)
+        public ActionResult AddCustomer(tbl_customers customerAdd)
         {
-            if (ModelState.IsValid)
-            {
-                db.tbl_customers.Add(tbl_customers);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            //db.Database.ExecuteSqlCommand("Insert into cmps411.tbl_customer Values({0},{1},{2}, {3}, {4}, {5})",
+            //    customerAdd.customerCode, customerAdd.name, customerAdd.address, customerAdd.city, customerAdd.state, customerAdd.zipCode);
 
-            return View(tbl_customers);
+            db.Database.ExecuteSqlCommand("Insert into tbl_customers Values({0},{1},{2})",
+                customerAdd.customerCode, customerAdd.customerName, customerAdd.address);
+            return new EmptyResult();
         }
 
-        // GET: customers/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult DeleteCustomer(tbl_customers custDelete)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbl_customers tbl_customers = db.tbl_customers.Find(id);
-            if (tbl_customers == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbl_customers);
-        }
+            db.Database.ExecuteSqlCommand("DELETE FROM tbl_customers WHERE id=({0})", custDelete.id);
 
-        // POST: customers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "customerCode,customerName,address")] tbl_customers tbl_customers)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tbl_customers).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(tbl_customers);
-        }
-
-        // GET: customers/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbl_customers tbl_customers = db.tbl_customers.Find(id);
-            if (tbl_customers == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbl_customers);
-        }
-
-        // POST: customers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            tbl_customers tbl_customers = db.tbl_customers.Find(id);
-            db.tbl_customers.Remove(tbl_customers);
-            db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult UpdateCustomer(tbl_customers custUpdate)
+        {
+            //db.Database.ExecuteSqlCommand("UPDATE cmps411.tbl_customer SET customerCode={0},name={1},address={2}, city={3}, state={4}, zipCode={5} WHERE id={6}",
+            //      custUpdate.customerCode, custUpdate.name, custUpdate.address, custUpdate.city, custUpdate.state, custUpdate.zipCode, custUpdate.id);
+
+            db.Database.ExecuteSqlCommand("UPDATE tbl_customers SET customerCode={0}, customerName={1}, address={2} WHERE id={3}",
+                  custUpdate.customerCode, custUpdate.customerName, custUpdate.address, custUpdate.id);
+
+            return RedirectToAction("Index");
+        }
+
 
         protected override void Dispose(bool disposing)
         {

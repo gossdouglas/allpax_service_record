@@ -21,6 +21,9 @@ namespace allpax_service_record.Models
         [StringLength(50)]
         public string resourceType { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int id { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_jobResourceTypes> tbl_jobResourceTypes { get; set; }
     }

@@ -15,6 +15,9 @@ namespace allpax_service_record.Models
         [StringLength(16)]
         public string description { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int id { get; set; }
+
         public virtual tbl_Jobs tbl_Jobs { get; set; }
     }
 }

@@ -34,6 +34,9 @@ namespace allpax_service_record.Models
 
         public byte lunchHours { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int id { get; set; }
+
         public virtual tbl_Jobs tbl_Jobs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

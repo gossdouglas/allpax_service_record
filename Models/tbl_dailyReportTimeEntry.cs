@@ -23,6 +23,9 @@ namespace allpax_service_record.Models
         [StringLength(1024)]
         public string workDescription { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int id { get; set; }
+
         public virtual tbl_dailyReport tbl_dailyReport { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
