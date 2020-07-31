@@ -85,7 +85,7 @@
 </head>
 <br />
 <hr />
-    <form >
+    <form>
         <div class=" container" style="margin:5px">
             <div class="row">
                 <div class="md-col-12" style="padding:5px">
@@ -112,7 +112,7 @@
                 <div class="col-2" style="padding:5px">
                     <strong>Customer:</strong>:
                 </div>
-                <div class="col-7" style="padding:5px" id="output_customerName">Nestle Purina</div>
+                <div class="col-7" style="padding:5px" id="output_customerName"></div>
                 <div class="col-1" style="padding:5px">
                     <strong>Sub Job:</strong>
                 </div>
@@ -126,11 +126,11 @@
                 <div class="col-2" style="padding:5px">
                     <strong>Location:</strong>
                 </div>
-                <div class="col-7" style="padding:5px" id="output_location">Harwell, GA</div>
+                <div class="col-7" style="padding:5px" id="output_location"></div>
                 <div class="col-1" style="padding:5px">
                     <strong>Code:</strong>
                 </div>
-                <div class="col-2" style="padding:5px" id="output_customerCode">NPH</div>
+                <div class="col-2" style="padding:5px" id="output_customerCode"></div>
             </div>
             <div class="row">
                 <div class="col-2" style="padding:5px">
@@ -138,7 +138,7 @@
                 </div>
                 <!--<div class="col-10" style="padding:5px">Rodney Anderson, Zac Wood</div>-->
                 <div class="col-10" style="padding:5px">
-                    <input type="text" value="Rodney Anderson, Zac Wood" id="input_custContact" name="" style="width:100%">
+                    <input type="text" value="" id="input_custContact" name="" style="width:100%">
                 </div>
             </div>
             <div class="row">
@@ -146,28 +146,35 @@
                     <strong>Equipment:</strong>
                 </div>
                 <div class="col-10" style="padding:5px">
-                    <input type="text" value="Loader, Unloader, Shuttle, Basket Conveyors" id="input_equipment" name="" style="width:100%">
+                    <input type="text" value="" id="input_equipment" name="" style="width:100%">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-2" style="padding:5px">
-                    <strong>Allpax Team:</strong>
-                </div>
-                <div class="col-8" style="padding:5px">
-                    <div class="row" style="margin:0px">
-                        <select name="team_dpdwn" id="team_dpdwn" style="width:100%">
-                        </select>
-                        <button type="button" class="btn btn-primary">Primary</button>
+            <form-inline>
+                <div class="row">
+                    <div class="col-2" style="padding:5px">
+                        <strong>Allpax Team:</strong>
                     </div>
-                </div>
-                <div class="col-2" style="padding:5px">
-                    <div class="row" style="margin:0px">
-                        <select name="" id="slct_teamShort" style="width:100%">
-                            <option value="">JW</option>
-                        </select>
+                    <div class="col-6" style="padding:5px">
+                        <div class="row" style="margin:0px; border: 2px solid black;">
+                            <select name="team_dpdwn" id="team_dpdwn" style="width:100%">
+                            </select>
+                            @*<button type="button" class="btn btn-sm btn-primary">Add</button>*@
+                        </div>
                     </div>
+                    <div class="col-1" style="padding:5px">
+                <div class="row" style="margin:0px">
+                    <button type="button" class="btn btn-sm btn-primary">Add</button>
                 </div>
             </div>
+                    <div class="col-1" style="padding:5px">
+                        <div class="row" style="margin:0px">
+                            <select name="" id="slct_teamShort" style="width:100%">
+                                <option value="">JW</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form-inline>
             <div class="row">
                 <div class="col-2" style="padding:5px">
                     <strong>Start Time:</strong>
