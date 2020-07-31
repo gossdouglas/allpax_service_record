@@ -5,7 +5,68 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <form>
+<head>
+<style>
+.container {
+    border: 2px solid black;
+}
+
+</style>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {//begin document read jquery statements
+
+        var jobs_dpdown = $('#jobs_dpdown');
+
+        //begin fill the jobs dropdown
+        $.ajax({
+            url: 'DataService.asmx/GetAllJobNos',
+            method: 'post',
+            dataType: 'json',
+            success: function (data) {
+
+                jobs_dpdown.append($('<option/>', { value: -1, text: 'Select Job' }));
+
+                $(data).each(function (index, item) {
+                    jobs_dpdown.append($('<option/>', { value: item.jobID, text: item.jobID }));
+                });
+            }
+        });
+        //end fill the jobs dropdown
+
+        //begin fill the customer info
+        jobs_dpdown.change(function () {
+            $.ajax({
+                url: 'DataService.asmx/GetCustomerInfoByJobID',
+                method: 'post',
+                dataType: 'json',
+                data: { jobID: jobs_dpdown.val() },
+                success: function (data) {
+                    //console.log(data.customerCode);
+                    //console.log(jobs_dpdown.val());
+
+                    $(data).each(function (index, item) {
+                        console.log(item.customerCode);
+                        console.log(item.customerName);
+                        console.log(item.address);
+                        $("#output_customerName").html(item.customerName.toString());
+                        $("#output_location").html(item.address.toString());
+                        $("#output_customerCode").html(item.customerCode.toString());
+                    });
+                }
+            });
+        });        
+        //end fill the customer info
+       
+    });//end document read jquery statements        
+</script>
+</head>
+<br />
+<hr />
+    <form >
         <div class=" container" style="margin:5px">
             <div class="row">
                 <div class="md-col-12" style="padding:5px">
@@ -17,8 +78,7 @@
                     <strong>Job:</strong>
                 </div>
                 <div class="md-col-2" style="padding:5px">
-                    <select name="" id="" style="width:100%">
-                        <option value="S1525">S1525</option>
+                    <select name="jobs_dpdown" id="jobs_dpdown" style="width:100%">
                     </select>
                 </div>
                 <div class="md-col-5" style="padding:5px"></div>
@@ -26,19 +86,19 @@
                     <strong>Date:</strong>
                 </div>
                 <div class="md-col-2" style="padding:5px">
-                    <input type="date" class="form-control form-control-sm" id="" placeholder="" value="">
+                    <input type="date" class="form-control form-control-sm" id="slct_date" placeholder="" value="">
                 </div>
             </div>
             <div class="row">
                 <div class="col-2" style="padding:5px">
                     <strong>Customer:</strong>:
                 </div>
-                <div class="col-7" style="padding:5px">Nestle Purina</div>
+                <div class="col-7" style="padding:5px" id="output_customerName">Nestle Purina</div>
                 <div class="col-1" style="padding:5px">
                     <strong>Sub Job:</strong>
                 </div>
                 <div class="col-2" style="padding:5px">
-                    <select name="" id="" style="width:100%">
+                    <select name="" id="slct_subJob" style="width:100%">
                         <option value="S1525">Commissioning</option>
                     </select>
                 </div>
@@ -47,11 +107,11 @@
                 <div class="col-2" style="padding:5px">
                     <strong>Location:</strong>
                 </div>
-                <div class="col-7" style="padding:5px">Harwell, GA</div>
+                <div class="col-7" style="padding:5px" id="output_location">Harwell, GA</div>
                 <div class="col-1" style="padding:5px">
                     <strong>Code:</strong>
                 </div>
-                <div class="col-2" style="padding:5px">NPH</div>
+                <div class="col-2" style="padding:5px" id="output_customerCode">NPH</div>
             </div>
             <div class="row">
                 <div class="col-2" style="padding:5px">
@@ -59,7 +119,7 @@
                 </div>
                 <!--<div class="col-10" style="padding:5px">Rodney Anderson, Zac Wood</div>-->
                 <div class="col-10" style="padding:5px">
-                    <input type="text" value="Rodney Anderson, Zac Wood" id="" name="" style="width:100%">
+                    <input type="text" value="Rodney Anderson, Zac Wood" id="input_custContact" name="" style="width:100%">
                 </div>
             </div>
             <div class="row">
@@ -67,7 +127,7 @@
                     <strong>Equipment:</strong>
                 </div>
                 <div class="col-10" style="padding:5px">
-                    <input type="text" value="Loader, Unloader, Shuttle, Basket Conveyors" id="" name="" style="width:100%">
+                    <input type="text" value="Loader, Unloader, Shuttle, Basket Conveyors" id="input_equipment" name="" style="width:100%">
                 </div>
             </div>
             <div class="row">
@@ -76,14 +136,14 @@
                 </div>
                 <div class="col-8" style="padding:5px">
                     <div class="row" style="margin:0px">
-                        <select name="" id="" style="width:100%">
+                        <select name="" id="slct_team" style="width:100%">
                             <option value="">Jonny Watkins</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-2" style="padding:5px">
                     <div class="row" style="margin:0px">
-                        <select name="" id="" style="width:100%">
+                        <select name="" id="slct_teamShort" style="width:100%">
                             <option value="">JW</option>
                         </select>
                     </div>
@@ -94,19 +154,19 @@
                     <strong>Start Time:</strong>
                 </div>
                 <div class="col-2" style="padding:5px">
-                    <input type="time" class="form-control form-control-sm" id="" placeholder="" value="">
+                    <input type="time" class="form-control form-control-sm" id="input_startTime" placeholder="" value="">
                 </div>
                 <div class="col-2" style="padding:5px">
                     <strong>End Time:</strong>
                 </div>
                 <div class="col-2" style="padding:5px">
-                    <input type="time" class="form-control form-control-sm" id="" placeholder="" value="">
+                    <input type="time" class="form-control form-control-sm" id="input_endTime" placeholder="" value="">
                 </div>
                 <div class="col-2" style="padding:5px">
                     <strong>Lunch (hr)</strong>
                 </div>
                 <div class="col-1" style="padding:5px">
-                    <input type="text" value="1" id="" name="" style="width:100%">
+                    <input type="text" value="1" id="" name="input_lunch" style="width:100%">
                 </div>
                 <div class="col-1" style="padding:5px">
                 </div>
@@ -122,10 +182,10 @@
             </div>
             <div class="row">
                 <div class="col-10" style="padding:5px">
-                    <input type="text" value="Water recovery system....." id="" name="" style="width:100%">
+                    <input type="text" value="Water recovery system....." id="input_workDesc" name="" style="width:100%">
                 </div>
                 <div class="col-2" style="padding:5px">
-                    <select name="" id="" style="width:100%">
+                    <select name="" id="slct_team2" style="width:100%">
                         <option value="">All</option>
                     </select>
                 </div>
