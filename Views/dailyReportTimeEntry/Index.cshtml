@@ -1,0 +1,196 @@
+﻿@model IEnumerable<allpax_service_record.Models.tbl_dailyReportTimeEntry>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                1 of 2
+            </div>
+            <div class="col">
+                2 of 2
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                1 of 3
+            </div>
+            <div class="col">
+                2 of 3
+            </div>
+            <div class="col">
+                3 of 3
+            </div>
+        </div>
+    </div>
+
+    <form>
+        <div class=" container" style="margin:5px">
+            <div class="row">
+                <div class="md-col-12" style="padding:5px">
+                    <strong>Daily Log Information</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="md-col-2" style="padding:5px">
+                    <strong>Job:</strong>
+                </div>
+                <div class="md-col-2" style="padding:5px">
+                    <select name="" id="" style="width:100%">
+                        <option value="S1525">S1525</option>
+                    </select>
+                </div>
+                <div class="md-col-5" style="padding:5px"></div>
+                <div class="md-col-1" style="padding:5px">
+                    <strong>Date:</strong>
+                </div>
+                <div class="md-col-2" style="padding:5px">
+                    <input type="date" class="form-control form-control-sm" id="" placeholder="" value="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2" style="padding:5px">
+                    <strong>Customer:</strong>:
+                </div>
+                <div class="col-7" style="padding:5px">Nestle Purina</div>
+                <div class="col-1" style="padding:5px">
+                    <strong>Sub Job:</strong>
+                </div>
+                <div class="col-2" style="padding:5px">
+                    <select name="" id="" style="width:100%">
+                        <option value="S1525">Commissioning</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2" style="padding:5px">
+                    <strong>Location:</strong>
+                </div>
+                <div class="col-7" style="padding:5px">Harwell, GA</div>
+                <div class="col-1" style="padding:5px">
+                    <strong>Code:</strong>
+                </div>
+                <div class="col-2" style="padding:5px">NPH</div>
+            </div>
+            <div class="row">
+                <div class="col-2" style="padding:5px">
+                    <strong>Customer Contact:</strong>
+                </div>
+                <!--<div class="col-10" style="padding:5px">Rodney Anderson, Zac Wood</div>-->
+                <div class="col-10" style="padding:5px">
+                    <input type="text" value="Rodney Anderson, Zac Wood" id="" name="" style="width:100%">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2" style="padding:5px">
+                    <strong>Equipment:</strong>
+                </div>
+                <div class="col-10" style="padding:5px">
+                    <input type="text" value="Loader, Unloader, Shuttle, Basket Conveyors" id="" name="" style="width:100%">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2" style="padding:5px">
+                    <strong>Allpax Team:</strong>
+                </div>
+                <div class="col-8" style="padding:5px">
+                    <div class="row" style="margin:0px">
+                        <select name="" id="" style="width:100%">
+                            <option value="">Jonny Watkins</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-2" style="padding:5px">
+                    <div class="row" style="margin:0px">
+                        <select name="" id="" style="width:100%">
+                            <option value="">JW</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2" style="padding:5px">
+                    <strong>Start Time:</strong>
+                </div>
+                <div class="col-2" style="padding:5px">
+                    <input type="time" class="form-control form-control-sm" id="" placeholder="" value="">
+                </div>
+                <div class="col-2" style="padding:5px">
+                    <strong>End Time:</strong>
+                </div>
+                <div class="col-2" style="padding:5px">
+                    <input type="time" class="form-control form-control-sm" id="" placeholder="" value="">
+                </div>
+                <div class="col-2" style="padding:5px">
+                    <strong>Lunch (hr)</strong>
+                </div>
+                <div class="col-1" style="padding:5px">
+                    <input type="text" value="1" id="" name="" style="width:100%">
+                </div>
+                <div class="col-1" style="padding:5px">
+                </div>
+            </div>
+        </div>
+
+        <div class=" container pl-auto" style="margin:5px">
+            <div class="row">
+                <div class="col-10" style="padding:5px">
+                    <strong>Work Description</strong>
+                </div>
+                <div class="col-2" style="padding:5px">Team</div>
+            </div>
+            <div class="row">
+                <div class="col-10" style="padding:5px">
+                    <input type="text" value="Water recovery system....." id="" name="" style="width:100%">
+                </div>
+                <div class="col-2" style="padding:5px">
+                    <select name="" id="" style="width:100%">
+                        <option value="">All</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class=" container pl-auto" style="margin:5px">
+            <div class="row">
+                <div class="col-10" style="padding:5px">
+                    <strong>Delays</strong>
+                </div>
+                <div class="col-2" style="padding:5px">Team</div>
+            </div>
+            <div class="row">
+                <div class="col-10" style="padding:5px">
+                    <input type="text" value="Water recovery system....." id="" name="" style="width:100%">
+                </div>
+                <div class="col-2" style="padding:5px">
+                    <select name="" id="" style="width:100%">
+                        <option value="">All</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class=" container pl-auto" style="margin:5px">
+            <div class="row">
+                <div class="col-10" style="padding:5px">
+                    <strong>Warranty Delays</strong>
+                </div>
+                <div class="col-2" style="padding:5px">Team</div>
+            </div>
+            <div class="row">
+                <div class="col-10" style="padding:5px">
+                    <input type="text" value="Water recovery system....." id="" name="" style="width:100%">
+                </div>
+                <div class="col-2" style="padding:5px">
+                    <select name="" id="" style="width:100%">
+                        <option value="">All</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+
