@@ -5,10 +5,10 @@ namespace allpax_service_record.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class allpaxServiceRecordEntities : DbContext
+    public partial class Model1 : DbContext
     {
-        public allpaxServiceRecordEntities()
-            : base("name=allpaxServiceRecordEntities")
+        public Model1()
+            : base("name=Model1")
         {
         }
 

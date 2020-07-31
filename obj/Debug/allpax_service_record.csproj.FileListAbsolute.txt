@@ -323,3 +323,4 @@ C:\Users\goss\Desktop\testing\service_record\allpax_service_record\obj\Debug\all
 C:\Users\goss\Desktop\testing\service_record\allpax_service_record\obj\Debug\allpax_service_record.csproj.CopyComplete
 C:\Users\goss\Desktop\testing\service_record\allpax_service_record\obj\Debug\allpax_service_record.dll
 C:\Users\goss\Desktop\testing\service_record\allpax_service_record\obj\Debug\allpax_service_record.pdb
+C:\Users\goss\Documents\Github\service_record\allpax_service_record\obj\Debug\allpax_service_record.csprojAssemblyReference.cache

@@ -11,10 +11,11 @@ namespace allpax_service_record.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbl_dailyReportTimeEntry()
         {
-            tbl_Users = new HashSet<tbl_Users>();
+            tbl_dailyReportTimeEntryUsers = new HashSet<tbl_dailyReportTimeEntryUsers>();
         }
 
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public byte timeEntryID { get; set; }
 
         public int dailyReportID { get; set; }
@@ -23,12 +24,9 @@ namespace allpax_service_record.Models
         [StringLength(1024)]
         public string workDescription { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id { get; set; }
-
         public virtual tbl_dailyReport tbl_dailyReport { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_Users> tbl_Users { get; set; }
+        public virtual ICollection<tbl_dailyReportTimeEntryUsers> tbl_dailyReportTimeEntryUsers { get; set; }
     }
 }

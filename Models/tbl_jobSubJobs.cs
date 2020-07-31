@@ -6,18 +6,20 @@ namespace allpax_service_record.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class tbl_subJobTypes
+    public partial class tbl_jobSubJobs
     {
         [Key]
         public byte subJobID { get; set; }
 
         [Required]
-        [StringLength(16)]
-        public string description { get; set; }
+        [StringLength(8)]
+        public string jobID { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
-        public virtual tbl_jobSubJobs tbl_jobSubJobs { get; set; }
+        public virtual tbl_Jobs tbl_Jobs { get; set; }
+
+        public virtual tbl_subJobTypes tbl_subJobTypes { get; set; }
     }
 }

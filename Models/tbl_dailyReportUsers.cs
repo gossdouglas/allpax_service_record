@@ -6,18 +6,23 @@ namespace allpax_service_record.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class tbl_subJobTypes
+    public partial class tbl_dailyReportUsers
     {
         [Key]
-        public byte subJobID { get; set; }
+        [Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int dailyReportID { get; set; }
 
-        [Required]
+        [Key]
+        [Column(Order = 1)]
         [StringLength(16)]
-        public string description { get; set; }
+        public string userName { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
-        public virtual tbl_jobSubJobs tbl_jobSubJobs { get; set; }
+        public virtual tbl_dailyReport tbl_dailyReport { get; set; }
+
+        public virtual tbl_Users tbl_Users { get; set; }
     }
 }

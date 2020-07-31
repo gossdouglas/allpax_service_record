@@ -51,6 +51,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -190,16 +192,25 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\allpaxServiceRecordEntities.cs" />
+    <Compile Include="Models\AspNetRole.cs" />
+    <Compile Include="Models\AspNetUser.cs" />
+    <Compile Include="Models\AspNetUserClaim.cs" />
+    <Compile Include="Models\AspNetUserLogin.cs" />
+    <Compile Include="Models\C__MigrationHistory.cs" />
     <Compile Include="Models\Dropdown Models\dpdwn_teamNames.cs" />
     <Compile Include="Models\Dropdown Models\dpdwn_jobID.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Model1.cs" />
     <Compile Include="Models\tbl_customers.cs" />
     <Compile Include="Models\tbl_dailyReport.cs" />
     <Compile Include="Models\tbl_dailyReportTimeEntry.cs" />
+    <Compile Include="Models\tbl_dailyReportTimeEntryUsers.cs" />
+    <Compile Include="Models\tbl_dailyReportUsers.cs" />
     <Compile Include="Models\tbl_jobCorrespondents.cs" />
     <Compile Include="Models\tbl_jobResourceTypes.cs" />
     <Compile Include="Models\tbl_Jobs.cs" />
+    <Compile Include="Models\tbl_jobSubJobs.cs" />
     <Compile Include="Models\tbl_resourceTypes.cs" />
     <Compile Include="Models\tbl_subJobTypes.cs" />
     <Compile Include="Models\tbl_Users.cs" />
@@ -413,6 +424,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
