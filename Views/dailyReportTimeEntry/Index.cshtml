@@ -18,10 +18,10 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {//begin document read jquery statements
-
+      
+        //begin fill the jobs dropdown
         var jobs_dpdown = $('#jobs_dpdown');
 
-        //begin fill the jobs dropdown
         $.ajax({
             url: 'DataService.asmx/GetAllJobNos',
             method: 'post',
@@ -60,6 +60,25 @@
             });
         });        
         //end fill the customer info
+
+
+        //begin fill the team names dropdown
+        var team_dpdwn = $('#team_dpdwn');
+
+        $.ajax({
+            url: 'DataService.asmx/GetAllTeamNames',
+            method: 'post',
+            dataType: 'json',
+            success: function (data) {
+
+                team_dpdwn.append($('<option/>', { value: -1, text: 'Select Team Member' }));
+
+                $(data).each(function (index, item) {
+                    team_dpdwn.append($('<option/>', { value: item.name, text: item.name + "-" + item.shortName }));
+                });
+            }
+        });
+        //end fill the jobs dropdown
        
     });//end document read jquery statements        
 </script>
@@ -136,8 +155,7 @@
                 </div>
                 <div class="col-8" style="padding:5px">
                     <div class="row" style="margin:0px">
-                        <select name="" id="slct_team" style="width:100%">
-                            <option value="">Jonny Watkins</option>
+                        <select name="team_dpdwn" id="team_dpdwn" style="width:100%">                          
                         </select>
                     </div>
                 </div>

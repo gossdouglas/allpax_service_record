@@ -81,7 +81,7 @@ namespace allpax_service_record
         public void GetAllTeamNames()
         {
             string cs = ConfigurationManager.ConnectionStrings["allpaxServiceRecordEntities"].ConnectionString;
-            List<dpdwn_jobID> teamNames = new List<dpdwn_jobID>();
+            List<dpdwn_teamNames> teamNames = new List<dpdwn_teamNames>();
             using (SqlConnection con = new SqlConnection(cs))
             {
                 SqlCommand cmd = new SqlCommand("spGetAllTeamNames", con);
@@ -90,7 +90,7 @@ namespace allpax_service_record
                 SqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    dpdwn_jobID teamName = new dpdwn_jobID();
+                    dpdwn_teamNames teamName = new dpdwn_teamNames();
                     teamName.name = rdr["name"].ToString();
                     teamName.shortName = rdr["shortName"].ToString();
                     teamNames.Add(teamName);

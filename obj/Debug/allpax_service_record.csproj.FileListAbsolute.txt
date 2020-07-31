@@ -138,11 +138,9 @@ C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\roslyn\S
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\roslyn\System.IO.Compression.ZipFile.dll
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\roslyn\System.IO.FileSystem.dll
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\roslyn\System.IO.FileSystem.Primitives.dll
-C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\roslyn\System.Memory.dll
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\roslyn\System.Net.Http.dll
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\roslyn\System.Net.Sockets.dll
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\roslyn\System.Reflection.Metadata.dll
-C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\roslyn\System.Security.Cryptography.Algorithms.dll
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\roslyn\System.Security.Cryptography.Encoding.dll
@@ -211,7 +209,6 @@ C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\Microsof
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\goss\Documents\Github\service_record\allpax_service_record\obj\Debug\allpax_service_record.csprojAssemblyReference.cache
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\obj\Debug\allpax_service_record.csproj.CoreCompileInputs.cache
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\obj\Debug\allpax_service_record.csproj.CopyComplete
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\obj\Debug\allpax_service_record.dll
