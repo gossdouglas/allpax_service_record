@@ -1,4 +1,4 @@
-namespace allpax_service_record.Models
+namespace allpax_service_record.Models.NewFolder1
 {
     using System;
     using System.Collections.Generic;
