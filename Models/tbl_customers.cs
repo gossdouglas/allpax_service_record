@@ -8,12 +8,6 @@ namespace allpax_service_record.Models
 
     public partial class tbl_customers
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_customers()
-        {
-            tbl_Jobs = new HashSet<tbl_Jobs>();
-        }
-
         [Key]
         [StringLength(3)]
         public string customerCode { get; set; }
@@ -28,8 +22,5 @@ namespace allpax_service_record.Models
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_Jobs> tbl_Jobs { get; set; }
     }
 }

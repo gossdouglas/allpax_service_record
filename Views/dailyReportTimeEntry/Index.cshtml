@@ -79,6 +79,54 @@
             }
         });
         //end fill the jobs dropdown
+
+        //begin #addButton
+        $("#addButton").click(function () {//when the add button is clicked...
+            var addItem1 = $("#jobs_dpdown").val();
+            var addItem2 = $("#slct_date").val();
+            //var addItem3 = $("#addRecordItem3").val();
+            var addItem4 = $("#input_startTime").val();
+            var addItem5 = $("#input_endTime").val();
+            //var addItem6 = $("#addRecordItem6").val();
+
+            console.log(addItem5);
+
+            alert(
+                "Selected for Add POST:" + '\n' +
+                "addItem1: " + addItem1 + '\n' +
+                "addItem2: " + addItem2 + '\n' +
+                //"addItem3: " + addItem3 + '\n' +
+                "addItem4: " + addItem4 + '\n' +
+                "addItem5: " + addItem5 + '\n' 
+                //"addItem6: " + addItem6 + '\n'
+            );
+            $("#addRecordItem1").val('');
+            $("#addRecordItem2").val('');
+            //$("#addRecordItem3").val('');
+            $("#addRecordItem4").val('');
+            $("#addRecordItem5").val('');
+            //$("#addRecordItem6").val('');
+            //begin axios add post
+            axios.post('/dailyReport/AddCustomer', {
+                jobID: addItem1,
+                date: addItem2,
+                subJobID: 'dddd',
+                //address: addItem3,
+                startTime: addItem4,
+                endTime: addItem5, 
+                lunchHours: '1',
+                dailyReportID: '1'
+                //zipCode: addItem6,
+            })
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            //end axios add post
+        });
+                //end #addButton
        
     });//end document read jquery statements        
 </script>
@@ -259,6 +307,6 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary btn-sm" id="addButton" style="background-color: royalblue">Add</button>
     </form>
 

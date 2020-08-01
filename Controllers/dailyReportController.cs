@@ -14,111 +14,48 @@ namespace allpax_service_record.Controllers
     {
         private allpaxServiceRecordEntities db = new allpaxServiceRecordEntities();
 
-        // GET: dailyReport
+        // GET: customers
         public ActionResult Index()
         {
-            var tbl_dailyReport = db.tbl_dailyReport.Include(t => t.tbl_Jobs);
-            return View(tbl_dailyReport.ToList());
+            //return View(db.tbl_customers.ToList());
+            var sql = db.tbl_dailyReport.SqlQuery("SELECT * from tbl_dailyReport").ToList();
+
+            return View(sql.ToList());
         }
 
-        // GET: dailyReport/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbl_dailyReport tbl_dailyReport = db.tbl_dailyReport.Find(id);
-            if (tbl_dailyReport == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbl_dailyReport);
-        }
-
-        // GET: dailyReport/Create
-        public ActionResult Create()
-        {
-            ViewBag.jobID = new SelectList(db.tbl_Jobs, "jobID", "description");
-            return View();
-        }
-
-        // POST: dailyReport/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //begin CMPS 411 controller code
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "dailyReportID,date,jobID,subJobID,start,C_end,lunchHours")] tbl_dailyReport tbl_dailyReport)
+        public ActionResult AddCustomer(tbl_dailyReport customerAdd)
         {
-            if (ModelState.IsValid)
-            {
-                db.tbl_dailyReport.Add(tbl_dailyReport);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            //db.Database.ExecuteSqlCommand("Insert into cmps411.tbl_customer Values({0},{1},{2}, {3}, {4}, {5})",
+            //    customerAdd.customerCode, customerAdd.name, customerAdd.address, customerAdd.city, customerAdd.state, customerAdd.zipCode);
 
-            ViewBag.jobID = new SelectList(db.tbl_Jobs, "jobID", "description", tbl_dailyReport.jobID);
-            return View(tbl_dailyReport);
+            //db.Database.ExecuteSqlCommand("Insert into tbl_customers Values({0}, {1}, {2}, {3})",
+            //    customerAdd.jobID, customerAdd.date, customerAdd.startTime, customerAdd.endTime);
+
+            db.Database.ExecuteSqlCommand("Insert into tbl_customers Values({0}, {1},{0},{2},{3},{4},{5},{6} )",
+                customerAdd.jobID, customerAdd.date, customerAdd.subJobID, customerAdd.startTime, customerAdd.endTime, customerAdd.lunchHours, customerAdd.dailyReportID);
+            return new EmptyResult();
         }
 
-        // GET: dailyReport/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult DeleteCustomer(tbl_dailyReport custDelete)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbl_dailyReport tbl_dailyReport = db.tbl_dailyReport.Find(id);
-            if (tbl_dailyReport == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.jobID = new SelectList(db.tbl_Jobs, "jobID", "description", tbl_dailyReport.jobID);
-            return View(tbl_dailyReport);
-        }
+            //db.Database.ExecuteSqlCommand("DELETE FROM tbl_customers WHERE id=({0})", custDelete.id);
 
-        // POST: dailyReport/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "dailyReportID,date,jobID,subJobID,start,C_end,lunchHours")] tbl_dailyReport tbl_dailyReport)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tbl_dailyReport).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.jobID = new SelectList(db.tbl_Jobs, "jobID", "description", tbl_dailyReport.jobID);
-            return View(tbl_dailyReport);
-        }
-
-        // GET: dailyReport/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbl_dailyReport tbl_dailyReport = db.tbl_dailyReport.Find(id);
-            if (tbl_dailyReport == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbl_dailyReport);
-        }
-
-        // POST: dailyReport/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tbl_dailyReport tbl_dailyReport = db.tbl_dailyReport.Find(id);
-            db.tbl_dailyReport.Remove(tbl_dailyReport);
-            db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult UpdateCustomer(tbl_dailyReport custUpdate)
+        {
+            //db.Database.ExecuteSqlCommand("UPDATE cmps411.tbl_customer SET customerCode={0},name={1},address={2}, city={3}, state={4}, zipCode={5} WHERE id={6}",
+            //      custUpdate.customerCode, custUpdate.name, custUpdate.address, custUpdate.city, custUpdate.state, custUpdate.zipCode, custUpdate.id);
+
+            //db.Database.ExecuteSqlCommand("UPDATE tbl_customers SET customerCode={0}, customerName={1}, address={2} WHERE id={3}",
+            //      custUpdate.customerCode, custUpdate.customerName, custUpdate.address, custUpdate.id);
+
+            return RedirectToAction("Index");
+        }
+
 
         protected override void Dispose(bool disposing)
         {
