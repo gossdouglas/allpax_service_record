@@ -68,15 +68,15 @@ namespace allpax_service_record.Models
                 .Property(e => e.jobID)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tbl_dailyReport>()
-                .HasMany(e => e.tbl_dailyReportTimeEntry)
-                .WithRequired(e => e.tbl_dailyReport)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<tbl_dailyReport>()
+            //    .HasMany(e => e.tbl_dailyReportTimeEntry)
+            //    .WithRequired(e => e.tbl_dailyReport)
+            //    .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<tbl_dailyReport>()
-                .HasMany(e => e.tbl_dailyReportUsers)
-                .WithRequired(e => e.tbl_dailyReport)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<tbl_dailyReport>()
+            //    .HasMany(e => e.tbl_dailyReportUsers)
+            //    .WithRequired(e => e.tbl_dailyReport)
+            //    .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<tbl_dailyReportTimeEntry>()
                 .Property(e => e.workDescription)
@@ -131,10 +131,10 @@ namespace allpax_service_record.Models
                 .Property(e => e.customerContact)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tbl_Jobs>()
-                .HasMany(e => e.tbl_dailyReport)
-                .WithRequired(e => e.tbl_Jobs)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<tbl_Jobs>()
+            //    .HasMany(e => e.tbl_dailyReport)
+            //    .WithRequired(e => e.tbl_Jobs)
+            //    .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<tbl_Jobs>()
                 .HasMany(e => e.tbl_jobCorrespondents)

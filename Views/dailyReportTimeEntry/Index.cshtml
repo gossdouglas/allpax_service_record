@@ -107,10 +107,10 @@
             $("#addRecordItem5").val('');
             //$("#addRecordItem6").val('');
             //begin axios add post
-            axios.post('/dailyReport/AddCustomer', {
-                jobID: addItem1,
+            axios.post('/dailyReport/AddDailyReport', {
+                jobID: '1000',
                 date: addItem2,
-                subJobID: 'dddd',
+                subJobID: '999',
                 //address: addItem3,
                 startTime: addItem4,
                 endTime: addItem5, 
