@@ -94,14 +94,14 @@
                 "Selected for Add POST:" + '\n' +
                 "addItem1: " + addItem1 + '\n' +
                 "addItem2: " + addItem2 + '\n' +
-                //"addItem3: " + addItem3 + '\n' +
+                //"addItem3: " + addItem3 + '\n' + //need to pull in subJobIds
                 "addItem4: " + addItem4 + '\n' +
                 "addItem5: " + addItem5 + '\n'
                 //"addItem6: " + addItem6 + '\n'
             );
             $("#addRecordItem1").val('');
             $("#addRecordItem2").val('');
-            //$("#addRecordItem3").val('');
+            //$("#addRecordItem3").val(''); //need to pull in subJobIds
             $("#addRecordItem4").val('');
             $("#addRecordItem5").val('');
             //$("#addRecordItem6").val('');
@@ -110,12 +110,10 @@
                 jobID: addItem1,
                 date: addItem2,
                 subJobID: '999',
-                //address: addItem3,
                 startTime: addItem4,
                 endTime: addItem5,
                 lunchHours: '1',
-                dailyReportID: '2'
-                //zipCode: addItem6,
+                dailyReportID: '4'
             })
                 .then(function (response) {
                     console.log(response);
