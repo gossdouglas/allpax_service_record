@@ -45,37 +45,37 @@ namespace allpax_service_record
             Context.Response.Write(js.Serialize(jobIDs));
         }
 
-        [WebMethod]
-        public void GetCustomerInfoByJobID(string jobID)
-        {
-            string cs = ConfigurationManager.ConnectionStrings["allpaxServiceRecordEntities"].ConnectionString;
-            List<tbl_customers> customerInfos = new List<tbl_customers>();
-            using (SqlConnection con = new SqlConnection(cs))
-            {
+        //[WebMethod]
+        //public void GetCustomerInfoByJobID(string jobID)
+        //{
+        //    string cs = ConfigurationManager.ConnectionStrings["allpaxServiceRecordEntities"].ConnectionString;
+        //    List<tbl_customers> customerInfos = new List<tbl_customers>();
+        //    using (SqlConnection con = new SqlConnection(cs))
+        //    {
 
-                con.Open();
+        //        con.Open();
 
-                SqlCommand cmd = new SqlCommand("spGetCustomerInfoByJobID", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                SqlParameter param = new SqlParameter()
-                {
-                    ParameterName = "@jobID",
-                    Value = jobID
-                };
-                cmd.Parameters.Add(param);
-                SqlDataReader rdr = cmd.ExecuteReader();
-                while (rdr.Read())
-                {
-                    tbl_customers customerInfo = new tbl_customers();
-                    customerInfo.customerCode = rdr["customerCode"].ToString();
-                    customerInfo.customerName = rdr["customerName"].ToString();
-                    customerInfo.address = rdr["address"].ToString();
-                    customerInfos.Add(customerInfo);
-                }
-            }
-            JavaScriptSerializer js = new JavaScriptSerializer();
-            Context.Response.Write(js.Serialize(customerInfos));
-        }
+        //        SqlCommand cmd = new SqlCommand("spGetCustomerInfoByJobID", con);
+        //        cmd.CommandType = CommandType.StoredProcedure;
+        //        SqlParameter param = new SqlParameter()
+        //        {
+        //            ParameterName = "@jobID",
+        //            Value = jobID
+        //        };
+        //        cmd.Parameters.Add(param);
+        //        SqlDataReader rdr = cmd.ExecuteReader();
+        //        while (rdr.Read())
+        //        {
+        //            tbl_customers customerInfo = new tbl_customers();
+        //            customerInfo.customerCode = rdr["customerCode"].ToString();
+        //            customerInfo.customerName = rdr["customerName"].ToString();
+        //            customerInfo.address = rdr["address"].ToString();
+        //            customerInfos.Add(customerInfo);
+        //        }
+        //    }
+        //    JavaScriptSerializer js = new JavaScriptSerializer();
+        //    Context.Response.Write(js.Serialize(customerInfos));
+        //}
 
         [WebMethod]
         public void GetAllTeamNames()
