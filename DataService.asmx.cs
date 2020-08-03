@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Web.Script.Serialization;
 using allpax_service_record.Models.Dropdown_Models;
 using allpax_service_record.Models;
+using allpax_service_record.Models.View_Models;
 
 namespace allpax_service_record
 {
@@ -49,7 +50,7 @@ namespace allpax_service_record
         public void GetCustomerInfoByJobID(string jobID)
         {
             string cs = ConfigurationManager.ConnectionStrings["allpaxServiceRecordEntities"].ConnectionString;
-            List<tbl_customers> customerInfos = new List<tbl_customers>();
+            List<vm_customerInfo> customerInfos = new List<vm_customerInfo>();
             using (SqlConnection con = new SqlConnection(cs))
             {
 
@@ -66,10 +67,11 @@ namespace allpax_service_record
                 SqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    tbl_customers customerInfo = new tbl_customers();
+                    vm_customerInfo customerInfo = new vm_customerInfo();
                     customerInfo.customerCode = rdr["customerCode"].ToString();
                     customerInfo.customerName = rdr["customerName"].ToString();
                     customerInfo.address = rdr["address"].ToString();
+                    customerInfo.customerContact= rdr["customerContact"].ToString();
                     customerInfos.Add(customerInfo);
                 }
             }
@@ -93,6 +95,7 @@ namespace allpax_service_record
                     dpdwn_teamNames teamName = new dpdwn_teamNames();
                     teamName.name = rdr["name"].ToString();
                     teamName.shortName = rdr["shortName"].ToString();
+                    teamName.userName = rdr["userName"].ToString();
                     teamNames.Add(teamName);
                 }
             }
