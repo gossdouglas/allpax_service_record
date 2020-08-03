@@ -36,7 +36,7 @@
         });
         //end fill the jobs dropdown
 
-        //begin fill the customer info
+        //begin jobs id dropdown change
         jobs_dpdown.change(function () {
             $.ajax({
                 url: 'DataService.asmx/GetCustomerInfoByJobID',
@@ -57,9 +57,31 @@
                     });
                 }
             });
-        });
-        //end fill the customer info
 
+            //begin fill the team names dropdown
+            var subJobTypes_dpdwn = $('#subJobTypes_dpdwn');
+            $('#subJobTypes_dpdwn').empty();//clear the dropdown
+
+            $.ajax({
+                url: 'DataService.asmx/GetSubJobTypesByJobID',
+                method: 'post',
+                dataType: 'json',
+                data: { jobID: jobs_dpdown.val() },
+                success: function (data) {
+
+                    subJobTypes_dpdwn.append($('<option/>', { value: -1, text: 'Select a Job Sub-Type' }));
+
+                    $(data).each(function (index, item) {
+                        subJobTypes_dpdwn.append($('<option/>', { value: item.subJobID, text: item.description }));
+
+                        //console.log(item.subJobID);
+                    });
+                }
+            });
+        //end fill sub jobs dropdown
+
+        });
+        //end jobs id dropdown change
 
         //begin fill the team names dropdown
         var team_dpdwn = $('#team_dpdwn');
@@ -77,43 +99,43 @@
                 });
             }
         });
-        //end fill the jobs dropdown
+        //end fill the sub job dropdown     
 
         //begin #addButton
         $("#addButton").click(function () {//when the add button is clicked...
             var addItem1 = $("#jobs_dpdown").val();
             var addItem2 = $("#slct_date").val();
-            //var addItem3 = $("#addRecordItem3").val();
+            var addItem3 = $("#subJobTypes_dpdwn").val();
             var addItem4 = $("#input_startTime").val();
             var addItem5 = $("#input_endTime").val();
-            //var addItem6 = $("#addRecordItem6").val();
+            var addItem6 = $("#input_lunch").val();
 
-            console.log(addItem5);
+            console.log(addItem3);
 
             alert(
                 "Selected for Add POST:" + '\n' +
                 "addItem1: " + addItem1 + '\n' +
                 "addItem2: " + addItem2 + '\n' +
-                //"addItem3: " + addItem3 + '\n' + //need to pull in subJobIds
+                "addItem3: " + addItem3 + '\n' + 
                 "addItem4: " + addItem4 + '\n' +
-                "addItem5: " + addItem5 + '\n'
-                //"addItem6: " + addItem6 + '\n'
+                "addItem5: " + addItem5 + '\n' +
+                "addItem6: " + addItem6 + '\n'
             );
             $("#addRecordItem1").val('');
             $("#addRecordItem2").val('');
-            //$("#addRecordItem3").val(''); //need to pull in subJobIds
+            $("#addRecordItem3").val(''); //need to pull in subJobIds
             $("#addRecordItem4").val('');
             $("#addRecordItem5").val('');
-            //$("#addRecordItem6").val('');
+            $("#addRecordItem6").val('');
             //begin axios add post
             axios.post('/dailyReport/AddDailyReport', {
                 jobID: addItem1,
                 date: addItem2,
-                subJobID: '999',
+                subJobID: addItem3,
                 startTime: addItem4,
                 endTime: addItem5,
-                lunchHours: '1',
-                dailyReportID: '6'
+                lunchHours: addItem6
+                //dailyReportID: '6'
             })
                 .then(function (response) {
                     console.log(response);
@@ -162,8 +184,8 @@
                 <strong>Sub Job:</strong>
             </div>
             <div class="col-2" style="padding:5px">
-                <select name="" id="slct_subJob" style="width:100%">
-                    <option value="S1525">Commissioning</option>
+                <select name="subJobTypes_dpdwn" id="subJobTypes_dpdwn" style="width:100%">
+                    @*<option value="S1525">Commissioning</option>*@
                 </select>
             </div>
         </div>
@@ -181,10 +203,10 @@
             <div class="col-2" style="padding:5px">
                 <strong>Customer Contact:</strong>
             </div>
-            <!--<div class="col-10" style="padding:5px">Rodney Anderson, Zac Wood</div>-->
-            <div class="col-10" style="padding:5px">
+            <div class="col-10" style="padding:5px" id="output_customerContact">Rodney Anderson, Zac Wood</div>
+            @*<div class="col-10" style="padding:5px">
                 <input type="text" value="" id="input_custContact" name="" style="width:100%">
-            </div>
+            </div>*@
         </div>
         <div class="row">
             <div class="col-2" style="padding:5px">
@@ -241,7 +263,7 @@
                 <strong>Lunch (hr)</strong>
             </div>
             <div class="col-1" style="padding:5px">
-                <input type="text" value="1" id="" name="input_lunch" style="width:100%">
+                <input type="text" class="form-control form-control-sm" id="input_lunch">
             </div>
             <div class="col-1" style="padding:5px">
             </div>

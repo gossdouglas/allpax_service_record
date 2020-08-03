@@ -12,10 +12,23 @@ namespace allpax_service_record.Models
         {
         }
 
+        public virtual DbSet<tbl_customers> tbl_customers { get; set; }
         public virtual DbSet<tbl_dailyReport> tbl_dailyReport { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<tbl_customers>()
+                .Property(e => e.customerCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<tbl_customers>()
+                .Property(e => e.customerName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<tbl_customers>()
+                .Property(e => e.address)
+                .IsUnicode(false);
+
             modelBuilder.Entity<tbl_dailyReport>()
                 .Property(e => e.jobID)
                 .IsUnicode(false);

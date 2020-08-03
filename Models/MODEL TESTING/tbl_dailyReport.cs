@@ -23,7 +23,6 @@ namespace allpax_service_record.Models.MODEL_TESTING
         public int lunchHours { get; set; }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int dailyReportID { get; set; }
     }
 }

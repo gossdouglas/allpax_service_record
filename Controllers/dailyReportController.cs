@@ -33,8 +33,8 @@ namespace allpax_service_record.Controllers
             //db.Database.ExecuteSqlCommand("Insert into tbl_customers Values({0}, {1}, {2}, {3})",
             //    customerAdd.jobID, customerAdd.date, customerAdd.startTime, customerAdd.endTime);
 
-             db.Database.ExecuteSqlCommand("Insert into tbl_dailyReport Values({0},{1},{2},{3},{4},{5},{6})",
-                dailyReportAdd.jobID, dailyReportAdd.date, dailyReportAdd.subJobID, dailyReportAdd.startTime, dailyReportAdd.endTime, dailyReportAdd.lunchHours, dailyReportAdd.dailyReportID); 
+             db.Database.ExecuteSqlCommand("Insert into tbl_dailyReport Values({0},{1},{2},{3},{4},{5})",
+                dailyReportAdd.jobID, dailyReportAdd.date, dailyReportAdd.subJobID, dailyReportAdd.startTime, dailyReportAdd.endTime, dailyReportAdd.lunchHours); 
             return new EmptyResult();
         }
 
