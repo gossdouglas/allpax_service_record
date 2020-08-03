@@ -355,42 +355,7 @@
     <Content Include="Views\customers\Edit.cshtml" />
     <Content Include="Views\customers\Index-orig.cshtml" />
     <Content Include="Views\customers\Index.cshtml" />
-    <Content Include="Views\dailyReportTimeEntry\Create.cshtml" />
-    <Content Include="Views\dailyReportTimeEntry\Delete.cshtml" />
-    <Content Include="Views\dailyReportTimeEntry\Details.cshtml" />
-    <Content Include="Views\dailyReportTimeEntry\Edit.cshtml" />
-    <Content Include="Views\dailyReportTimeEntry\Index.cshtml" />
-    <Content Include="Views\dailyReport\Create.cshtml" />
-    <Content Include="Views\dailyReport\Delete.cshtml" />
-    <Content Include="Views\dailyReport\Details.cshtml" />
-    <Content Include="Views\dailyReport\Edit.cshtml" />
     <Content Include="Views\dailyReport\Index.cshtml" />
-    <Content Include="Views\jobCorrespondents\Create.cshtml" />
-    <Content Include="Views\jobCorrespondents\Delete.cshtml" />
-    <Content Include="Views\jobCorrespondents\Details.cshtml" />
-    <Content Include="Views\jobCorrespondents\Edit.cshtml" />
-    <Content Include="Views\jobCorrespondents\Index.cshtml" />
-    <Content Include="Views\jobResourceTypes\Create.cshtml" />
-    <Content Include="Views\jobResourceTypes\Delete.cshtml" />
-    <Content Include="Views\jobResourceTypes\Details.cshtml" />
-    <Content Include="Views\jobResourceTypes\Edit.cshtml" />
-    <Content Include="Views\jobResourceTypes\Index.cshtml" />
-    <Content Include="Views\resourceTypes\Create.cshtml" />
-    <Content Include="Views\resourceTypes\Delete.cshtml" />
-    <Content Include="Views\resourceTypes\Details.cshtml" />
-    <Content Include="Views\resourceTypes\Edit.cshtml" />
-    <Content Include="Views\resourceTypes\Index.cshtml" />
-    <Content Include="Views\subJobTypes\Create.cshtml" />
-    <Content Include="Views\subJobTypes\Delete.cshtml" />
-    <Content Include="Views\subJobTypes\Details.cshtml" />
-    <Content Include="Views\subJobTypes\Edit.cshtml" />
-    <Content Include="Views\subJobTypes\Index.cshtml" />
-    <Content Include="Views\users\Create.cshtml" />
-    <Content Include="Views\users\Delete.cshtml" />
-    <Content Include="Views\users\Details.cshtml" />
-    <Content Include="Views\users\Edit.cshtml" />
-    <Content Include="Views\users\Index.cshtml" />
-    <Content Include="Views\dailyReportTimeEntry\Index-orig.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.js.flow" />
@@ -406,7 +371,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
