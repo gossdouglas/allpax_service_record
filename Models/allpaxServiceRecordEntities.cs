@@ -18,8 +18,8 @@ namespace allpax_service_record.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<tbl_customers>()
-                .Property(e => e.customerCode)
-                .IsUnicode(false);
+               .Property(e => e.customerCode)
+               .IsUnicode(false);
 
             modelBuilder.Entity<tbl_customers>()
                 .Property(e => e.customerName)
@@ -31,6 +31,10 @@ namespace allpax_service_record.Models
 
             modelBuilder.Entity<tbl_dailyReport>()
                 .Property(e => e.jobID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<tbl_dailyReport>()
+                .Property(e => e.equipment)
                 .IsUnicode(false);
         }
     }

@@ -9,5 +9,6 @@ namespace allpax_service_record.Models.Dropdown_Models
     {    
         public string name { get; set; }
         public string shortName { get; set; }
+        public string userName { get; set; }
     }
 }

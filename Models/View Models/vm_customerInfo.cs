@@ -7,7 +7,7 @@ namespace allpax_service_record.Models.View_Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class tbl_customers
+    public partial class vm_customerInfo
     {
         public string customerCode { get; set; }
 

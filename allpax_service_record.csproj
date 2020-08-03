@@ -194,9 +194,7 @@
     <Compile Include="Models\Dropdown Models\dpdwn_jobID.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\MODEL TESTING\Model1.cs" />
     <Compile Include="Models\tbl_customers.cs" />
-    <Compile Include="Models\MODEL TESTING\tbl_dailyReport.cs" />
     <Compile Include="Models\tbl_dailyReport.cs" />
     <Compile Include="Models\View Models\vm_customerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -374,6 +372,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\MODEL TESTING\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

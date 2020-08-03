@@ -54,6 +54,7 @@
                         $("#output_customerName").html(item.customerName.toString());
                         $("#output_location").html(item.address.toString());
                         $("#output_customerCode").html(item.customerCode.toString());
+                        $("#output_customerContact").html(item.customerContact.toString());
                     });
                 }
             });
@@ -92,10 +93,10 @@
             dataType: 'json',
             success: function (data) {
 
-                team_dpdwn.append($('<option/>', { value: -1, text: 'Select Team Member' }));
+                team_dpdwn.append($('<option/>', { value: -1, text: 'Add Team Member' }));
 
                 $(data).each(function (index, item) {
-                    team_dpdwn.append($('<option/>', { value: item.name, text: item.name + "-" + item.shortName }));
+                    team_dpdwn.append($('<option/>', { value: item.userName, text: item.name + "-" + item.shortName }));
                 });
             }
         });
@@ -109,8 +110,9 @@
             var addItem4 = $("#input_startTime").val();
             var addItem5 = $("#input_endTime").val();
             var addItem6 = $("#input_lunch").val();
-
-            console.log(addItem3);
+            var addItem7 = $("#input_equipment").val();
+           
+            //console.log(addItem3);
 
             alert(
                 "Selected for Add POST:" + '\n' +
@@ -119,7 +121,8 @@
                 "addItem3: " + addItem3 + '\n' + 
                 "addItem4: " + addItem4 + '\n' +
                 "addItem5: " + addItem5 + '\n' +
-                "addItem6: " + addItem6 + '\n'
+                "addItem6: " + addItem6 + '\n' +
+                "addItem7: " + addItem7 + '\n'
             );
             $("#addRecordItem1").val('');
             $("#addRecordItem2").val('');
@@ -127,6 +130,8 @@
             $("#addRecordItem4").val('');
             $("#addRecordItem5").val('');
             $("#addRecordItem6").val('');
+            $("#addRecordItem7").val('');
+
             //begin axios add post
             axios.post('/dailyReport/AddDailyReport', {
                 jobID: addItem1,
@@ -134,7 +139,8 @@
                 subJobID: addItem3,
                 startTime: addItem4,
                 endTime: addItem5,
-                lunchHours: addItem6
+                lunchHours: addItem6,
+                equipment: addItem7
                 //dailyReportID: '6'
             })
                 .then(function (response) {
@@ -145,7 +151,77 @@
                 });
             //end axios add post
         });
-                //end #addButton
+        //end #addButton
+
+        //begin #addTeamBtn
+        $("#addTeamBtn").click(function () {//when the add button is clicked...
+
+            alert($('#team_dpdwn').val())
+
+            //$('#Crd').val()
+
+            //$("#output_customerName").html(item.customerName.toString());
+
+            //$("#output_customerName")
+
+            //var addItem1 = $("#jobs_dpdown").val();
+            //var addItem2 = $("#slct_date").val();
+            //var addItem3 = $("#subJobTypes_dpdwn").val();
+            //var addItem4 = $("#input_startTime").val();
+            //var addItem5 = $("#input_endTime").val();
+            //var addItem6 = $("#input_lunch").val();
+            //var addItem7 = $("#input_equipment").val();
+
+            //console.log(addItem3);
+
+            //alert(
+            //    "Selected for Add POST:" + '\n' +
+            //    "addItem1: " + addItem1 + '\n' +
+            //    "addItem2: " + addItem2 + '\n' +
+            //    "addItem3: " + addItem3 + '\n' +
+            //    "addItem4: " + addItem4 + '\n' +
+            //    "addItem5: " + addItem5 + '\n' +
+            //    "addItem6: " + addItem6 + '\n' +
+            //    "addItem7: " + addItem7 + '\n'
+            //);
+            //$("#addRecordItem1").val('');
+            //$("#addRecordItem2").val('');
+            //$("#addRecordItem3").val('');
+            //$("#addRecordItem4").val('');
+            //$("#addRecordItem5").val('');
+            //$("#addRecordItem6").val('');
+            //$("#addRecordItem7").val('');
+
+            //begin axios add post
+            //axios.post('/dailyReport/AddDailyReport', {
+            //    jobID: addItem1,
+            //    date: addItem2,
+            //    subJobID: addItem3,
+            //    startTime: addItem4,
+            //    endTime: addItem5,
+            //    lunchHours: addItem6,
+            //    equipment: addItem7
+            //    //dailyReportID: '6'
+            //})
+            //    .then(function (response) {
+            //        console.log(response);
+            //    })
+            //    .catch(function (error) {
+            //        console.log(error);
+            //    });
+            //end axios add post
+        });
+        //end #addTeamBtn
+
+        //begin jobs id dropdown change
+        team_dpdwn.change(function () {
+
+            //alert($(this).val())
+
+            alert($('#team_dpdwn').val())
+         
+        });
+        //end jobs id dropdown change
 
     });//end document read jquery statements
     </script>
@@ -221,29 +297,56 @@
             <div class="col-2" style="padding:5px">
                 <strong>Allpax Team:</strong>
             </div>
-            <div class="col-6" style="padding:5px">
+            <div class="col-9" style="padding:5px">
                 <div class="row" style="margin:0px;">
                     <select name="team_dpdwn" id="team_dpdwn" style="width:100%">
                     </select>
                 </div>
 
-                <div class="row" style="margin:0px;">
-                    <strong>Allpax Team:</strong>
+                <div class="row" style="margin:0px;" name="txt_teamMembers" id="txt_teamMembers">
+                    <div class="col-4" id="teamMember_template" style="padding:5px">
+                        Johnny Watkins|JW
+                        <button type="button" class="btn btn-sm btn-primary">Delete</button>
+                    </div>
+                    @*<div class="col-4" style="padding:5px">
+                        Johnny Watkins|JW
+                        <button type="button" class="btn btn-sm btn-primary">Delete</button>
+                    </div>
+                    <div class="col-4" style="padding:5px">
+                        Johnny Watkins|JW
+                        <button type="button" class="btn btn-sm btn-primary">Delete</button>
+                    </div>
+                    <div class="col-4" style="padding:5px">
+                        Johnny Watkins|JW
+                        <button type="button" class="btn btn-sm btn-primary">Delete</button>
+                    </div>
+                    <div class="col-4" style="padding:5px">
+                        Johnny Watkins|JW
+                        <button type="button" class="btn btn-sm btn-primary">Delete</button>
+                    </div>
+                    <div class="col-4" style="padding:5px">
+                        Johnny Watkins|JW
+                        <button type="button" class="btn btn-sm btn-primary">Delete</button>
+                    </div>*@
                 </div>
 
             </div>
             <div class="col-1" style="padding:5px">
-                <div class="row" style="margin:0px">
-                    <button type="button" class="btn btn-sm btn-primary">Add</button>
-                </div>
+                @*<div class="row" style="margin:0px">*@
+                    <button type="button" class="btn btn-sm btn-primary" id="addTeamBtn">Add Team Member</button>
+                @*</div>*@
             </div>
-            <div class="col-1" style="padding:5px">
+            <div class="col-9" style="padding:5px">
+
+
+            </div>
+            @*<div class="col-1" style="padding:5px">
                 <div class="row" style="margin:0px">
                     <select name="" id="slct_teamShort" style="width:100%">
                         <option value="">JW</option>
                     </select>
                 </div>
-            </div>
+            </div>*@
         </div>
         @*</form-inline>*@
         <div class="row">
@@ -326,7 +429,7 @@
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-sm" id="addButton" style="background-color: royalblue">Add</button>
+    <button type="submit" class="btn btn-primary btn-sm" id="addButton" style="background-color: royalblue">Save Record</button>
 </form>
 
 

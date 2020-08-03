@@ -22,6 +22,8 @@ namespace allpax_service_record.Models
 
         public int lunchHours { get; set; }
 
+        public string equipment { get; set; }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int dailyReportID { get; set; }
