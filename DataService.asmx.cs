@@ -80,7 +80,7 @@ namespace allpax_service_record
         }
 
         [WebMethod]
-        public void GetAllTeamNames()
+        public void GetAllTeamNames(string userName)
         {
             string cs = ConfigurationManager.ConnectionStrings["allpaxServiceRecordEntities"].ConnectionString;
             List<dpdwn_teamNames> teamNames = new List<dpdwn_teamNames>();
@@ -88,6 +88,12 @@ namespace allpax_service_record
             {
                 SqlCommand cmd = new SqlCommand("spGetAllTeamNames", con);
                 cmd.CommandType = CommandType.StoredProcedure;
+                SqlParameter param = new SqlParameter()
+                {
+                    ParameterName = "@userName",
+                    Value = userName
+                };
+                cmd.Parameters.Add(param);
                 con.Open();
                 SqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())

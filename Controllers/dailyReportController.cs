@@ -18,6 +18,14 @@ namespace allpax_service_record.Controllers
         public ActionResult Index()
         {
             //return View(db.tbl_customers.ToList());
+            //var sql = db.tbl_dailyReport.SqlQuery("SELECT * from tbl_dailyReport").ToList();
+           
+            return View(sql.ToList()); 
+        }
+
+        public ActionResult ViewDailyReport(string dailyReportID)
+        {
+            //return View(db.tbl_customers.ToList());
             var sql = db.tbl_dailyReport.SqlQuery("SELECT * from tbl_dailyReport").ToList();
 
             return View(sql.ToList());
