@@ -18,17 +18,9 @@ namespace allpax_service_record.Controllers
         public ActionResult Index()
         {
             //return View(db.tbl_customers.ToList());
-            //var sql = db.tbl_dailyReport.SqlQuery("SELECT * from tbl_dailyReport").ToList();
+            var sql = db.tbl_dailyReport.SqlQuery("SELECT * from tbl_dailyReport").ToList();
            
             return View(sql.ToList()); 
-        }
-
-        public ActionResult ViewDailyReport(string dailyReportID)
-        {
-            //return View(db.tbl_customers.ToList());
-            var sql = db.tbl_dailyReport.SqlQuery("SELECT * from tbl_dailyReport").ToList();
-
-            return View(sql.ToList());
         }
 
         //begin CMPS 411 controller code
@@ -43,7 +35,9 @@ namespace allpax_service_record.Controllers
 
              db.Database.ExecuteSqlCommand("Insert into tbl_dailyReport Values({0},{1},{2},{3},{4},{5},{6})",
                 dailyReportAdd.jobID, dailyReportAdd.date, dailyReportAdd.subJobID, dailyReportAdd.startTime, dailyReportAdd.endTime, dailyReportAdd.lunchHours, dailyReportAdd.equipment); 
-            return new EmptyResult();
+            //return new EmptyResult();
+            return RedirectToAction("Home", "Index");
+            //return Redirect("/Home");
         }
 
         public ActionResult DeleteCustomer(tbl_dailyReport custDelete)
