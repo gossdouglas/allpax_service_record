@@ -22,7 +22,7 @@ namespace allpax_service_record.Models.View_Models
 
         public string customerName { get; set; }
 
-        public string location { get; set; }
+        public string address { get; set; }
 
         public int subJobID { get; set; }
 

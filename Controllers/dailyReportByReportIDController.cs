@@ -10,28 +10,18 @@ using allpax_service_record.Models;
 
 namespace allpax_service_record.Controllers
 {
-    public class dailyReportController : Controller
+    public class dailyReportByReportIDController : Controller
     {
         private allpaxServiceRecordEntities db = new allpaxServiceRecordEntities();
 
         // GET: customers
-        public ActionResult Index()
+        public ActionResult Index(string reportID)
         {
+            ViewBag.reportID = reportID;
             //return View(db.tbl_customers.ToList());
             var sql = db.tbl_dailyReport.SqlQuery("SELECT * from tbl_dailyReport").ToList();
            
             return View(sql.ToList()); 
-        }
-
-        // GET: customers
-        public ActionResult Edit()
-        {
-            //ViewBag.reportID = reportID;
-
-            //return View(db.tbl_customers.ToList());
-            var sql = db.tbl_dailyReport.SqlQuery("SELECT * from tbl_dailyReport").ToList();
-
-            return View(sql.ToList());
         }
 
         //begin CMPS 411 controller code
