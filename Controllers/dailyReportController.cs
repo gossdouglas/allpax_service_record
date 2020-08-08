@@ -30,8 +30,8 @@ namespace allpax_service_record.Controllers
 
              db.Database.ExecuteSqlCommand("Insert into tbl_dailyReport Values({0},{1},{2},{3},{4},{5},{6})",
                 dailyReportAdd.jobID, dailyReportAdd.date, dailyReportAdd.subJobID, dailyReportAdd.startTime, dailyReportAdd.endTime, dailyReportAdd.lunchHours, dailyReportAdd.equipment); 
-            //return new EmptyResult();
-            return RedirectToAction("Home", "Index");
+            return new EmptyResult();
+            //return RedirectToAction("Home", "Index");
             //return Redirect("/Home");
         }
 
