@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using allpax_service_record.Models;
+using allpax_service_record.Models.View_Models;
 
 namespace allpax_service_record.Controllers
 {
@@ -18,9 +19,23 @@ namespace allpax_service_record.Controllers
         public ActionResult Index()
         {
             //return View(db.tbl_customers.ToList());
-            var sql = db.tbl_dailyReport.SqlQuery("SELECT * from tbl_dailyReport").ToList();
-           
-            return View(sql.ToList()); 
+            //var sql = db.tbl_dailyReport.SqlQuery("SELECT * from tbl_dailyReport").ToList();
+            List<vm_dailyReportViewAll> list  = db.Database.SqlQuery<vm_dailyReportViewAll>("SELECT tbl_dailyReport.dailyReportID, tbl_Jobs.active, tbl_dailyReport.date, tbl_dailyReport.jobID, " +
+                "tbl_subJobTypes.description, tbl_customers.customerName, tbl_customers.address FROM tbl_dailyReport " +
+
+                    "INNER JOIN " +
+                    "tbl_Jobs ON tbl_Jobs.jobID = tbl_dailyReport.jobID " +
+                    "INNER JOIN " +
+                    "tbl_customers ON tbl_customers.customerCode = tbl_Jobs.customerCode " +
+                    "INNER JOIN " +
+                    "tbl_jobSubJobs ON tbl_jobSubJobs.jobID = tbl_Jobs.jobID " +
+                    "INNER JOIN " +
+                    "tbl_subJobTypes ON tbl_subJobTypes.subJobID = tbl_jobSubJobs.subJobID " +
+                    "WHERE " +
+                    "tbl_dailyReport.subJobID = tbl_subJobTypes.subJobID").ToList();
+
+
+            return View(list.ToList()); 
         }
 
         //begin CMPS 411 controller code

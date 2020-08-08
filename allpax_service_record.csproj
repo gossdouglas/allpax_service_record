@@ -197,6 +197,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\tbl_customers.cs" />
     <Compile Include="Models\tbl_dailyReport.cs" />
+    <Compile Include="Models\View Models\vm_dailyReportViewAll.cs" />
     <Compile Include="Models\View Models\vm_dailyReport.cs" />
     <Compile Include="Models\View Models\vm_customerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

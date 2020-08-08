@@ -1,4 +1,4 @@
-﻿@model IEnumerable<allpax_service_record.Models.tbl_dailyReport>
+﻿@model IEnumerable<allpax_service_record.Models.View_Models.vm_dailyReportViewAll>
 
 @{
     ViewBag.Title = "Index";
@@ -196,6 +196,12 @@
             <thead>
                 <tr>
                     <th class="th-sm">
+                        Report ID
+                    </th>
+                    <th class="th-sm">
+                        Active
+                    </th>
+                    <th class="th-sm">
                         Date
                     </th>
                     <th class="th-sm">
@@ -225,13 +231,15 @@
                 @foreach (var item in Model)
                 {
                 <tr class="record" id=@Html.DisplayFor(modelItem => item.jobID)>
-                    <td id="record_item0" value=@Html.DisplayFor(modelItem => item.date)>@Html.DisplayFor(modelItem => item.date)</td>
-                    <td id="record_item1" value=@Html.DisplayFor(modelItem => item.jobID)>@Html.DisplayFor(modelItem => item.jobID)</td>
-                    <td id="record_item2" value=@Html.DisplayFor(modelItem => item.subJobID)>@Html.DisplayFor(modelItem => item.subJobID)</td>
-                    <td id="record_item2" value=@Html.DisplayFor(modelItem => item.subJobID)>@Html.DisplayFor(modelItem => item.subJobID)</td>
-                    <td id="record_item2" value=@Html.DisplayFor(modelItem => item.subJobID)>@Html.DisplayFor(modelItem => item.subJobID)</td>
-                    <td id="record_item2" value=@Html.DisplayFor(modelItem => item.subJobID)>@Html.DisplayFor(modelItem => item.subJobID)</td>
-                    <td id="record_item2" value=@Html.DisplayFor(modelItem => item.subJobID)>@Html.DisplayFor(modelItem => item.subJobID)</td>
+                    <td id="record_item0" value=@Html.DisplayFor(modelItem => item.dailyReportID)>@Html.DisplayFor(modelItem => item.dailyReportID)</td>
+                    <td id="record_item1" value=@Html.DisplayFor(modelItem => item.active)>@Html.DisplayFor(modelItem => item.active)</td>
+                    <td id="record_item2" value=@Html.DisplayFor(modelItem => item.date)>@Html.DisplayFor(modelItem => item.date)</td>
+                    <td id="record_item3" value=@Html.DisplayFor(modelItem => item.jobID)>@Html.DisplayFor(modelItem => item.jobID)</td>
+                    <td id="record_item4" value=@Html.DisplayFor(modelItem => item.description)>@Html.DisplayFor(modelItem => item.description)</td>
+                    <td id="record_item5" value=@Html.DisplayFor(modelItem => item.customerName)>@Html.DisplayFor(modelItem => item.customerName)</td>
+                    <td id="record_item6" value=@Html.DisplayFor(modelItem => item.location)>@Html.DisplayFor(modelItem => item.location)</td>
+                    <td id="record_item7" value=>TEAM</td>
+                    <td id="record_item8" value=>WORK DESCRIPTION</td>
                     <td>
                         <button class="btn btn-primary btn-sm editButton" style=" background-color: royalblue">Edit</button>
                         <button class="btn btn-primary btn-sm updateButton" style="display:none;">Update</button>
