@@ -10,7 +10,7 @@ using allpax_service_record.Models;
 
 namespace allpax_service_record.Controllers
 {
-    public class dailyReportController : Controller
+    public class dailyReportAllController : Controller
     {
         private allpaxServiceRecordEntities db = new allpaxServiceRecordEntities();
 

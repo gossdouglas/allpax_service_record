@@ -325,31 +325,12 @@
             <div class="col-2" style="padding:5px">
                 <strong>Daily Log Information</strong>
             </div>
-            @*<div class="col-1" style="padding:5px">
-                    <strong></strong>
-                </div>*@
             <div class="col-3" style="padding:5px">
                 <div>
                     <span><strong>Record No</strong></span>
                     <span class="recordNo">new</span>
                 </div>
             </div>
-            @*<div class="col-2" style="padding:5px">
-                    <strong>Record No</strong>
-                </div>
-                <div class="col-1" style="padding:5px">
-                    <strong>12345</strong>
-                </div>*@
-            @*<div class="col-4" style="padding:5px">
-                    <div class="row" style="justify-content:flex-end">
-                        <div>
-                            <strong>Record No:</strong>
-                        </div>
-                        <div class="recordNo">
-                            <strong>12345</strong>
-                        </div>
-                    </div>
-                </div>*@
         </div>
         <div class="row">
             <div class="md-col-2" style="padding:5px">
@@ -378,7 +359,6 @@
             </div>
             <div class="col-2" style="padding:5px">
                 <select name="subJobTypes_dpdwn" id="subJobTypes_dpdwn" style="width:100%">
-                    @*<option value="S1525">Commissioning</option>*@
                 </select>
             </div>
         </div>
@@ -397,9 +377,6 @@
                 <strong>Customer Contact:</strong>
             </div>
             <div class="col-10" style="padding:5px" id="output_customerContact"></div>
-            @*<div class="col-10" style="padding:5px">
-                    <input type="text" value="" id="input_custContact" name="" style="width:100%">
-                </div>*@
         </div>
         <div class="row">
             <div class="col-2" style="padding:5px">
@@ -434,7 +411,7 @@
     </div>
 
     <!--allpax team-->
-    <div class="container pl-auto" style="margin:5px" id="contnr_team">
+    <div class="container pl-auto" style="margin:5px" id="contnr_team" hidden>
         <div class="row">
             <div class="col-2" style="padding:5px">
                 <strong>Allpax Team:</strong>
@@ -480,7 +457,7 @@
     </div>
     <!--allpax team-->
 
-    <div class=" container pl-auto" style="margin:5px" id="contnr_workDescription">
+    <div class=" container pl-auto" style="margin:5px" id="contnr_workDescription" hidden>
         <div class="row">
             <div class="col-10" style="padding:5px">
                 <strong>Work Description</strong>
@@ -499,7 +476,7 @@
         </div>
     </div>
 
-    <div class=" container pl-auto" style="margin:5px" id="contnr_delays">
+    <div class=" container pl-auto" style="margin:5px" id="contnr_delays" hidden>
         <div class="row">
             <div class="col-10" style="padding:5px">
                 <strong>Delays</strong>
@@ -518,7 +495,7 @@
         </div>
     </div>
 
-    <div class=" container pl-auto" style="margin:5px" id="contnr_warrantyDelays">
+    <div class=" container pl-auto" style="margin:5px" id="contnr_warrantyDelays" hidden>
         <div class="row">
             <div class="col-10" style="padding:5px">
                 <strong>Warranty Delays</strong>
