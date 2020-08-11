@@ -70,7 +70,7 @@
                             temp_name = item.name;
                             temp_shortName = item.shortName;
 
-                            $("#teamMember_template").clone(true).prop("id", "team_" + temp_userName.toString()).appendTo("#txt_teamMembers");
+                            $("#team_").clone(true).prop("id", "team_" + temp_userName.toString()).appendTo("#txt_teamMembers");
                             //$("#team_" + temp_userName.toString()).prop("class", "teamMember")
 
                             $("#team_" + temp_userName.toString()).text(temp_name + "| " + temp_shortName.toString());
@@ -109,10 +109,12 @@
                 $('.team_').each(function () {
                     //var tempTeamMemberUserID
                     var tempTeamMemberUserID = this.id.substr(5);
+                    //console.log(tempTeamMemberUserID.length)
 
-                    //teamMembersArray.push(this.id);
-                    teamMembersArray.push(tempTeamMemberUserID);
-                    console.log(tempTeamMemberUserID)
+                    if (tempTeamMemberUserID.length > 0) {
+                        teamMembersArray.push(tempTeamMemberUserID);
+                        console.log(tempTeamMemberUserID)
+                    }                                       
                 });
 
                 console.log(teamMembersArray)
@@ -233,7 +235,7 @@
                 </div>
 
                 <div class="row" style="margin:0px;" name="txt_teamMembers" id="txt_teamMembers">
-                    <div class="team_" id="teamMember_template" style="padding:5px; border:solid black 1px" hidden>
+                    <div class="team_" id="team_" style="padding:5px; border:solid black 1px" hidden>
                         Johnny Watkins|JW
                         @*<button type="button" class="btn btn-sm btn-primary" id="btn_delete_temp_userName">Delete</button>*@
                     </div>
