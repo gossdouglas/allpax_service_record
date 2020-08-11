@@ -40,7 +40,7 @@
             //begin
             team_dpdwn.change(function () {
 
-                alert($(this).val())
+                //alert($(this).val())
 
                 //alert($('#team_dpdwn').val())
 
@@ -70,13 +70,13 @@
                             temp_name = item.name;
                             temp_shortName = item.shortName;
 
-                            $("#teamMember_template").clone().prop("id", "user_" + temp_userName.toString()).appendTo("#txt_teamMembers");
+                            $("#teamMember_template").clone(true).prop("id", "team_" + temp_userName.toString()).appendTo("#txt_teamMembers");
 
-                            $("#user_" + temp_userName.toString()).text(temp_name + "| " + temp_shortName.toString());
+                            $("#team_" + temp_userName.toString()).text(temp_name + "| " + temp_shortName.toString());
 
                             //$("#btn_delete_temp_userName").clone().prop("id", "btn_delete_temp_" + temp_userName.toString()).appendTo("#user_" + temp_userName.toString());
 
-                            $("#user_" + temp_userName.toString()).removeAttr('hidden');//unhide the copy
+                            $("#team_" + temp_userName.toString()).removeAttr('hidden');//unhide the copy
                         });
                     }
                 });
@@ -93,11 +93,27 @@
 
                 //alert($("#slctd_reportID").val())
                 //alert($(this).attr("id"))
-                //alert($(this).attr("class"))
+                //alert("this will remove item with id: " + $(this).attr("id"))
+
+                //alert("#" + $(this).attr("id"))
+                $("#" + $(this).attr("id")).remove();
 
             });
             //end when a record class is clicked...
-            
+
+            //begin teamSaveButton click
+            $("#teamSaveButton").click(function () {//when the add button is clicked...
+
+                var teamMembersArray = [];
+                $('.teamMember').each(function () {
+                    teamMembersArray.push(this.id);
+                });
+
+                console.log(teamMembersArray)
+               
+            });
+            //end teamSaveButton click
+
         });//end document read jquery statements
     </script>
 </head>
@@ -158,7 +174,7 @@
             <div class="col-1" style="padding:5px">
                 <strong>Code:</strong>
             </div>
-            <div class="col-2" style="padding:5px" id="output_customerCode"></div>
+            <div class="col-2" style="padding:5px" id="output_customerCode">@Model.First().customerCode</div>
         </div>
         <div class="row">
             <div class="col-2" style="padding:5px">
@@ -204,21 +220,24 @@
             <div class="col-2" style="padding:5px">
                 <strong>Allpax Team:</strong>
             </div>
-            <div class="col-9" style="padding:5px">
+            <div class="col-8" style="padding:5px">
                 <div class="row" style="margin:0px;">
                     <select name="team_dpdwn" id="team_dpdwn" style="width:100%">
                     </select>
                 </div>
 
                 <div class="row" style="margin:0px;" name="txt_teamMembers" id="txt_teamMembers">
-                    <div class="teamMember" id="teamMember_template" style="padding:5px; border:solid black 1px">
+                    <div class="teamMember" id="teamMember_template" style="padding:5px; border:solid black 1px" hidden>
                         Johnny Watkins|JW
                         @*<button type="button" class="btn btn-sm btn-primary" id="btn_delete_temp_userName">Delete</button>*@
                     </div>
                     @*<div class="col-1">
-                        <button type="button" class="btn btn-sm btn-primary" id="btn_delete_temp_userName">Delete</button>
-                    </div>*@ 
+                    <button type="button" class="btn btn-sm btn-primary" id="btn_delete_temp_userName">Delete</button>
+                </div>*@
                 </div>
+            </div>
+            <div class="col-2" style="padding:5px">
+                <button type="button" class="btn btn-sm btn-primary" id="teamSaveButton">SAVE TEAM</button>
             </div>
         </div>
     </div>
