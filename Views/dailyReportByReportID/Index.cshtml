@@ -36,8 +36,68 @@
                 }
             });
             //end fill the sub job dropdown
-           
 
+            //begin
+            team_dpdwn.change(function () {
+
+                alert($(this).val())
+
+                //alert($('#team_dpdwn').val())
+
+                //begin
+                var team_dpdwn = $('#team_dpdwn');
+
+                $.ajax({
+                    url: 'DataService.asmx/GetAllTeamNames',
+                    method: 'post',
+                    dataType: 'json',
+                    data: { userName: $(this).val() },
+                    success: function (data) {
+
+                        //alert($('#team_dpdwn').val())
+                        //team_dpdwn.append($('<option/>', { value: -1, text: 'Add Team Member' }));
+
+                        $(data).each(function (index, item) {
+                            //team_dpdwn.append($('<option/>', { value: item.userName, text: item.name + "-" + item.shortName }));
+                            //alert(item.userName)
+                            //alert(item.name)
+                            //alert(item.shortName)
+                            var temp_userName;
+                            var temp_name;
+                            var temp_shortName;
+
+                            temp_userName = item.userName;
+                            temp_name = item.name;
+                            temp_shortName = item.shortName;
+
+                            $("#teamMember_template").clone().prop("id", "user_" + temp_userName.toString()).appendTo("#txt_teamMembers");
+
+                            $("#user_" + temp_userName.toString()).text(temp_name + "| " + temp_shortName.toString());
+
+                            //$("#btn_delete_temp_userName").clone().prop("id", "btn_delete_temp_" + temp_userName.toString()).appendTo("#user_" + temp_userName.toString());
+
+                            $("#user_" + temp_userName.toString()).removeAttr('hidden');//unhide the copy
+                        });
+                    }
+                });
+
+                //$("#tabTemplate").clone().prop("id", "tab_" + tempJobNo.toString()).appendTo("#jobNoTabs");
+
+                //$("#tab_" + tempJobNo.toString()).removeAttr('hidden');//unhide the copy
+            });
+            //end
+
+            //begin when a team member class is clicked...
+            $(".teamMember").on('click', function () {
+                //alert('yo')              
+
+                //alert($("#slctd_reportID").val())
+                //alert($(this).attr("id"))
+                //alert($(this).attr("class"))
+
+            });
+            //end when a record class is clicked...
+            
         });//end document read jquery statements
     </script>
 </head>
@@ -151,34 +211,13 @@
                 </div>
 
                 <div class="row" style="margin:0px;" name="txt_teamMembers" id="txt_teamMembers">
-                    <div class="col-3" id="teamMember_template" style="padding:5px; border:solid black 1px">
+                    <div class="teamMember" id="teamMember_template" style="padding:5px; border:solid black 1px">
                         Johnny Watkins|JW
                         @*<button type="button" class="btn btn-sm btn-primary" id="btn_delete_temp_userName">Delete</button>*@
                     </div>
-                    <div class="col-1">
+                    @*<div class="col-1">
                         <button type="button" class="btn btn-sm btn-primary" id="btn_delete_temp_userName">Delete</button>
-                    </div>
-                    <div class="col-3" id="teamMember_template" style="padding:5px; border:solid black 1px">
-                        Warren Wood|WW
-                        @*<button type="button" class="btn btn-sm btn-primary" id="btn_delete_temp_userName">Delete</button>*@
-                    </div>
-                    <div class="col-1">
-                        <button type="button" class="btn btn-sm btn-primary" id="btn_delete_temp_userName">Delete</button>
-                    </div>
-                    <div class="col-3" id="teamMember_template" style="padding:5px; border:solid black 1px">
-                        John Holmestead|JH
-                        @*<button type="button" class="btn btn-sm btn-primary" id="btn_delete_temp_userName">Delete</button>*@
-                    </div>
-                    <div class="col-1">
-                        <button type="button" class="btn btn-sm btn-primary" id="btn_delete_temp_userName">Delete</button>
-                    </div>
-                    <div class="col-3" id="teamMember_template" style="padding:5px; border:solid black 1px">
-                        Perr Wills|PW
-                        @*<button type="button" class="btn btn-sm btn-primary" id="btn_delete_temp_userName">Delete</button>*@
-                    </div>
-                    <div class="col-1">
-                        <button type="button" class="btn btn-sm btn-primary" id="btn_delete_temp_userName">Delete</button>
-                    </div>
+                    </div>*@ 
                 </div>
             </div>
         </div>
