@@ -12,10 +12,13 @@ namespace allpax_service_record.Models.View_Models
 
         public Boolean active { get; set; }
 
-        public DateTime date { get; set; }
-        public DateTime startTime { get; set; }
-        public DateTime endTime { get; set; }
+        public string date { get; set; }
+        public string startTime { get; set; }
+        public string endTime { get; set; }
 
+        public int lunchHours { get; set; }
+
+        public string customerCode { get; set; }
 
         public string jobID { get; set; }
 

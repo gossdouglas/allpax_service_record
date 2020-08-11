@@ -64,13 +64,20 @@ namespace allpax_service_record.Controllers
                 vm_dailyReportByReportID.dailyReportID = (int)dr1[0];
                 vm_dailyReportByReportID.jobID = dr1[1].ToString();
                 vm_dailyReportByReportID.description = dr1[2].ToString();
-                vm_dailyReportByReportID.date = Convert.ToDateTime(dr1[3]);
+
+                vm_dailyReportByReportID.date = dr1[3].ToString();
+
                 vm_dailyReportByReportID.customerContact = dr1[4].ToString();
                 vm_dailyReportByReportID.customerName = dr1[5].ToString();
                 vm_dailyReportByReportID.address = dr1[6].ToString();
                 vm_dailyReportByReportID.equipment = dr1[7].ToString();
-                vm_dailyReportByReportID.startTime = Convert.ToDateTime(dr1[8]);
-                vm_dailyReportByReportID.endTime = Convert.ToDateTime(dr1[9]);
+
+                //vm_dailyReportByReportID.startTime = GetDateTime.(dr1[8]).TimeofDay;
+                //vm_dailyReportByReportID.startTime = dr1[8].gettimespan();
+
+                vm_dailyReportByReportID.startTime = dr1[8].ToString();
+                vm_dailyReportByReportID.endTime = dr1[9].ToString();
+                vm_dailyReportByReportID.lunchHours = (int)dr1[10];
 
                 dailyReportByID.Add(vm_dailyReportByReportID);
             }

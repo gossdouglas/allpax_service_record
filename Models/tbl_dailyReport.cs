@@ -16,9 +16,9 @@ namespace allpax_service_record.Models
 
         public int subJobID { get; set; }
 
-        public DateTime startTime { get; set; }
+        public TimeSpan startTime { get; set; }
 
-        public DateTime endTime { get; set; }
+        public TimeSpan endTime { get; set; }
 
         public int lunchHours { get; set; }
 
