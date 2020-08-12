@@ -20,6 +20,8 @@
 
             //begin fill the team names dropdown
             var team_dpdwn = $('#team_dpdwn');
+            var dailyReportID = $("#txt_dailyReportID").html();
+
 
             $.ajax({
                 url: 'DataService.asmx/GetAllTeamNames',
@@ -46,6 +48,7 @@
 
                 //begin
                 var team_dpdwn = $('#team_dpdwn');
+
 
                 $.ajax({
                     url: 'DataService.asmx/GetAllTeamNames',
@@ -78,6 +81,9 @@
                             //$("#btn_delete_temp_userName").clone().prop("id", "btn_delete_temp_" + temp_userName.toString()).appendTo("#user_" + temp_userName.toString());
 
                             $("#team_" + temp_userName.toString()).removeAttr('hidden');//unhide the copy
+
+                            console.log(temp_userName)
+                            console.log(dailyReportID)
                         });
                     }
                 });

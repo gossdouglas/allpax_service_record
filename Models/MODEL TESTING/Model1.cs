@@ -1,15 +1,14 @@
-namespace allpax_service_record.Models
+namespace allpax_service_record.Models.MODEL_TESTING
 {
     using System;
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
-    using allpax_service_record.Models.MODEL_TESTING;
 
-    public partial class allpaxServiceRecordEntities : DbContext
+    public partial class Model1 : DbContext
     {
-        public allpaxServiceRecordEntities()
-            : base("name=allpaxServiceRecordEntities")
+        public Model1()
+            : base("name=Model1")
         {
         }
 
