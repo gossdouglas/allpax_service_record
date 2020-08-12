@@ -114,16 +114,37 @@
 
             //begin when a team member class is clicked...
             $(".team_").on('click', function () {
-                //alert('yo')              
+                //alert('yo') 
+
+                var tempTeamMemberUserID = this.id.substr(5);
+                //alert(tempTeamMemberUserID)
 
                 //alert($("#slctd_reportID").val())
                 //alert($(this).attr("id"))
                 //alert("this will remove item with id: " + $(this).attr("id"))
 
                 //alert("#" + $(this).attr("id"))
-                $("#" + $(this).attr("id")).remove();
+                
 
+                //begin DeleteTeamMember
+                //begin axios delete post
+                axios.post('/dailyReportByReportID/DeleteTeamMember', {
+
+                    dailyReportID: dailyReportID,
+                    userName: tempTeamMemberUserID,
+                })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                //end axios add post
+
+                $("#" + $(this).attr("id")).remove();
             });
+                //end DeleteTeamMember
+
             //end when a record class is clicked...
 
             //begin teamSaveButton click

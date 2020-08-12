@@ -111,11 +111,15 @@ namespace allpax_service_record.Controllers
             //return RedirectToAction("SalesLanding", "Index");
         }
 
+        [HttpPost]
         public ActionResult DeleteTeamMember(tbl_dailyReportUsers teamMemberDelete)
         {
-            //db.Database.ExecuteSqlCommand("DELETE FROM tbl_dailyReportUsers WHERE id=({0})", teamMemberDelete.id);
+            db.Database.ExecuteSqlCommand("DELETE FROM tbl_dailyReportUsers " +
+                "WHERE " +
+                "dailyReportID=({0})" +
+                "AND userName = ({1})", teamMemberDelete.id, teamMemberDelete.userName);
 
-            //return RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
 
         public ActionResult UpdateCustomer(tbl_dailyReport custUpdate)
