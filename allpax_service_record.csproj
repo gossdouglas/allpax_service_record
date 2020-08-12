@@ -196,9 +196,6 @@
     <Compile Include="Models\Dropdown Models\dpdwn_jobID.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\MODEL TESTING\Model1.cs" />
-    <Compile Include="Models\MODEL TESTING\tbl_customers.cs" />
-    <Compile Include="Models\MODEL TESTING\tbl_dailyReport.cs" />
     <Compile Include="Models\tbl_dailyReportUsers.cs" />
     <Compile Include="Models\tbl_customers.cs" />
     <Compile Include="Models\tbl_dailyReport.cs" />

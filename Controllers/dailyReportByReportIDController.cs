@@ -11,6 +11,7 @@ using allpax_service_record.Models.View_Models;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Dynamic;
+using allpax_service_record.Models.MODEL_TESTING;
 
 namespace allpax_service_record.Controllers
 {
@@ -100,11 +101,21 @@ namespace allpax_service_record.Controllers
             //return Redirect("/Home");
         }
 
-        public ActionResult DeleteCustomer(tbl_dailyReport custDelete)
+        [HttpPost]
+        public ActionResult AddTeamMember(tbl_dailyReportUsers teamMemberAdd)
         {
-            //db.Database.ExecuteSqlCommand("DELETE FROM tbl_customers WHERE id=({0})", custDelete.id);
+            db.Database.ExecuteSqlCommand("Insert into tbl_dailyReportUsers Values({0},{1})",
+                teamMemberAdd.dailyReportID, teamMemberAdd.userName);
 
-            return RedirectToAction("Index");
+            return new EmptyResult(); 
+            //return RedirectToAction("SalesLanding", "Index");
+        }
+
+        public ActionResult DeleteTeamMember(tbl_dailyReportUsers teamMemberDelete)
+        {
+            //db.Database.ExecuteSqlCommand("DELETE FROM tbl_dailyReportUsers WHERE id=({0})", teamMemberDelete.id);
+
+            //return RedirectToAction("Index");
         }
 
         public ActionResult UpdateCustomer(tbl_dailyReport custUpdate)

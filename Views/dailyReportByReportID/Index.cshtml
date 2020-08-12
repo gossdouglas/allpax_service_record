@@ -82,9 +82,27 @@
 
                             $("#team_" + temp_userName.toString()).removeAttr('hidden');//unhide the copy
 
-                            console.log(temp_userName)
-                            console.log(dailyReportID)
+                            //console.log(temp_userName)
+                            //console.log(dailyReportID)
+
+                            //begin AddTeamMember
+                            //begin axios add post
+                            axios.post('/dailyReportByReportID/AddTeamMember', {
+                                dailyReportID: dailyReportID,
+                                userName: temp_userName,
+                            })
+                                .then(function (response) {
+                                    console.log(response);
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
+                            //end axios add post
                         });
+                            //end AddTeamMember
+
+                            
+                        //});
                     }
                 });
 
@@ -109,23 +127,23 @@
             //end when a record class is clicked...
 
             //begin teamSaveButton click
-            $("#teamSaveButton").click(function () {//when the add button is clicked...
+            //$("#teamSaveButton").click(function () {//when the add button is clicked...
 
-                var teamMembersArray = [];
-                $('.team_').each(function () {
-                    //var tempTeamMemberUserID
-                    var tempTeamMemberUserID = this.id.substr(5);
-                    //console.log(tempTeamMemberUserID.length)
+            //    var teamMembersArray = [];
+            //    $('.team_').each(function () {
+            //        //var tempTeamMemberUserID
+            //        var tempTeamMemberUserID = this.id.substr(5);
+            //        //console.log(tempTeamMemberUserID.length)
 
-                    if (tempTeamMemberUserID.length > 0) {
-                        teamMembersArray.push(tempTeamMemberUserID);
-                        console.log(tempTeamMemberUserID)
-                    }                                       
-                });
+            //        if (tempTeamMemberUserID.length > 0) {
+            //            teamMembersArray.push(tempTeamMemberUserID);
+            //            console.log(tempTeamMemberUserID)
+            //        }                                       
+            //    });
 
-                console.log(teamMembersArray)
+            //    console.log(teamMembersArray)
                
-            });
+            //});
             //end teamSaveButton click
 
         });//end document read jquery statements
@@ -251,7 +269,7 @@
                 </div>
             </div>
             <div class="col-2" style="padding:5px">
-                <button type="button" class="btn btn-sm btn-primary" id="teamSaveButton">SAVE TEAM</button>
+                <button type="button" class="btn btn-sm btn-primary" id="teamSaveButton" disabled>SAVE TEAM</button>
             </div>
         </div>
     </div>
