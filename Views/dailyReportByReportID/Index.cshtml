@@ -24,6 +24,7 @@
 
                 //begin fill the team names dropdown
                 var team_dpdwn = $('#team_dpdwn');
+                var workDescTeam_dpdwn = $('#workDescTeam_dpdwn');
                 var dailyReportID = $("#txt_dailyReportID").html();
 
                 $.ajax({
@@ -44,9 +45,6 @@
 
                 //begin load team members on page load
                 //team_dpdwn.change(function () {
-
-                //var team_dpdwn = $('#team_dpdwn');
-
                 $.ajax({
                     url: 'DataService.asmx/GetAllTeamNamesByReportID',
                     method: 'post',
@@ -70,7 +68,7 @@
                             temp_name = item.name;
                             temp_shortName = item.shortName;
 
-                            console.log(temp_userName)
+                            //console.log(temp_userName)
 
                             $("#team_").clone(true).prop("id", "team_" + temp_userName.toString()).appendTo("#txt_teamMembers");
                             //$("#team_" + temp_userName.toString()).prop("class", "teamMember")
@@ -88,11 +86,38 @@
                 //});
                 //end load team members on page load
 
+                //begin load team members on work description dpdwn click
+                workDescTeam_dpdwn.click(function () {
+
+                    workDescTeam_dpdwn.empty();
+                    workDescTeam_dpdwn.append($('<option/>', { value: -1, text: 'Add' }));
+                    workDescTeam_dpdwn.val('-1');                   
+
+                $.ajax({
+                    url: 'DataService.asmx/GetAllTeamNamesByReportID',
+                    method: 'post',
+                    dataType: 'json',
+                    data: { userName: '%', dailyReportID: dailyReportID },
+                    success: function (data) {
+
+                        //alert($('#team_dpdwn').val())
+                        //workDescTeam_dpdwn.append($('<option/>', { value: -1, text: 'Add' }));
+
+                        $(data).each(function (index, item) {
+                            //workDescTeam_dpdwn.append($('<option/>', { value: item.userName, text: item.name + "-" + item.shortName }))
+                            workDescTeam_dpdwn.append($('<option/>', { value: item.userName, text: item.shortName }))
+
+                        });
+                        //end AddTeamMember
+                    }
+                });
+                });
+                //end load team members on work description dpdwn click
+
                 //begin add team member on drop down change
                 team_dpdwn.change(function () {
 
                     //begin
-                    var team_dpdwn = $('#team_dpdwn');
 
                     $.ajax({
                         url: 'DataService.asmx/GetAllTeamNames',
@@ -145,6 +170,66 @@
                     });
                 });
                 //end add team member on drop down change
+
+                //begin load team members on work description dpdwn change
+                workDescTeam_dpdwn.change(function () {
+
+                    //workDescTeam_dpdwn.empty();
+                    //workDescTeam_dpdwn.append($('<option/>', { value: -1, text: 'Add' }));
+                    //workDescTeam_dpdwn.val('-1');
+                    //alert($(this).val())
+
+                    //begin
+
+                    $.ajax({
+                        url: 'DataService.asmx/GetAllTeamNamesByReportID',
+                        method: 'post',
+                        dataType: 'json',
+                        data: { userName: $(this).val(), dailyReportID: dailyReportID },
+                        success: function (data) {
+
+                            //alert($(this).val())
+                            //team_dpdwn.append($('<option/>', { value: -1, text: 'Add Team Member' }));
+
+                            //console.log(data)
+
+                            $(data).each(function (index, item) {
+                                //team_dpdwn.append($('<option/>', { value: item.userName, text: item.name + "-" + item.shortName }));
+                                console.log(item.userName)
+                                console.log(item.name)
+                                console.log(item.shortName)
+
+                                var temp_userName;
+                                var temp_name;
+                                var temp_shortName;
+
+                                temp_userName = item.userName;
+                                temp_name = item.name;
+                                temp_shortName = item.shortName;
+
+                                //$("#team_").clone(true).prop("id", "team_" + temp_userName.toString()).appendTo("#txt_teamMembers");
+                                //$("#team_" + temp_userName.toString()).text(temp_name + "| " + temp_shortName.toString());
+                                //$("#team_" + temp_userName.toString()).removeAttr('hidden');//unhide the copy
+
+                                //begin AddTeamMember
+                                //begin axios add post
+                                //axios.post('/dailyReportByReportID/AddTeamMember', {
+                                //    dailyReportID: dailyReportID,
+                                //    userName: temp_userName,
+                                //})
+                                //    .then(function (response) {
+                                //        console.log(response);
+                                //    })
+                                //    .catch(function (error) {
+                                //        console.log(error);
+                                //    });
+                                //end axios add post
+                            });
+                            //end AddTeamMember
+                        }
+                    });
+                });
+                //end load team members on work description dpdwn change
 
                 //begin when a team member class is clicked...
                 $(".team_").on('click', function () {
@@ -301,10 +386,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-7" style="padding:5px" contenteditable="true">
-                @*<input type="textarea" value="Water recovery systemfdfsdffafsdfdfdfdfdfdfsafdsffdsfdsfdfsdfdsffsdfdsfdfafdsfdfdsfdfsdfdsfdsffsdfsdf" id="input_workDesc" name="" style="width:100%">*@
+            <div class="col-7" style="padding:5px" contenteditable="true">                
                 <span class="input"
-                      role="textbox"
+                      role="textbox" id="input_workDesc"
                       contenteditable>
                     netsle contractor installed water recovery 3 way val was installed incorrectly.  
                     zach requested that allpax correct the problem.  the valve had to 
@@ -312,15 +396,21 @@
                     in the body.  The actuator still needs to be reinstalled.
                 </span>
             </div>
+            <div class="col-3 workDescTeam_" style="padding:5px">
+                <span class="" id="workDescTeam_" style="padding:5px">JW</span>
+                <span class="" id="workDescTeam_" style="padding:5px">JW</span>
+                <span class="" id="workDescTeam_" style="padding:5px">JW</span>
+                <span class="" id="workDescTeam_" style="padding:5px">JW</span>
+                <span class="" id="workDescTeam_" style="padding:5px">JW</span>
+                <span class="" id="workDescTeam_" style="padding:5px">JW</span>
+                <span class="" id="workDescTeam_" style="padding:5px">JW</span>
 
-            
-
-            <div class="col-3" style="padding:5px">
-                <strong>Work Description</strong>
+                @*<div class="" id="workDescTeam_" style="padding:5px">JW</div>*@
+                @*<div class="col-1 workDescTeam_" id="workDescTeam_" style="padding:5px">JW</div>*@
             </div>
             <div class="col-2" style="padding:5px">
                 <select name="" id="workDescTeam_dpdwn" style="width:100%">
-                    <option value="">All</option>
+                    <option value="">Add</option>
                 </select>
             </div>
         </div>
