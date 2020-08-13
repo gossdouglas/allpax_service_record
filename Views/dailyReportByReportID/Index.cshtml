@@ -25,6 +25,7 @@
                 //begin fill the team names dropdown
                 var team_dpdwn = $('#team_dpdwn');
                 var workDescTeam_dpdwn = $('#workDescTeam_dpdwn');
+                var addWorkDescBtn = $('#addWorkDescBtn');
                 var dailyReportID = $("#txt_dailyReportID").html();
 
                 $.ajax({
@@ -56,10 +57,6 @@
                         //team_dpdwn.append($('<option/>', { value: -1, text: 'Add Team Member' }));
 
                         $(data).each(function (index, item) {
-                            //team_dpdwn.append($('<option/>', { value: item.userName, text: item.name + "-" + item.shortName }));
-                            //alert(item.userName)
-                            //alert(item.name)
-                            //alert(item.shortName)
                             var temp_userName;
                             var temp_name;
                             var temp_shortName;
@@ -72,11 +69,8 @@
 
                             $("#team_").clone(true).prop("id", "team_" + temp_userName.toString()).appendTo("#txt_teamMembers");
                             //$("#team_" + temp_userName.toString()).prop("class", "teamMember")
-
                             $("#team_" + temp_userName.toString()).text(temp_name + "| " + temp_shortName.toString());
-
                             //$("#btn_delete_temp_userName").clone().prop("id", "btn_delete_temp_" + temp_userName.toString()).appendTo("#user_" + temp_userName.toString());
-
                             $("#team_" + temp_userName.toString()).removeAttr('hidden');//unhide the copy
 
                         });
@@ -90,7 +84,7 @@
                 workDescTeam_dpdwn.click(function () {
 
                     workDescTeam_dpdwn.empty();
-                    workDescTeam_dpdwn.append($('<option/>', { value: -1, text: 'Add' }));
+                    workDescTeam_dpdwn.append($('<option/>', { value: -1, text: 'Team' }));
                     workDescTeam_dpdwn.val('-1');                   
 
                 $.ajax({
@@ -207,9 +201,10 @@
                                 temp_name = item.name;
                                 temp_shortName = item.shortName;
 
-                                //$("#team_").clone(true).prop("id", "team_" + temp_userName.toString()).appendTo("#txt_teamMembers");
-                                //$("#team_" + temp_userName.toString()).text(temp_name + "| " + temp_shortName.toString());
-                                //$("#team_" + temp_userName.toString()).removeAttr('hidden');//unhide the copy
+                                $("#workDescTeam_").clone(true).prop("id", "workDescTeam_" + temp_userName.toString()).appendTo("#txt_teamMembersWorkDesc");
+                                //$("#workDescTeam_" + temp_userName.toString()).text(temp_name + "| " + temp_shortName.toString());
+                                $("#workDescTeam_" + temp_userName.toString()).text(temp_shortName);
+                                $("#workDescTeam_" + temp_userName.toString()).removeAttr('hidden');//unhide the copy
 
                                 //begin AddTeamMember
                                 //begin axios add post
@@ -255,6 +250,19 @@
                 //end DeleteTeamMember
 
                 //end when a record class is clicked...
+
+                //begin when nnnn is clicked...
+                $("#addWorkDescBtn").on('click', function () {
+
+                    alert('yo')
+                    $("#workDescriptionLine_template").clone(true).prop("id", "workDescriptionLine_template" + "time_id").appendTo("#contnr_workDescription");
+                    //$("#team_" + temp_userName.toString()).prop("class", "teamMember")
+                    //$("#workDescriptionLine_template" + temp_userName.toString()).text(temp_name + "| " + temp_shortName.toString());
+                    //$("#btn_delete_temp_userName").clone().prop("id", "btn_delete_temp_" + temp_userName.toString()).appendTo("#user_" + temp_userName.toString());
+                    $("#workDescriptionLine_template" + "time_id").removeAttr('hidden');//unhide the copy
+                    
+                });
+                //end n
 
             });//end document read jquery statements
         </script>
@@ -378,42 +386,47 @@
 
     <div class=" container pl-auto" style="margin:5px" id="contnr_workDescription">
         <div class="row">
-            <div class="col-7" style="padding:5px">
+            <div class="col-4" style="padding:5px">
                 <strong>Work Description</strong>
             </div>
-            <div class="col-5" style="padding:5px">
+            <div class="col-4" style="padding:5px">
+                <button type="button" class="btn btn-primary btn-sm" id="addWorkDescBtn" style="background-color: royalblue;" disabled>New Entry</button>
+            </div>
+            <div class="col-4" style="padding:5px">
                 <strong>Team</strong>
             </div>
         </div>
-        <div class="row">
-            <div class="col-7" style="padding:5px" contenteditable="true">                
-                <span class="input"
-                      role="textbox" id="input_workDesc"
-                      contenteditable>
-                    netsle contractor installed water recovery 3 way val was installed incorrectly.  
-                    zach requested that allpax correct the problem.  the valve had to 
-                    be disassembled in the pipe.  the actuator was removed and the ball was spun 
-                    in the body.  The actuator still needs to be reinstalled.
-                </span>
+        <!--begin workDescriptionLine_template-->
+        @*<div class="col-12" id="workDescriptionLine_template" hidden>*@
+            <div class="row" id="">
+                <div class="col-8" style="padding:5px" contenteditable="true">
+                    <span class="input"
+                          role="textbox" id="input_workDesc"
+                          contenteditable>kkkkkk
+                    </span>
+                </div>
+                <div class="col-3" name="txt_teamMembersWorkDesc" id="txt_teamMembersWorkDesc" style="padding:5px">
+                    <span class="workDescTeam_" id="workDescTeam_" style="padding:5px"></span>
+                </div>
+                <div class="col-1" style="padding:5px">
+                    <select name="" id="workDescTeam_dpdwn" style="width:100%">
+                        <option value="">Team</option>
+                    </select>
+                </div>
             </div>
-            <div class="col-3 workDescTeam_" style="padding:5px">
-                <span class="" id="workDescTeam_" style="padding:5px">JW</span>
-                <span class="" id="workDescTeam_" style="padding:5px">JW</span>
-                <span class="" id="workDescTeam_" style="padding:5px">JW</span>
-                <span class="" id="workDescTeam_" style="padding:5px">JW</span>
-                <span class="" id="workDescTeam_" style="padding:5px">JW</span>
-                <span class="" id="workDescTeam_" style="padding:5px">JW</span>
-                <span class="" id="workDescTeam_" style="padding:5px">JW</span>
-
-                @*<div class="" id="workDescTeam_" style="padding:5px">JW</div>*@
-                @*<div class="col-1 workDescTeam_" id="workDescTeam_" style="padding:5px">JW</div>*@
+            <div class="row">
+                <div class="col-2" style="padding:5px">
+                    <div>
+                        <span><strong>Time Entry:</strong></span>
+                        <span id="txt_timeEntryID" value="">new</span>
+                    </div>
+                </div>
+                <div class="col-10" style="padding:5px">
+                    <button type="submit" class="btn btn-primary btn-sm" id="" style="background-color: royalblue; width: 100%" disabled>Save Entry</button>
+                </div>
             </div>
-            <div class="col-2" style="padding:5px">
-                <select name="" id="workDescTeam_dpdwn" style="width:100%">
-                    <option value="">Add</option>
-                </select>
-            </div>
-        </div>
+        @*</div>*@
+        <!--end workDescriptionLine_template-->
     </div>
 
     <div class=" container pl-auto" style="margin:5px" id="contnr_delays" hidden>
@@ -453,7 +466,7 @@
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-sm" id="addButton" style="background-color: royalblue" disabled>Save Record</button>
+    <button type="submit" class="btn btn-primary btn-sm" id="addButton" style="background-color: royalblue;" disabled >Save Record</button>
 </form>
 
 
