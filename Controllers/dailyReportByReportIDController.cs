@@ -65,9 +65,7 @@ namespace allpax_service_record.Controllers
                 vm_dailyReportByReportID.dailyReportID = (int)dr1[0];
                 vm_dailyReportByReportID.jobID = dr1[1].ToString();
                 vm_dailyReportByReportID.description = dr1[2].ToString();
-
-                vm_dailyReportByReportID.date = dr1[3].ToString();
-
+                vm_dailyReportByReportID.date = String.Format("{0:yyyy-MM-dd}", dr1[3]);
                 vm_dailyReportByReportID.customerContact = dr1[4].ToString();
                 vm_dailyReportByReportID.customerName = dr1[5].ToString();
                 vm_dailyReportByReportID.address = dr1[6].ToString();
@@ -117,9 +115,10 @@ namespace allpax_service_record.Controllers
             db.Database.ExecuteSqlCommand("DELETE FROM tbl_dailyReportUsers " +
                 "WHERE " +
                 "dailyReportID=({0})" +
-                "AND userName = ({1})", teamMemberDelete.id, teamMemberDelete.userName);
+                "AND userName = ({1})", teamMemberDelete.dailyReportID, teamMemberDelete.userName);
 
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return new EmptyResult();
         }
 
         public ActionResult UpdateCustomer(tbl_dailyReport custUpdate)

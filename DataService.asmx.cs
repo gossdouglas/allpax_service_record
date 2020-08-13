@@ -110,6 +110,40 @@ namespace allpax_service_record
         }
 
         [WebMethod]
+        public void GetAllTeamNamesByReportID(string userName, int dailyReportID)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["allpaxServiceRecordEntities"].ConnectionString;
+            List<dpdwn_teamNames> teamNames = new List<dpdwn_teamNames>();
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("spGetAllTeamNamesByreportID", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                //SqlParameter param = new SqlParameter()
+                //{
+                //    ParameterName = "@userName",
+                //    Value = userName
+                //};
+                //cmd.Parameters.Add(param);
+
+                cmd.Parameters.AddWithValue("@userName", userName);
+                cmd.Parameters.AddWithValue("@dailyReportID", dailyReportID);
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    dpdwn_teamNames teamName = new dpdwn_teamNames();
+                    teamName.name = rdr["name"].ToString();
+                    teamName.shortName = rdr["shortName"].ToString();
+                    teamName.userName = rdr["userName"].ToString();
+                    teamNames.Add(teamName);
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Write(js.Serialize(teamNames));
+        }
+
+        [WebMethod]
         public void GetSubJobTypesByJobID(string jobID)
         {
             string cs = ConfigurationManager.ConnectionStrings["allpaxServiceRecordEntities"].ConnectionString;
