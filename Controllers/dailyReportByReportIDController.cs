@@ -20,9 +20,10 @@ namespace allpax_service_record.Controllers
         private allpaxServiceRecordEntities db = new allpaxServiceRecordEntities();
 
         // GET: customers
-        public ActionResult Index(string reportID)
+        //public ActionResult Index(string reportID)
+            public ActionResult Index(int reportID)
         {
-            //ViewBag.reportID = reportID;           
+            ViewBag.reportID = reportID;           
 
             List<vm_dailyReportByReportID> dailyReportByID = new List<vm_dailyReportByReportID>();
             string mainconn = ConfigurationManager.ConnectionStrings["allpaxServiceRecordEntities"].ConnectionString;

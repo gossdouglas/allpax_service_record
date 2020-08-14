@@ -1,0 +1,48 @@
+﻿@*@model List<allpax_service_record.Models.View_Models.vm_workDesc>*@
+
+@{ 
+//dailyReportByReportID = this.ViewData.ContainsKey("dailyReportByReportID") ? this.ViewData["dailyReportByReportID"] : null;
+}
+
+<!--begin workDescriptionLine_template-->
+<div class="col-12" id="workDescriptionLine_template">
+
+    <div class="col-3" style="padding:5px">
+        <div>
+            <span><strong>Record No</strong></span>
+            @*<span id="txt_dailyReportID" value="@Model.First().dailyReportID">@Model.First().dailyReportID</span>*@
+            @*<span id="txt_dailyReportID" value=@dailyReportByReportID.First().dailyReportID>@dailyReportByReportID.First().dailyReportID</span>*@
+        <span id="txt_dailyReportID" value=@ViewBag.reportID>@ViewBag.reportID</span>
+        </div>
+    </div
+
+><div class="row" id="">
+    <div class="col-8" style="padding:5px" contenteditable="true">
+        <span class="input"
+              role="textbox" id="input_workDesc"
+              contenteditable>
+            kkkkkk
+        </span>
+    </div>
+    <div class="col-3" name="txt_teamMembersWorkDesc" id="txt_teamMembersWorkDesc" style="padding:5px">
+        <span class="workDescTeam_" id="workDescTeam_" style="padding:5px"></span>
+    </div>
+    <div class="col-1" style="padding:5px">
+        <select name="" id="workDescTeam_dpdwn" style="width:100%">
+            <option value="">Team</option>
+        </select>
+    </div>
+</div>
+<div class="row">
+    <div class="col-2" style="padding:5px">
+        <div>
+            <span><strong>Time Entry:</strong></span>
+            <span id="txt_timeEntryID" value="">new</span>
+        </div>
+    </div>
+    <div class="col-10" style="padding:5px">
+        <button type="submit" class="btn btn-primary btn-sm" id="" style="background-color: royalblue; width: 100%" disabled>Save Entry</button>
+    </div>
+</div>
+</div>
+<!--end workDescriptionLine_template-->

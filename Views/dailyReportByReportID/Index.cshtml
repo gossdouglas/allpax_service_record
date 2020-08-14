@@ -249,6 +249,31 @@
                 });
                 //end DeleteTeamMember
 
+                //begin when a nnnnn class is clicked...
+                $(".input_workDesc").on('keypress', function () {
+                    //var tempTeamMemberUserID = this.id.substr(5);
+                    //alert('yo')
+                    //alert($(this).html())
+
+                    //begin DeleteTeamMember
+                    //begin axios delete post
+                    //axios.post('/dailyReportByReportID/DeleteTeamMember', {
+
+                    //    dailyReportID: dailyReportID,
+                    //    userName: tempTeamMemberUserID,
+                    //})
+                    //    .then(function (response) {
+                    //        console.log(response);
+                    //    })
+                    //    .catch(function (error) {
+                    //        console.log(error);
+                    //    });
+                    //end axios add post
+
+                    //$("#" + $(this).attr("id")).remove();
+                });
+                //end DeleteTeamMember
+
                 //end when a record class is clicked...
 
                 //begin when nnnn is clicked...
@@ -397,36 +422,45 @@
             </div>
         </div>
         <!--begin workDescriptionLine_template-->
-        @*<div class="col-12" id="workDescriptionLine_template" hidden>*@
-            <div class="row" id="">
-                <div class="col-8" style="padding:5px" contenteditable="true">
-                    <span class="input"
-                          role="textbox" id="input_workDesc"
-                          contenteditable>kkkkkk
-                    </span>
-                </div>
-                <div class="col-3" name="txt_teamMembersWorkDesc" id="txt_teamMembersWorkDesc" style="padding:5px">
-                    <span class="workDescTeam_" id="workDescTeam_" style="padding:5px"></span>
-                </div>
-                <div class="col-1" style="padding:5px">
-                    <select name="" id="workDescTeam_dpdwn" style="width:100%">
-                        <option value="">Team</option>
-                    </select>
+        @*<div class="col-12" id="workDescriptionLine_template">
+        <div class="row" id="">
+            <div class="col-8 input_workDesc" style="padding:5px" contenteditable="true">
+                <span class="input_workDesc" id="input_workDesc" role="textbox"  contenteditable></span>
+            </div>
+            <div class="col-3" name="txt_teamMembersWorkDesc" id="txt_teamMembersWorkDesc" style="padding:5px">
+                <span class="workDescTeam_" id="workDescTeam_" style="padding:5px"></span>
+            </div>
+            <div class="col-1" style="padding:5px">
+                <select name="" id="workDescTeam_dpdwn" style="width:100%">
+                    <option value="">Team</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2" style="padding:5px">
+                <div>
+                    <span><strong>Time Entry:</strong></span>
+                    <span id="txt_timeEntryID" value="">new</span>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-2" style="padding:5px">
-                    <div>
-                        <span><strong>Time Entry:</strong></span>
-                        <span id="txt_timeEntryID" value="">new</span>
-                    </div>
-                </div>
-                <div class="col-10" style="padding:5px">
-                    <button type="submit" class="btn btn-primary btn-sm" id="" style="background-color: royalblue; width: 100%" disabled>Save Entry</button>
-                </div>
+            <div class="col-10" style="padding:5px">
+                <button type="submit" class="btn btn-primary btn-sm" id="" style="background-color: royalblue; width: 100%">Save Entry</button>
             </div>
-        @*</div>*@
+        </div>
+        </div>*@
         <!--end workDescriptionLine_template-->
+        @*@foreach (var item in Model)
+        {
+            {
+                Html.Partial("_workDesc", null, new ViewDataDictionary { { "dailyReportByReportID", item } });
+            }
+        }*@
+
+        @{
+            //Html.Partial("_workDesc", null, new ViewDataDictionary { {);
+            //@Html.Partial("_workDesc", (int)@ViewBag.reportID)
+            @Html.Partial("_workDesc")
+        }
     </div>
 
     <div class=" container pl-auto" style="margin:5px" id="contnr_delays" hidden>
