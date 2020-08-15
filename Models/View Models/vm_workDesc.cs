@@ -9,12 +9,13 @@ namespace allpax_service_record.Models.View_Models
 
     public partial class vm_workDesc
     {
+        [Key]
         public int timeEntryID { get; set; }
 
         public int dailyReportID { get; set; }
 
         public string workDescription { get; set; }
-        public string userName { get; set; }
+        //public string userName { get; set; }
 
     }
 }

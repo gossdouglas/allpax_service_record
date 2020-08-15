@@ -6,21 +6,17 @@ namespace allpax_service_record.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class tbl_dailyReportUsers
+    public partial class tbl_dailyReportTimeEntryUsers
     {
         [Key]
         [Column(Order = 0)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int dailyReportID { get; set; }
+        public byte timeEntryID { get; set; }
 
         [Key]
         [Column(Order = 1)]
         [StringLength(16)]
         public string userName { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id { get; set; }
-
-        public virtual tbl_dailyReport tbl_dailyReport { get; set; }
+        public virtual tbl_dailyReportTimeEntry tbl_dailyReportTimeEntry { get; set; }
     }
 }

@@ -15,10 +15,6 @@ namespace allpax_service_record.Models.View_Models
         //public DateTime date { get; set; }
         public string date { get; set; }
 
-        //[DataType(DataType.Date)]
-        //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
-        //public Nullable<System.DateTime> date { get; set; }
-
         public string startTime { get; set; }
         public string endTime { get; set; }
 
@@ -43,7 +39,10 @@ namespace allpax_service_record.Models.View_Models
 
         public string team { get; set; }
 
-        public string workDescription { get; set; }    
-       
+        public string workDescription { get; set; }
+
+        public Models.tbl_dailyReportTimeEntry tbl_dailyReportTimeEntry;
+
+
     }
 }

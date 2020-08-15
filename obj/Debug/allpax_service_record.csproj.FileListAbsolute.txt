@@ -304,7 +304,6 @@ C:\Users\goss\Desktop\testing\service_record\allpax_service_record\obj\Debug\all
 C:\Users\goss\Desktop\testing\service_record\allpax_service_record\obj\Debug\allpax_service_record.csproj.CopyComplete
 C:\Users\goss\Desktop\testing\service_record\allpax_service_record\obj\Debug\allpax_service_record.dll
 C:\Users\goss\Desktop\testing\service_record\allpax_service_record\obj\Debug\allpax_service_record.pdb
-C:\Users\goss\Documents\Github\service_record\allpax_service_record\obj\Debug\allpax_service_record.csprojAssemblyReference.cache
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\roslyn\Microsoft.Win32.Primitives.dll
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\roslyn\System.AppContext.dll
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\roslyn\System.Console.dll
@@ -324,3 +323,4 @@ C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\roslyn\S
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\roslyn\System.Xml.XmlDocument.dll
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\roslyn\System.Xml.XPath.dll
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\goss\Documents\Github\service_record\allpax_service_record\obj\Debug\allpax_service_record.csprojAssemblyReference.cache

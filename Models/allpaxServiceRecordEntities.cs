@@ -17,6 +17,7 @@ namespace allpax_service_record.Models
         public virtual DbSet<tbl_dailyReport> tbl_dailyReport { get; set; }
         public virtual DbSet<tbl_dailyReportUsers> tbl_dailyReportUsers { get; set; }
         public virtual DbSet<tbl_dailyReportTimeEntry> tbl_dailyReportTimeEntry { get; set; }
+        public virtual DbSet<tbl_dailyReportTimeEntryUsers> tbl_dailyReportTimeEntryUsers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -47,6 +48,13 @@ namespace allpax_service_record.Models
             modelBuilder.Entity<tbl_dailyReportTimeEntry>()
                 .Property(e => e.workDescription)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<tbl_dailyReportTimeEntryUsers>()
+                .Property(e => e.userName)
+                .IsUnicode(false);
+
         }
+
+        public System.Data.Entity.DbSet<allpax_service_record.Models.View_Models.vm_workDesc> vm_workDesc { get; set; }
     }
 }
