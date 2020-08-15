@@ -177,7 +177,7 @@
     <Compile Include="Controllers\dailyReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\VMControllers\workDescByTimeEntryIDController.cs" />
+    <Compile Include="Controllers\workDescByTimeEntryIDController.cs" />
     <Compile Include="DataService.asmx.cs">
       <DependentUpon>DataService.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -382,10 +382,11 @@
     <Content Include="Views\dailyReport\Edit.cshtml" />
     <Content Include="Views\dailyReportByReportID\Index.cshtml" />
     <Content Include="Views\Shared\_workDesc.cshtml" />
-    <Content Include="Views\workDescByTimeEntryID\AddWorkDesc.cshtml" />
+    <Content Include="Views\Shared\_workDescByTimeEntryID.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\workDescByTimeEntryID\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
