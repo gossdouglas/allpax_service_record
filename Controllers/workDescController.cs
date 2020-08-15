@@ -16,11 +16,20 @@ namespace allpax_service_record.Controllers
         private allpaxServiceRecordEntities db = new allpaxServiceRecordEntities();
 
         // GET: workDesc
-        public ActionResult Index()
-        {
+        public ActionResult Index(int dailyReportID)
+         {
             //var sql = db.tbl_dailyReportTimeEntry.SqlQuery("SELECT * from tbl_dailyReportTimeEntry").ToList();
 
-            var sql = db.Database.SqlQuery<vm_workDesc>("SELECT * from tbl_dailyReportTimeEntry").ToList();
+            //var sql = db.Database.SqlQuery<vm_workDesc>("SELECT * from tbl_dailyReportTimeEntry").ToList();
+
+            var sql = db.Database.SqlQuery<vm_workDesc>("SELECT * " +
+                "FROM tbl_dailyReportTimeEntry " +
+                "WHERE " +
+
+                //"tbl_dailyReportTimeEntry.dailyReportID = '51'");
+                "tbl_dailyReportTimeEntry.dailyReportID = {0}", dailyReportID);
+
+            //db.Database.ExecuteSqlCommand("DELETE FROM tbl_customers WHERE id=({0})", custDelete.id);
 
             //db.Database.SqlQuery<vm_dailyReportViewAll>("SELECT tbl_dailyReport.dailyReportID, tbl_Jobs.active, tbl_dailyReport.date, tbl_dailyReport.jobID, " +
             //   "tbl_subJobTypes.description, tbl_customers.customerName, tbl_customers.address FROM tbl_dailyReport " +

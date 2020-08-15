@@ -464,13 +464,33 @@
             //@Html.Partial("_workDescByTimeEntryID")
 
             //@Html.Partial("~/Views/workDesc/index.cshtml", new allpax_service_record.Models.tbl_dailyReportTimeEntry())
-            @Html.Partial("~/Views/workDesc/index.cshtml", new List<allpax_service_record.Models.View_Models.vm_workDesc>())
+
+            //@Html.Partial("~/Views/workDesc/index.cshtml", new List<allpax_service_record.Models.View_Models.vm_workDesc>())
+            //@Html.Partial("~/Views/workDesc/index.cshtml", new List<allpax_service_record.Models.View_Models.vm_workDesc>())
 
 
         }
 
         @*@{Html.RenderAction("Index", "workDesc", new List<allpax_service_record.Models.View_Models.vm_workDesc>());
         }*@
+
+        @*@{Html.RenderAction("Index?dailyReportID=50", "workDesc", new { dailyReportID = "51" } new List<allpax_service_record.Models.View_Models.vm_workDesc>
+          ()});
+        }*@
+
+        @*@{Html.RenderAction("Index", "workDesc", new { dailyReportID = "51" });
+        }*@
+
+        @{Html.RenderAction("Index", "workDesc", new { dailyReportID = ViewBag.reportID });
+        }
+
+        @*@{Html.RenderAction("Index?dailyReportID=50", "workDesc", new List<allpax_service_record.Models.View_Models.vm_workDesc>());
+        }*@
+
+        @*@{
+            Html.RenderAction("ContentSection", "Portal", new { sectionAlias = "TermsAndConditions", mvcController = "Portal", mvcAction = "ChoosePayment" });
+        }*@
+
     </div>
 
     <div class=" container pl-auto" style="margin:5px" id="contnr_delays" hidden>
