@@ -26,29 +26,9 @@ namespace allpax_service_record.Controllers
                 "FROM tbl_dailyReportTimeEntry " +
                 "WHERE " +
 
-                //"tbl_dailyReportTimeEntry.dailyReportID = '51'");
                 "tbl_dailyReportTimeEntry.dailyReportID = {0}", dailyReportID);
 
-            //db.Database.ExecuteSqlCommand("DELETE FROM tbl_customers WHERE id=({0})", custDelete.id);
-
-            //db.Database.SqlQuery<vm_dailyReportViewAll>("SELECT tbl_dailyReport.dailyReportID, tbl_Jobs.active, tbl_dailyReport.date, tbl_dailyReport.jobID, " +
-            //   "tbl_subJobTypes.description, tbl_customers.customerName, tbl_customers.address FROM tbl_dailyReport " +
-
-            //       "INNER JOIN " +
-            //       "tbl_Jobs ON tbl_Jobs.jobID = tbl_dailyReport.jobID " +
-            //       "INNER JOIN " +
-            //       "tbl_customers ON tbl_customers.customerCode = tbl_Jobs.customerCode " +
-            //       "INNER JOIN " +
-            //       "tbl_jobSubJobs ON tbl_jobSubJobs.jobID = tbl_Jobs.jobID " +
-            //       "INNER JOIN " +
-            //       "tbl_subJobTypes ON tbl_subJobTypes.subJobID = tbl_jobSubJobs.subJobID " +
-            //       "WHERE " +
-            //       "tbl_dailyReport.subJobID = tbl_subJobTypes.subJobID").ToList();
-
-
             return View(sql.ToList());
-
-            //return View(db.vm_workDesc.ToList());
         }
 
         // GET: workDesc/Details/5
