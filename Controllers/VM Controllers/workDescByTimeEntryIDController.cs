@@ -30,8 +30,35 @@ namespace allpax_service_record.Controllers
         [HttpPost]
         public ActionResult AddWorkDesc(vm_workDesc workDescAdd)
         {
-             db.Database.ExecuteSqlCommand("Insert into tbl_dailyReportTimeEntry Values({0},{1})",
-                workDescAdd.dailyReportID, workDescAdd.workDescription); 
+            //db.Database.ExecuteSqlCommand("Insert into tbl_dailyReportTimeEntry Values({0},{1})",
+            //   workDescAdd.dailyReportID, workDescAdd.workDescription); 
+
+            db.Database.ExecuteSqlCommand("IF NOT EXISTS(SELECT * FROM tbl_dailyReportTimeEntry WHERE dailyReportID = {0}) " +
+                "BEGIN" +
+
+                "DECLARE @id INT" +
+                "INSERT INTO tbl_dailyReportTimeEntry VALUES({0}, {1})" +
+                "SET @id = SCOPE_IDENTITY()" +
+                "INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@id, {2})" +
+
+                "END" +
+
+                "ELSE" +
+                "BEGIN" +
+
+                "SET @timeEntryID = " +
+                    "(SELECT tbl_dailyReportTimeEntry.timeEntryID" +
+
+                    "FROM tbl_dailyReportTimeEntry" +
+
+                    "WHERE" +
+
+                    "tbl_dailyReportTimeEntry.dailyReportID like {0})" +
+                    "INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@timeEntryID, {2})" +
+
+                "END)",
+                workDescAdd.dailyReportID, workDescAdd.workDescription, workDescAdd.userName);
+
             return new EmptyResult();
             //return RedirectToAction("Home", "Index");
             //return Redirect("/Home");

@@ -14,6 +14,7 @@ namespace allpax_service_record.Models.View_Models
         public int dailyReportID { get; set; }
 
         public string workDescription { get; set; }
+        public string userName { get; set; }
 
     }
 }

@@ -4,6 +4,62 @@
 //dailyReportByReportID = this.ViewData.ContainsKey("dailyReportByReportID") ? this.ViewData["dailyReportByReportID"] : null;
 }
 
+    <head>
+
+        <script>
+            $(document).ready(function () {//begin document read jquery statements
+
+                //begin #addButton
+                $("#addButton").click(function () {//when the add button is clicked...
+
+                    alert('yo')
+                    //var addItem1 = $("#addRecordItem1").val();
+                    //var addItem2 = $("#addRecordItem2").val();
+                    //var addItem3 = $("#addRecordItem3").val();
+                    //var addItem4 = $("#addRecordItem4").val();
+                    //var addItem5 = $("#addRecordItem5").val();
+                    //var addItem6 = $("#addRecordItem6").val();
+
+                    //alert(
+                    //    "Selected for Add POST:" + '\n' +
+                    //    "addItem1: " + addItem1 + '\n' +
+                    //    "addItem2: " + addItem2 + '\n' +
+                    //    "addItem3: " + addItem3 + '\n' +
+                    //    "addItem4: " + addItem4 + '\n' +
+                    //    "addItem5: " + addItem5 + '\n' +
+                    //    "addItem6: " + addItem6 + '\n'
+                    //);
+                    //$("#addRecordItem1").val('');
+                    //$("#addRecordItem2").val('');
+                    //$("#addRecordItem3").val('');
+                    //$("#addRecordItem4").val('');
+                    //$("#addRecordItem5").val('');
+                    //$("#addRecordItem6").val('');
+                    //begin axios add post
+                    //axios.post('/CustomerMgmt/AddCustomer', {
+                    //    customerCode: addItem1,
+                    //    name: addItem2,
+                    //    address: addItem3,
+                    //    city: addItem4,
+                    //    state: addItem5,
+                    //    zipCode: addItem6,
+                    //})
+                    //    .then(function (response) {
+                    //        console.log(response);
+                    //    })
+                    //    .catch(function (error) {
+                    //        console.log(error);
+                    //    });
+                    //end axios add post
+                });
+                //end #addButton
+
+
+            });//end document read jquery statements
+        </script>
+
+
+</head>
 <!--begin workDescriptionLine_template-->
 <div class="col-12" id="workDescriptionLine_template">
 
@@ -41,7 +97,7 @@
         </div>
     </div>
     <div class="col-10" style="padding:5px">
-        <button type="submit" class="btn btn-primary btn-sm" id="" style="background-color: royalblue; width: 100%" disabled>Save Entry</button>
+        <button type="submit" class="btn btn-primary btn-sm" id="addButton" style="background-color: royalblue; width: 100%">Save Entry</button>
     </div>
 </div>
 </div>
