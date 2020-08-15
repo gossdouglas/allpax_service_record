@@ -5,6 +5,9 @@
 }
 
     <head>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
         <script>
             $(document).ready(function () {//begin document read jquery statements
@@ -13,6 +16,12 @@
                 $("#addButton").click(function () {//when the add button is clicked...
 
                     alert('yo')
+
+                    //console.log($(this).attr("id"))
+                    //console.log($(this).attr("class"))
+
+                    //$(this).parent().find(".#txt_dailyReportID").val();
+
                     //var addItem1 = $("#addRecordItem1").val();
                     //var addItem2 = $("#addRecordItem2").val();
                     //var addItem3 = $("#addRecordItem3").val();
@@ -36,20 +45,18 @@
                     //$("#addRecordItem5").val('');
                     //$("#addRecordItem6").val('');
                     //begin axios add post
-                    //axios.post('/CustomerMgmt/AddCustomer', {
-                    //    customerCode: addItem1,
-                    //    name: addItem2,
-                    //    address: addItem3,
-                    //    city: addItem4,
-                    //    state: addItem5,
-                    //    zipCode: addItem6,
-                    //})
-                    //    .then(function (response) {
-                    //        console.log(response);
-                    //    })
-                    //    .catch(function (error) {
-                    //        console.log(error);
-                    //    });
+                    axios.post('/VMControllers/workDescByTimeEntryID/AddWorkDesc', {
+                        dailyReportID: '50',
+                        workDescription: 'yo',
+                        userName: 'tgoss',
+
+                    })
+                        .then(function (response) {
+                            console.log(response);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
                     //end axios add post
                 });
                 //end #addButton
@@ -59,7 +66,7 @@
         </script>
 
 
-</head>
+    </head>
 <!--begin workDescriptionLine_template-->
 <div class="col-12" id="workDescriptionLine_template">
 
@@ -97,7 +104,7 @@
         </div>
     </div>
     <div class="col-10" style="padding:5px">
-        <button type="submit" class="btn btn-primary btn-sm" id="addButton" style="background-color: royalblue; width: 100%">Save Entry</button>
+        <button type="button" class="btn btn-primary btn-sm" id="addButton" style="background-color: royalblue; width: 100%">Save Entry</button>
     </div>
 </div>
 </div>
