@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -18,29 +20,151 @@ namespace allpax_service_record.Controllers
         // GET: workDesc
         public ActionResult Index(int dailyReportID)
          {
-            //var sql = db.tbl_dailyReportTimeEntry.SqlQuery("SELECT * from tbl_dailyReportTimeEntry").ToList();
 
-            //var sql = db.Database.SqlQuery<vm_workDesc>("SELECT * from tbl_dailyReportTimeEntry").ToList();
+            //var sql = db.Database.SqlQuery<vm_workDesc>("SELECT tbl_dailyReportTimeEntry.dailyReportID, tbl_dailyReportTimeEntry.workDescription, " +
+            //"tbl_dailyReportTimeEntry.timeEntryID, tbl_dailyReportTimeEntryUsers.userName " +
 
-            //var sql = db.Database.SqlQuery<vm_workDesc>("SELECT * " +
-            //    "FROM tbl_dailyReportTimeEntry " +
-            //    "WHERE " +
+            //"FROM tbl_dailyReportTimeEntry " +
+            //"INNER JOIN tbl_dailyReportTimeEntryUsers ON " +
+            //"tbl_dailyReportTimeEntryUsers.timeEntryID = tbl_dailyReportTimeEntry.timeEntryID " +
 
-            //    "tbl_dailyReportTimeEntry.dailyReportID = {0}", dailyReportID);
+            //"WHERE " +
 
-            var sql = db.Database.SqlQuery<vm_workDesc>("SELECT tbl_dailyReportTimeEntry.dailyReportID, tbl_dailyReportTimeEntry.workDescription, " +
-            "tbl_dailyReportTimeEntry.timeEntryID, tbl_dailyReportTimeEntryUsers.userName " +
+            //"tbl_dailyReportTimeEntry.dailyReportID = {0}", dailyReportID);
 
-            "FROM tbl_dailyReportTimeEntry " +
-            "INNER JOIN tbl_dailyReportTimeEntryUsers ON " +
-            "tbl_dailyReportTimeEntryUsers.timeEntryID = tbl_dailyReportTimeEntry.timeEntryID " +
+            //return View(sql.ToList());
 
-            "WHERE " +
+            List<vm_workDesc> workDescs = new List<vm_workDesc>();
+            string mainconn = ConfigurationManager.ConnectionStrings["allpaxServiceRecordEntities"].ConnectionString;
+            SqlConnection sqlconn = new SqlConnection(mainconn);
 
-            "tbl_dailyReportTimeEntry.dailyReportID = {0}", dailyReportID);
+            sqlconn.Open();
+           
+            //begin query
+            string sqlquery1 =
+                "SELECT tbl_dailyReportTimeEntry.dailyReportID, tbl_dailyReportTimeEntry.workDescription, " +
+                "tbl_dailyReportTimeEntry.timeEntryID " +
 
-            return View(sql.ToList());
+                "FROM tbl_dailyReportTimeEntry " +
+                "WHERE " +
+                "tbl_dailyReportTimeEntry.dailyReportID = @dailyReportID";
+
+            SqlCommand sqlcomm1 = new SqlCommand(sqlquery1, sqlconn);
+            sqlcomm1.Parameters.AddWithValue("@dailyReportID", dailyReportID);
+            SqlDataAdapter sda1 = new SqlDataAdapter(sqlcomm1);
+            DataTable dt1 = new DataTable();
+            sda1.Fill(dt1);
+            foreach (DataRow dr1 in dt1.Rows)
+            {
+                vm_workDesc workDesc = new vm_workDesc();
+
+                workDesc.dailyReportID = (int) dr1[0];
+                workDesc.workDescription = dr1[1].ToString();
+                workDesc.timeEntryID = (int) dr1[2];
+
+                //workDesc.userName = kitsAvlblbNotInstld(mWkitsAvlblBnotInstalled.customerCode, mWkitsAvlblBnotInstalled.jobNo, mWkitsAvlblBnotInstalled.machineID);
+
+                workDescs.Add(workDesc);
+            }
+
+            //end query for kits available, but not installed
+            return View(workDescs);
         }
+
+        //public ActionResult Index(String customerCode, string name, string address, string city, string state)
+        //{
+        //    ViewBag.customerCode = customerCode;
+        //    ViewBag.name = name;
+        //    ViewBag.address = address;
+        //    ViewBag.city = city;
+        //    ViewBag.state = state;
+
+        //    List<machinesW_kitsAvlbl_BnotInstalled> mWkaBni = new List<machinesW_kitsAvlbl_BnotInstalled>();
+        //    string mainconn = ConfigurationManager.ConnectionStrings["allpax_sale_minerEntities"].ConnectionString;
+        //    SqlConnection sqlconn = new SqlConnection(mainconn);
+
+        //    // begin empty and build custEqpmtWkitsAvlbl and custEqpmtWkitsInstld tables  
+        //    //this is handled by a stored procedure on the sql server named dbo.bldSalesOppsTables
+        //    sqlconn.Open();
+        //    SqlCommand sqlcomm1 = new SqlCommand("dbo.bldSalesOppsTables", sqlconn);
+        //    sqlcomm1.CommandType = System.Data.CommandType.StoredProcedure;
+        //    sqlcomm1.ExecuteNonQuery();
+        //    sqlconn.Close();
+        //    //end empty and build custEqpmtWkitsAvlbl and custEqpmtWkitsInstld tables 
+
+        //    //begin query for kits available, but not installed
+        //    string sqlquery2 =
+        //        "SELECT DISTINCT custEqpmtWkitsAvlbl.customerCode_cEqpmt, custEqpmtWkitsAvlbl.jobNum_cEqpmt, custEqpmtWkitsAvlbl.eqpmtType_cEqpmt, " +
+        //        "cmps411.custEqpmtWkitsAvlbl.model_cEqpmt, cmps411.custEqpmtWkitsAvlbl.machineID_cEqpmt " +
+
+        //        "FROM cmps411.custEqpmtWkitsAvlbl " +
+        //        "LEFT JOIN cmps411.custEqpmtWkitsInstld ON " +
+        //        "cmps411.custEqpmtWkitsAvlbl.machineID_cEqpmt = cmps411.custEqpmtWkitsInstld.machineID_kitsCurrent " +
+        //        "AND cmps411.custEqpmtWkitsAvlbl.kitID_kitsAvlbl = cmps411.custEqpmtWkitsInstld.kitID_kitsCurrent " +
+        //        "WHERE " +
+        //        "custEqpmtWkitsInstld.machineID_kitsCurrent is NULL " +
+        //        "AND " +
+        //        "cmps411.custEqpmtWkitsInstld.kitID_kitsCurrent is NULL " +
+
+        //        "AND custEqpmtWkitsAvlbl.customerCode_cEqpmt=@customerCode";
+
+        //    SqlCommand sqlcomm2 = new SqlCommand(sqlquery2, sqlconn);
+        //    sqlcomm2.Parameters.AddWithValue("@customerCode", customerCode);
+        //    SqlDataAdapter sda2 = new SqlDataAdapter(sqlcomm2);
+        //    DataTable dt2 = new DataTable();
+        //    sda2.Fill(dt2);
+        //    foreach (DataRow dr2 in dt2.Rows)
+        //    {
+        //        machinesW_kitsAvlbl_BnotInstalled mWkitsAvlblBnotInstalled = new machinesW_kitsAvlbl_BnotInstalled();
+
+        //        mWkitsAvlblBnotInstalled.customerCode = dr2[0].ToString();
+        //        mWkitsAvlblBnotInstalled.jobNo = dr2[1].ToString();
+        //        mWkitsAvlblBnotInstalled.eqpmtType = dr2[2].ToString();
+        //        mWkitsAvlblBnotInstalled.model = dr2[3].ToString();
+        //        mWkitsAvlblBnotInstalled.machineID = dr2[4].ToString();
+        //        //mWkitsAvlblBnotInstalled.kitsAvlbl_kitID = dr2[5].ToString();
+        //        mWkitsAvlblBnotInstalled.kitsAvlblbNotInstld = kitsAvlblbNotInstld(mWkitsAvlblBnotInstalled.customerCode, mWkitsAvlblBnotInstalled.jobNo, mWkitsAvlblBnotInstalled.machineID);
+
+        //        mWkaBni.Add(mWkitsAvlblBnotInstalled);
+        //    }
+
+        //    //end query for kits available, but not installed
+        //    return View(mWkaBni);
+        //}
+        //public List<string> kitsAvlblbNotInstld(string customerCode, string jobNo, string machineID)
+        //{
+        //    List<string> mWkaBni = new List<string>();
+
+        //    string mainconn = ConfigurationManager.ConnectionStrings["allpax_sale_minerEntities"].ConnectionString;
+        //    SqlConnection sqlconn = new SqlConnection(mainconn);
+
+        //    //begin query for kits available but not installed by machine
+        //    string sqlquery3 = "SELECT custEqpmtWkitsAvlbl.customerCode_cEqpmt, custEqpmtWkitsAvlbl.jobNum_cEqpmt, custEqpmtWkitsAvlbl.eqpmtType_cEqpmt, " +
+        //        "cmps411.custEqpmtWkitsAvlbl.model_cEqpmt, cmps411.custEqpmtWkitsAvlbl.machineID_cEqpmt, kitID_kitsAvlbl " +
+        //        "FROM cmps411.custEqpmtWkitsAvlbl " +
+        //        "LEFT JOIN cmps411.custEqpmtWkitsInstld " +
+        //        "ON cmps411.custEqpmtWkitsAvlbl.machineID_cEqpmt = cmps411.custEqpmtWkitsInstld.machineID_kitsCurrent " +
+        //        "AND cmps411.custEqpmtWkitsAvlbl.kitID_kitsAvlbl = cmps411.custEqpmtWkitsInstld.kitID_kitsCurrent " +
+        //        "WHERE custEqpmtWkitsInstld.machineID_kitsCurrent is NULL " +
+        //        "AND cmps411.custEqpmtWkitsInstld.kitID_kitsCurrent is NULL " +
+        //        "AND custEqpmtWkitsAvlbl.customerCode_cEqpmt = @customerCode " +
+        //        "AND custEqpmtWkitsAvlbl.jobNum_cEqpmt = @jobNo " +
+        //        "AND cmps411.custEqpmtWkitsAvlbl.machineID_cEqpmt = @machineID";
+        //    //end query for kits available but not installed by machine
+
+        //    SqlCommand sqlcomm3 = new SqlCommand(sqlquery3, sqlconn);
+        //    sqlcomm3.Parameters.Add(new SqlParameter("customerCode", customerCode));
+        //    sqlcomm3.Parameters.Add(new SqlParameter("jobNo", jobNo));
+        //    sqlcomm3.Parameters.Add(new SqlParameter("machineID", machineID));
+        //    SqlDataAdapter sda3 = new SqlDataAdapter(sqlcomm3);
+        //    DataTable dt3 = new DataTable();
+        //    sda3.Fill(dt3);
+        //    foreach (DataRow dr3 in dt3.Rows)
+        //    {
+        //        mWkaBni.Add(dr3[5].ToString());
+        //    }
+        //    return mWkaBni;
+        //}
 
         [HttpPost]
         public ActionResult AddWorkDesc(vm_workDesc workDescAdd)
@@ -83,6 +207,8 @@ namespace allpax_service_record.Controllers
 
             return new EmptyResult();
         }
+
+        
 
         protected override void Dispose(bool disposing)
         {

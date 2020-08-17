@@ -122,14 +122,17 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr class="record" id=@Html.DisplayFor(modelItem => item.dailyReportID)>
-                        <td id="record_item0" value=@Html.DisplayFor(modelItem => item.dailyReportID)>@Html.DisplayFor(modelItem => item.dailyReportID)</td>
-                        <td id="record_item1" value=@Html.DisplayFor(modelItem => item.workDescription)>@Html.DisplayFor(modelItem => item.workDescription)</td>
-                        <td id="record_item2" value=@Html.DisplayFor(modelItem => item.timeEntryID)>@Html.DisplayFor(modelItem => item.timeEntryID)</td>
-                    </tr>
+                <tr class="record" id=@Html.DisplayFor(modelItem => item.dailyReportID)>
+                    <td id="record_item0" value=@Html.DisplayFor(modelItem => item.dailyReportID)>@Html.DisplayFor(modelItem => item.dailyReportID)</td>
+                    <td id="record_item1" value=@Html.DisplayFor(modelItem => item.workDescription)>@Html.DisplayFor(modelItem => item.workDescription)</td>
+                    <td id="record_item2" value=@Html.DisplayFor(modelItem => item.timeEntryID)>@Html.DisplayFor(modelItem => item.timeEntryID)</td>
+                    <td id="record_item2" value=@Html.DisplayFor(modelItem => item.userName)>@Html.DisplayFor(modelItem => item.userName)</td>
+                </tr>
                 }
         </table>
     </div>
 </div>
+
+@*<span id="txt_dailyReportID" value="@Model.First().dailyReportID">@Model.First().dailyReportID</span>*@
 
 
