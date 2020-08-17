@@ -22,11 +22,22 @@ namespace allpax_service_record.Controllers
 
             //var sql = db.Database.SqlQuery<vm_workDesc>("SELECT * from tbl_dailyReportTimeEntry").ToList();
 
-            var sql = db.Database.SqlQuery<vm_workDesc>("SELECT * " +
-                "FROM tbl_dailyReportTimeEntry " +
-                "WHERE " +
+            //var sql = db.Database.SqlQuery<vm_workDesc>("SELECT * " +
+            //    "FROM tbl_dailyReportTimeEntry " +
+            //    "WHERE " +
 
-                "tbl_dailyReportTimeEntry.dailyReportID = {0}", dailyReportID);
+            //    "tbl_dailyReportTimeEntry.dailyReportID = {0}", dailyReportID);
+
+            var sql = db.Database.SqlQuery<vm_workDesc>("SELECT tbl_dailyReportTimeEntry.dailyReportID, tbl_dailyReportTimeEntry.workDescription, " +
+            "tbl_dailyReportTimeEntry.timeEntryID, tbl_dailyReportTimeEntryUsers.userName " +
+
+            "FROM tbl_dailyReportTimeEntry " +
+            "INNER JOIN tbl_dailyReportTimeEntryUsers ON " +
+            "tbl_dailyReportTimeEntryUsers.timeEntryID = tbl_dailyReportTimeEntry.timeEntryID " +
+
+            "WHERE " +
+
+            "tbl_dailyReportTimeEntry.dailyReportID = {0}", dailyReportID);
 
             return View(sql.ToList());
         }
@@ -39,33 +50,36 @@ namespace allpax_service_record.Controllers
             //   dailyReportAdd.jobID, dailyReportAdd.date, dailyReportAdd.subJobID, dailyReportAdd.startTime, dailyReportAdd.endTime, dailyReportAdd.lunchHours, dailyReportAdd.equipment);
 
             //--IF THE DAILY REPORT DOESN'T ALREADY EXIST...
-            db.Database.ExecuteSqlCommand("IF NOT EXISTS(SELECT * FROM tbl_dailyReportTimeEntry WHERE dailyReportID = {0})" +
-            "BEGIN" +
+            db.Database.ExecuteSqlCommand("IF NOT EXISTS(SELECT * FROM tbl_dailyReportTimeEntry WHERE dailyReportID = {0}) " +
+            "BEGIN " +
 
-            "DECLARE @id INT" +
-            "INSERT INTO tbl_dailyReportTimeEntry VALUES({0}, {1})" +
-            "SET @id = SCOPE_IDENTITY()" +
-            "INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@id, {2})" +
+            "DECLARE @id INT " +
+            "DECLARE @timeEntryID INT " +
+            "INSERT INTO tbl_dailyReportTimeEntry VALUES({0}, {1}) " +
+            "SET @id = SCOPE_IDENTITY() " +
+            "INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@id, {2}) " +
 
-            "END" +
+            "END " +
 
             //--IF THE DAILY REPORT DOES ALREADY EXIST...
-            "ELSE" +
-            "BEGIN" +
+            "ELSE " +
+            "BEGIN " +
 
-            "SET @timeEntryID =" +
-                "(SELECT tbl_dailyReportTimeEntry.timeEntryID" +
-                "FROM tbl_dailyReportTimeEntry" +
-                "WHERE" +
+            "SET @timeEntryID = " +
+                "(SELECT tbl_dailyReportTimeEntry.timeEntryID " +
+                "FROM tbl_dailyReportTimeEntry " +
+                "WHERE " +
 
-                "tbl_dailyReportTimeEntry.dailyReportID like {0})" +
+                "tbl_dailyReportTimeEntry.dailyReportID like {0}) " +
 
-                "INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@timeEntryID, {2})" +
+                //"INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@timeEntryID, {2}) END)",
+                "INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@timeEntryID, {2}) END",
 
-            "END)", workDescAdd.dailyReportID, workDescAdd.workDescription, workDescAdd.userName);
+
+                workDescAdd.dailyReportID, workDescAdd.workDescription, workDescAdd.userName);
 
             //db.Database.ExecuteSqlCommand("Insert into tbl_dailyReport Values({0},{1},{2},{3},{4},{5},{6})",
-            //    dailyReportAdd.jobID, dailyReportAdd.date, dailyReportAdd.subJobID, dailyReportAdd.startTime, dailyReportAdd.endTime, dailyReportAdd.lunchHours, dailyReportAdd.equipment);
+            //   dailyReportAdd.jobID, dailyReportAdd.date, dailyReportAdd.subJobID, dailyReportAdd.startTime, dailyReportAdd.endTime, dailyReportAdd.lunchHours, dailyReportAdd.equipment);
 
             return new EmptyResult();
         }
