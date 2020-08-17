@@ -295,6 +295,10 @@ namespace allpax_service_record.Controllers
             //   dailyReportAdd.jobID, dailyReportAdd.date, dailyReportAdd.subJobID, dailyReportAdd.startTime, dailyReportAdd.endTime, dailyReportAdd.lunchHours, dailyReportAdd.equipment);
 
             return new EmptyResult();
+            //return View();
+            //return RedirectToAction("Index");
+            //return RedirectToAction("Index", new { dailyReportID = workDescAdd.dailyReportID });
+            //return RedirectToAction("Index", "DailyReportByReportID", new { reportID = workDescAdd.dailyReportID});
         }
 
         

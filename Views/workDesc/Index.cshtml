@@ -11,23 +11,51 @@
     <script>
         $(document).ready(function () {//begin document read jquery statements
 
-            //begin #addButton
-            $("#addButton").click(function () {//when the add button is clicked...
+            //begin when nnnn is clicked...
+            $("#addWorkDescBtn").on('click', function () {
 
-                //alert('yo')
+                //alert('hghghgh');
 
                 //console.log($(this).attr("id"))
                 //console.log($(this).attr("class"))
                 //alert($(this).parent().attr("class"))
                 //alert($(this).parents().eq(1).attr("class"))
 
-                var addItem1 = $("#txt_dailyReportID").html();
-                var addItem2 = $("#input_workDesc").html();
+                //var addItem1 = $("#txt_dailyReportID").html();
+                //var addItem2 = $("#input_workDesc").html();
 
-                alert("dailyReportID: " + addItem1 + '\n' +
-                    "workDescription: " + addItem2 
-                                                     
-                    );
+                //alert("dailyReportID: " + addItem1 + '\n' +
+                //    "workDescription: " + addItem2
+
+                //);
+             
+                //function GFG_Fun() {
+                //    var arr = [];
+                    //$(".workDescTeam_").each(function () { arr.push($(this).text()) });
+                    //el_down.innerHTML = '"' + arr.join('", "') + '"';
+
+                    //$(".workDescTeam_").each(function ()
+                    //alert($(this).attr("id"));
+                var tempTeamMemberUserID
+
+                $(".workDescTeam_").each(function () {
+
+                    //var tempTeamMemberUserID = $(this).attr("id").split("workDescTeam_");
+                    var tempTeamMemberUserID = $(this).attr("id").substr(13);
+
+
+                    //var tempTeamMemberUserID = this.id.substr(5);
+
+                    if (tempTeamMemberUserID.length > 0) {
+                        alert(tempTeamMemberUserID);
+                        alert(tempTeamMemberUserID.length);
+                    }
+                    //alert($(this).attr("id"));
+                    //alert(tempTeamMemberUserID);
+                    //alert(tempTeamMemberUserID.length);
+                    
+                    });
+                //}
 
                 //alert($("#input_workDesc").html());
 
@@ -59,22 +87,23 @@
                 //$("#addRecordItem6").val('');
 
                 //begin axios add post
-                axios.post('/workDesc/AddWorkDesc', {
-                    dailyReportID: addItem1,
-                    workDescription: addItem2,
-                    //userName: 'tgoss',
+                //axios.post('/workDesc/AddWorkDesc', {
+                //    dailyReportID: addItem1,
+                //    workDescription: addItem2,
+                //    //userName: 'tgoss',
 
-                })
-                    .then(function (response) {
-                        console.log(response);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                //})
+                //    .then(function (response) {
+                //        console.log(response);
+                //    })
+                //    .catch(function (error) {
+                //        console.log(error);
+                //    });
                 //end axios add post
-            });
-            //end #addButton
 
+            });
+            //end n
+          
         });//end document read jquery statements
     </script>
 </head>
@@ -88,12 +117,8 @@
             </div>
         </div>*@
     <div class="row" id="">
-        <div class="col-8" style="padding:5px" contenteditable="true">
-            <span class="input"
-                  role="textbox" id="input_workDesc"
-                  contenteditable>
-                kkkkkk
-            </span>
+        <div class="col-8" id="input_workDesc" style="padding:5px" contenteditable="true">
+            @*<span class="input" role="textbox" id="input_workDesc" contenteditable>kkkkk</span>*@
         </div>
         <div class="col-3" name="txt_teamMembersWorkDesc" id="txt_teamMembersWorkDesc" style="padding:5px">
             <span class="workDescTeam_" id="workDescTeam_" style="padding:5px"></span>
@@ -112,7 +137,7 @@
             </div>
         </div>
         <div class="col-10" style="padding:5px">
-            <button type="button" class="btn btn-primary btn-sm" id="addButton" style="background-color: royalblue; width: 100%">Save Entry</button>
+            <button type="button" class="btn btn-primary btn-sm" id="addWorkDescBtn" style="background-color: royalblue; width: 100%">Save Entry</button>
         </div>
     </div>
 </div>

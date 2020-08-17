@@ -173,7 +173,9 @@
                 //workDescTeam_dpdwn.empty();
                 //workDescTeam_dpdwn.append($('<option/>', { value: -1, text: 'Add' }));
                 //workDescTeam_dpdwn.val('-1');
-                alert($(this).val());
+                //alert($(this).val());
+
+                //var tempTeamMemberUserID = this.id.substr(5);
 
                 //begin
 
@@ -276,20 +278,7 @@
             });
             //end DeleteTeamMember
 
-            //end when a record class is clicked...
-
-            //begin when nnnn is clicked...
-            $("#addWorkDescBtn").on('click', function () {
-
-                alert('yo')
-                $("#workDescriptionLine_template").clone(true).prop("id", "workDescriptionLine_template" + "time_id").appendTo("#contnr_workDescription");
-                //$("#team_" + temp_userName.toString()).prop("class", "teamMember")
-                //$("#workDescriptionLine_template" + temp_userName.toString()).text(temp_name + "| " + temp_shortName.toString());
-                //$("#btn_delete_temp_userName").clone().prop("id", "btn_delete_temp_" + temp_userName.toString()).appendTo("#user_" + temp_userName.toString());
-                $("#workDescriptionLine_template" + "time_id").removeAttr('hidden');//unhide the copy
-
-            //});
-            //end n
+            //end when a record class is clicked...            
 
         });//end document read jquery statements
     </script>
@@ -416,9 +405,9 @@
                         <div class="col-4" style="padding:5px">
                             <strong>Work Description</strong>
                         </div>
-                        <div class="col-4" style="padding:5px">
+                        @*<div class="col-4" style="padding:5px">
                             <button type="button" class="btn btn-primary btn-sm" id="addWorkDescBtn" style="background-color: royalblue;" disabled>New Entry</button>
-                        </div>
+                        </div>*@
                         <div class="col-4" style="padding:5px">
                             <strong>Team</strong>
                         </div>
