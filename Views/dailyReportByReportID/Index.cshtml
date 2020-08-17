@@ -81,7 +81,35 @@
             });
             //});
             //end load team members on page load
-          
+
+            //begin load team members on work description dpdwn click
+            workDescTeam_dpdwn.click(function () {
+
+                workDescTeam_dpdwn.empty();
+                workDescTeam_dpdwn.append($('<option/>', { value: -1, text: 'Team' }));
+                workDescTeam_dpdwn.val('-1');
+
+                $.ajax({
+                    url: 'DataService.asmx/GetAllTeamNamesByReportID',
+                    method: 'post',
+                    dataType: 'json',
+                    data: { userName: '%', dailyReportID: dailyReportID },
+                    success: function (data) {
+
+                        //alert($('#team_dpdwn').val())
+                        //workDescTeam_dpdwn.append($('<option/>', { value: -1, text: 'Add' }));
+
+                        $(data).each(function (index, item) {
+                            //workDescTeam_dpdwn.append($('<option/>', { value: item.userName, text: item.name + "-" + item.shortName }))
+                            workDescTeam_dpdwn.append($('<option/>', { value: item.userName, text: item.shortName }))
+
+                        });
+                        //end AddTeamMember
+                    }
+                });
+            });
+            //end load team members on work description dpdwn click
+
             //begin add team member on drop down change
             team_dpdwn.change(function () {
 
@@ -138,34 +166,6 @@
                 });
             });
             //end add team member on drop down change
-
-            //begin load team members on work description dpdwn click
-            workDescTeam_dpdwn.click(function () {
-
-                workDescTeam_dpdwn.empty();
-                workDescTeam_dpdwn.append($('<option/>', { value: -1, text: 'Team' }));
-                workDescTeam_dpdwn.val('-1');
-
-                $.ajax({
-                    url: 'DataService.asmx/GetAllTeamNamesByReportID',
-                    method: 'post',
-                    dataType: 'json',
-                    data: { userName: '%', dailyReportID: dailyReportID },
-                    success: function (data) {
-
-                        //alert($('#team_dpdwn').val())
-                        //workDescTeam_dpdwn.append($('<option/>', { value: -1, text: 'Add' }));
-
-                        $(data).each(function (index, item) {
-                            //workDescTeam_dpdwn.append($('<option/>', { value: item.userName, text: item.name + "-" + item.shortName }))
-                            workDescTeam_dpdwn.append($('<option/>', { value: item.userName, text: item.shortName }))
-
-                        });
-                        //end AddTeamMember
-                    }
-                });
-            });
-            //end load team members on work description dpdwn click
 
             //begin load team members on work description dpdwn change
             workDescTeam_dpdwn.change(function () {
@@ -288,7 +288,7 @@
                 //$("#btn_delete_temp_userName").clone().prop("id", "btn_delete_temp_" + temp_userName.toString()).appendTo("#user_" + temp_userName.toString());
                 $("#workDescriptionLine_template" + "time_id").removeAttr('hidden');//unhide the copy
 
-            });
+            //});
             //end n
 
         });//end document read jquery statements
