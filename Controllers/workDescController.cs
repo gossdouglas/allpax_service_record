@@ -31,99 +31,43 @@ namespace allpax_service_record.Controllers
             return View(sql.ToList());
         }
 
-        // GET: workDesc/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            vm_workDesc vm_workDesc = db.vm_workDesc.Find(id);
-            if (vm_workDesc == null)
-            {
-                return HttpNotFound();
-            }
-            return View(vm_workDesc);
-        }
-
-        // GET: workDesc/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: workDesc/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "timeEntryID,dailyReportID,workDescription,userName")] vm_workDesc vm_workDesc)
+        public ActionResult AddWorkDesc(vm_workDesc workDescAdd)
         {
-            if (ModelState.IsValid)
-            {
-                db.vm_workDesc.Add(vm_workDesc);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            return View(vm_workDesc);
-        }
+            //db.Database.ExecuteSqlCommand("Insert into tbl_dailyReport Values({0},{1},{2},{3},{4},{5},{6})",
+            //   dailyReportAdd.jobID, dailyReportAdd.date, dailyReportAdd.subJobID, dailyReportAdd.startTime, dailyReportAdd.endTime, dailyReportAdd.lunchHours, dailyReportAdd.equipment);
 
-        // GET: workDesc/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            vm_workDesc vm_workDesc = db.vm_workDesc.Find(id);
-            if (vm_workDesc == null)
-            {
-                return HttpNotFound();
-            }
-            return View(vm_workDesc);
-        }
+            //--IF THE DAILY REPORT DOESN'T ALREADY EXIST...
+            db.Database.ExecuteSqlCommand("IF NOT EXISTS(SELECT * FROM tbl_dailyReportTimeEntry WHERE dailyReportID = {0})" +
+            "BEGIN" +
 
-        // POST: workDesc/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "timeEntryID,dailyReportID,workDescription,userName")] vm_workDesc vm_workDesc)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(vm_workDesc).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(vm_workDesc);
-        }
+            "DECLARE @id INT" +
+            "INSERT INTO tbl_dailyReportTimeEntry VALUES({0}, {1})" +
+            "SET @id = SCOPE_IDENTITY()" +
+            "INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@id, {2})" +
 
-        // GET: workDesc/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            vm_workDesc vm_workDesc = db.vm_workDesc.Find(id);
-            if (vm_workDesc == null)
-            {
-                return HttpNotFound();
-            }
-            return View(vm_workDesc);
-        }
+            "END" +
 
-        // POST: workDesc/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            vm_workDesc vm_workDesc = db.vm_workDesc.Find(id);
-            db.vm_workDesc.Remove(vm_workDesc);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            //--IF THE DAILY REPORT DOES ALREADY EXIST...
+            "ELSE" +
+            "BEGIN" +
+
+            "SET @timeEntryID =" +
+                "(SELECT tbl_dailyReportTimeEntry.timeEntryID" +
+                "FROM tbl_dailyReportTimeEntry" +
+                "WHERE" +
+
+                "tbl_dailyReportTimeEntry.dailyReportID like {0})" +
+
+                "INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@timeEntryID, {2})" +
+
+            "END)", workDescAdd.dailyReportID, workDescAdd.workDescription, workDescAdd.userName);
+
+            //db.Database.ExecuteSqlCommand("Insert into tbl_dailyReport Values({0},{1},{2},{3},{4},{5},{6})",
+            //    dailyReportAdd.jobID, dailyReportAdd.date, dailyReportAdd.subJobID, dailyReportAdd.startTime, dailyReportAdd.endTime, dailyReportAdd.lunchHours, dailyReportAdd.equipment);
+
+            return new EmptyResult();
         }
 
         protected override void Dispose(bool disposing)

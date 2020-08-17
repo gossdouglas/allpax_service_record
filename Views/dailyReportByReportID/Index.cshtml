@@ -293,245 +293,181 @@
         });//end document read jquery statements
     </script>
 </head>
-<br />
-<hr />
-<form>
-    <div class=" container" style="margin:5px">
-        <div class="row">
-            <div class="col-3" style="padding:5px">
-                <strong>Daily Log Information</strong>
-            </div>
-            <div class="col-3" style="padding:5px">
-                <div>
-                    <span><strong>Record No</strong></span>
-                    <span id="txt_dailyReportID" value="@Model.First().dailyReportID">@Model.First().dailyReportID</span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="md-col-2" style="padding:5px">
-                <strong>Job:</strong>
-            </div>
-            <div class="md-col-2" style="padding:5px">
-                <select name="jobs_dpdown" id="jobs_dpdown" style="width:100%" value="">
-                    <option value="@Model.First().jobID">@Model.First().jobID</option>
-                </select>
-                <input type="text" id="input_jobs_dpdown" name="" style="width:100%" hidden>
-            </div>
-            <div class="md-col-5" style="padding:5px"></div>
-            <div class="md-col-1" style="padding:5px">
-                <strong>Date:</strong>
-            </div>
-            <div class="md-col-2" style="padding:5px">
-                <input type="date" class="form-control form-control-sm" id="slct_date"
-                       placeholder="@Model.First().date" value=@Model.First().date>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-2" style="padding:5px">
-                <strong>Customer:</strong>:
-            </div>
-            <div class="col-7" style="padding:5px" id="output_customerName">@Model.First().customerName</div>
-            <div class="col-1" style="padding:5px">
-                <strong>Sub Job:</strong>
-            </div>
-            <div class="col-2" style="padding:5px">
-                <select name="subJobTypes_dpdwn" id="subJobTypes_dpdwn" style="width:100%" value="">
-                    <option value="@Model.First().description">@Model.First().description</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-2" style="padding:5px">
-                <strong>Location:</strong>
-            </div>
-            <div class="col-7" style="padding:5px" id="output_location">@Model.First().address</div>
-            <div class="col-1" style="padding:5px">
-                <strong>Code:</strong>
-            </div>
-            <div class="col-2" style="padding:5px" id="output_customerCode">@Model.First().customerCode</div>
-        </div>
-        <div class="row">
-            <div class="col-2" style="padding:5px">
-                <strong>Customer Contact:</strong>
-            </div>
-            <div class="col-10" style="padding:5px" id="output_customerContact">@Model.First().customerContact</div>
-        </div>
-        <div class="row">
-            <div class="col-2" style="padding:5px">
-                <strong>Equipment:</strong>
-            </div>
-            <div class="col-10" style="padding:5px">
-                <input type="text" value="@Model.First().equipment" id="input_equipment" name="" style="width:100%">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-2" style="padding:5px">
-                <strong>Start Time:</strong>
-            </div>
-            <div class="col-2" style="padding:5px">
-                <input type="time" class="form-control form-control-sm" id="input_startTime" placeholder="" value="@Model.First().startTime">
-            </div>
-            <div class="col-2" style="padding:5px">
-                <strong>End Time:</strong>
-            </div>
-            <div class="col-2" style="padding:5px">
-                <input type="time" class="form-control form-control-sm" id="input_endTime" placeholder="" value="@Model.First().endTime">
-            </div>
-            <div class="col-2" style="padding:5px">
-                <strong>Lunch (hr)</strong>
-            </div>
-            <div class="col-1" style="padding:5px">
-                <input type="text" class="form-control form-control-sm" id="input_lunch" value="@Model.First().lunchHours">
-            </div>
-            <div class="col-1" style="padding:5px">
-            </div>
-        </div>
-    </div>
 
-    <!--allpax team-->
-    <div class="container pl-auto" style="margin:5px" id="contnr_team">
-        <div class="row">
-            <div class="col-2" style="padding:5px">
-                <strong>Allpax Team:</strong>
-            </div>
-            <div class="col-10" style="padding:5px">
-                <div class="row" style="margin:0px;">
-                    <select name="team_dpdwn" id="team_dpdwn" style="width:100%">
-                    </select>
-                </div>
-                <div class="row" style="margin:0px;" name="txt_teamMembers" id="txt_teamMembers">
-                    <div class="team_" id="team_" style="padding:5px; border:solid black 1px" hidden>
-                        Johnny Watkins|JW
+<br /><br /><br />
+            <form>
+                <div class=" container" style="margin:5px">
+                    <div class="row">
+                        <div class="col-3" style="padding:5px">
+                            <strong>Daily Log Information</strong>
+                        </div>
+                        <div class="col-3" style="padding:5px">
+                            <div>
+                                <span><strong>Record No</strong></span>
+                                <span id="txt_dailyReportID" value="@Model.First().dailyReportID">@Model.First().dailyReportID</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="md-col-2" style="padding:5px">
+                            <strong>Job:</strong>
+                        </div>
+                        <div class="md-col-2" style="padding:5px">
+                            <select name="jobs_dpdown" id="jobs_dpdown" style="width:100%" value="">
+                                <option value="@Model.First().jobID">@Model.First().jobID</option>
+                            </select>
+                            <input type="text" id="input_jobs_dpdown" name="" style="width:100%" hidden>
+                        </div>
+                        <div class="md-col-5" style="padding:5px"></div>
+                        <div class="md-col-1" style="padding:5px">
+                            <strong>Date:</strong>
+                        </div>
+                        <div class="md-col-2" style="padding:5px">
+                            <input type="date" class="form-control form-control-sm" id="slct_date"
+                                   placeholder="@Model.First().date" value=@Model.First().date>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2" style="padding:5px">
+                            <strong>Customer:</strong>:
+                        </div>
+                        <div class="col-7" style="padding:5px" id="output_customerName">@Model.First().customerName</div>
+                        <div class="col-1" style="padding:5px">
+                            <strong>Sub Job:</strong>
+                        </div>
+                        <div class="col-2" style="padding:5px">
+                            <select name="subJobTypes_dpdwn" id="subJobTypes_dpdwn" style="width:100%" value="">
+                                <option value="@Model.First().description">@Model.First().description</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2" style="padding:5px">
+                            <strong>Location:</strong>
+                        </div>
+                        <div class="col-7" style="padding:5px" id="output_location">@Model.First().address</div>
+                        <div class="col-1" style="padding:5px">
+                            <strong>Code:</strong>
+                        </div>
+                        <div class="col-2" style="padding:5px" id="output_customerCode">@Model.First().customerCode</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2" style="padding:5px">
+                            <strong>Customer Contact:</strong>
+                        </div>
+                        <div class="col-10" style="padding:5px" id="output_customerContact">@Model.First().customerContact</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2" style="padding:5px">
+                            <strong>Equipment:</strong>
+                        </div>
+                        <div class="col-10" style="padding:5px">
+                            <input type="text" value="@Model.First().equipment" id="input_equipment" name="" style="width:100%">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2" style="padding:5px">
+                            <strong>Start Time:</strong>
+                        </div>
+                        <div class="col-2" style="padding:5px">
+                            <input type="time" class="form-control form-control-sm" id="input_startTime" placeholder="" value="@Model.First().startTime">
+                        </div>
+                        <div class="col-2" style="padding:5px">
+                            <strong>End Time:</strong>
+                        </div>
+                        <div class="col-2" style="padding:5px">
+                            <input type="time" class="form-control form-control-sm" id="input_endTime" placeholder="" value="@Model.First().endTime">
+                        </div>
+                        <div class="col-2" style="padding:5px">
+                            <strong>Lunch (hr)</strong>
+                        </div>
+                        <div class="col-1" style="padding:5px">
+                            <input type="text" class="form-control form-control-sm" id="input_lunch" value="@Model.First().lunchHours">
+                        </div>
+                        <div class="col-1" style="padding:5px">
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!--allpax team-->
 
-    <div class=" container pl-auto" style="margin:5px" id="contnr_workDescription">
-        <div class="row">
-            <div class="col-4" style="padding:5px">
-                <strong>Work Description</strong>
-            </div>
-            <div class="col-4" style="padding:5px">
-                <button type="button" class="btn btn-primary btn-sm" id="addWorkDescBtn" style="background-color: royalblue;" disabled>New Entry</button>
-            </div>
-            <div class="col-4" style="padding:5px">
-                <strong>Team</strong>
-            </div>
-        </div>
-        <!--begin workDescriptionLine_template-->
-        @*<div class="col-12" id="workDescriptionLine_template">
-        <div class="row" id="">
-            <div class="col-8 input_workDesc" style="padding:5px" contenteditable="true">
-                <span class="input_workDesc" id="input_workDesc" role="textbox"  contenteditable></span>
-            </div>
-            <div class="col-3" name="txt_teamMembersWorkDesc" id="txt_teamMembersWorkDesc" style="padding:5px">
-                <span class="workDescTeam_" id="workDescTeam_" style="padding:5px"></span>
-            </div>
-            <div class="col-1" style="padding:5px">
-                <select name="" id="workDescTeam_dpdwn" style="width:100%">
-                    <option value="">Team</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-2" style="padding:5px">
-                <div>
-                    <span><strong>Time Entry:</strong></span>
-                    <span id="txt_timeEntryID" value="">new</span>
+                @*BEGIN ALLPAX TEAM*@
+                <div class="container pl-auto" style="margin:5px" id="contnr_team">
+                    <div class="row">
+                        <div class="col-2" style="padding:5px">
+                            <strong>Allpax Team:</strong>
+                        </div>
+                        <div class="col-10" style="padding:5px">
+                            <div class="row" style="margin:0px;">
+                                <select name="team_dpdwn" id="team_dpdwn" style="width:100%">
+                                </select>
+                            </div>
+                            <div class="row" style="margin:0px;" name="txt_teamMembers" id="txt_teamMembers">
+                                <div class="team_" id="team_" style="padding:5px; border:solid black 1px" hidden>
+                                    Johnny Watkins|JW
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-10" style="padding:5px">
-                <button type="submit" class="btn btn-primary btn-sm" id="" style="background-color: royalblue; width: 100%">Save Entry</button>
-            </div>
-        </div>
-        </div>*@
-        <!--end workDescriptionLine_template-->
-        @*@foreach (var item in Model)
-        {
-            {
-                Html.Partial("_workDesc", null, new ViewDataDictionary { { "dailyReportByReportID", item } });
-            }
-        }*@
+                @*END ALLPAX TEAM*@
 
-        @{
-            //Html.Partial("_workDesc", null, new ViewDataDictionary { {);
-            //@Html.Partial("_workDesc", (int)@ViewBag.reportID)
-            //@Html.Partial("_workDesc")
-            //@Html.Partial("_workDescByTimeEntryID")
+                <div class=" container pl-auto" style="margin:5px" id="contnr_workDescription">
+                    <div class="row">
+                        <div class="col-4" style="padding:5px">
+                            <strong>Work Description</strong>
+                        </div>
+                        <div class="col-4" style="padding:5px">
+                            <button type="button" class="btn btn-primary btn-sm" id="addWorkDescBtn" style="background-color: royalblue;" disabled>New Entry</button>
+                        </div>
+                        <div class="col-4" style="padding:5px">
+                            <strong>Team</strong>
+                        </div>
+                    </div>
 
-            //@Html.Partial("~/Views/workDesc/index.cshtml", new allpax_service_record.Models.tbl_dailyReportTimeEntry())
+                    @*WORKS*@
+                    @{Html.RenderAction("Index", "workDesc", new { dailyReportID = ViewBag.reportID });
+                    }
 
-            //@Html.Partial("~/Views/workDesc/index.cshtml", new List<allpax_service_record.Models.View_Models.vm_workDesc>())
-            //@Html.Partial("~/Views/workDesc/index.cshtml", new List<allpax_service_record.Models.View_Models.vm_workDesc>())
+                </div>
 
+                <div class=" container pl-auto" style="margin:5px" id="contnr_delays" hidden>
+                    <div class="row">
+                        <div class="col-10" style="padding:5px">
+                            <strong>Delays</strong>
+                        </div>
+                        <div class="col-2" style="padding:5px">Team</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10" style="padding:5px">
+                            <input type="text" value="Water recovery system....." id="" name="" style="width:100%">
+                        </div>
+                        <div class="col-2" style="padding:5px">
+                            <select name="" id="" style="width:100%">
+                                <option value="">All</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-        }
-
-        @*@{Html.RenderAction("Index", "workDesc", new List<allpax_service_record.Models.View_Models.vm_workDesc>());
-        }*@
-
-        @*@{Html.RenderAction("Index?dailyReportID=50", "workDesc", new { dailyReportID = "51" } new List<allpax_service_record.Models.View_Models.vm_workDesc>
-          ()});
-        }*@
-
-        @*@{Html.RenderAction("Index", "workDesc", new { dailyReportID = "51" });
-        }*@
-
-        @{Html.RenderAction("Index", "workDesc", new { dailyReportID = ViewBag.reportID });
-        }
-
-        @*@{Html.RenderAction("Index?dailyReportID=50", "workDesc", new List<allpax_service_record.Models.View_Models.vm_workDesc>());
-        }*@
-
-        @*@{
-            Html.RenderAction("ContentSection", "Portal", new { sectionAlias = "TermsAndConditions", mvcController = "Portal", mvcAction = "ChoosePayment" });
-        }*@
-
-    </div>
-
-    <div class=" container pl-auto" style="margin:5px" id="contnr_delays" hidden>
-        <div class="row">
-            <div class="col-10" style="padding:5px">
-                <strong>Delays</strong>
-            </div>
-            <div class="col-2" style="padding:5px">Team</div>
-        </div>
-        <div class="row">
-            <div class="col-10" style="padding:5px">
-                <input type="text" value="Water recovery system....." id="" name="" style="width:100%">
-            </div>
-            <div class="col-2" style="padding:5px">
-                <select name="" id="" style="width:100%">
-                    <option value="">All</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <div class=" container pl-auto" style="margin:5px" id="contnr_warrantyDelays" hidden>
-        <div class="row">
-            <div class="col-10" style="padding:5px">
-                <strong>Warranty Delays</strong>
-            </div>
-            <div class="col-2" style="padding:5px">Team</div>
-        </div>
-        <div class="row">
-            <div class="col-10" style="padding:5px">
-                <input type="text" value="Water recovery system....." id="" name="" style="width:100%">
-            </div>
-            <div class="col-2" style="padding:5px">
-                <select name="" id="" style="width:100%">
-                    <option value="">All</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary btn-sm" id="addButton" style="background-color: royalblue;" disabled>Save Record</button>
-</form>
+                <div class=" container pl-auto" style="margin:5px" id="contnr_warrantyDelays" hidden>
+                    <div class="row">
+                        <div class="col-10" style="padding:5px">
+                            <strong>Warranty Delays</strong>
+                        </div>
+                        <div class="col-2" style="padding:5px">Team</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10" style="padding:5px">
+                            <input type="text" value="Water recovery system....." id="" name="" style="width:100%">
+                        </div>
+                        <div class="col-2" style="padding:5px">
+                            <select name="" id="" style="width:100%">
+                                <option value="">All</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm" id="addButton" style="background-color: royalblue;" disabled>Save Record</button>
+            </form>
 
 
 
