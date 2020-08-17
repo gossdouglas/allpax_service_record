@@ -14,10 +14,24 @@
             //begin #addButton
             $("#addButton").click(function () {//when the add button is clicked...
 
-                alert('yo')
+                //alert('yo')
 
                 //console.log($(this).attr("id"))
                 //console.log($(this).attr("class"))
+                //alert($(this).parent().attr("class"))
+                //alert($(this).parents().eq(1).attr("class"))
+
+                var addItem1 = $("#txt_dailyReportID").html();
+                var addItem2 = $("#input_workDesc").html();
+
+                alert("dailyReportID: " + addItem1 + '\n' +
+                    "workDescription: " + addItem2 
+                                                     
+                    );
+
+                //alert($("#input_workDesc").html());
+
+                ////$('#element1').parents().eq(2);
 
                 //$(this).parent().find(".#txt_dailyReportID").val();
 
@@ -43,11 +57,12 @@
                 //$("#addRecordItem4").val('');
                 //$("#addRecordItem5").val('');
                 //$("#addRecordItem6").val('');
+
                 //begin axios add post
                 axios.post('/workDesc/AddWorkDesc', {
-                    dailyReportID: '53',
-                    workDescription: 'yo',
-                    userName: 'tgoss',
+                    dailyReportID: addItem1,
+                    workDescription: addItem2,
+                    //userName: 'tgoss',
 
                 })
                     .then(function (response) {
@@ -108,9 +123,12 @@
         <table id="" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    @*<th class="th-sm">
+                    <th class="th-sm">
                         dailyReportID
-                    </th>*@
+                    </th>
+                    <th class="th-sm">
+                        timeEntryID
+                    </th>
                     <th class="th-sm">
                         Work Description
                     </th>
@@ -122,7 +140,9 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr class="record" id=@Html.DisplayFor(modelItem => item.dailyReportID)>
+                <tr class="record" id=@Html.DisplayFor(modelItem => item.timeEntryID)>
+                    <td id="record_item1" value=@Html.DisplayFor(modelItem => item.dailyReportID)>@Html.DisplayFor(modelItem => item.dailyReportID)</td>
+                    <td id="record_item1" value=@Html.DisplayFor(modelItem => item.timeEntryID)>@Html.DisplayFor(modelItem => item.timeEntryID)</td>
                     <td id="record_item1" value=@Html.DisplayFor(modelItem => item.workDescription)>@Html.DisplayFor(modelItem => item.workDescription)</td>
                     <td class="workDescUsers">
                         @for (var i = 0; i < (item.userNames.Count); i++)

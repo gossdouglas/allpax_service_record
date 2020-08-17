@@ -231,37 +231,65 @@ namespace allpax_service_record.Controllers
         public ActionResult AddWorkDesc(vm_workDesc workDescAdd)
         {
 
-            //db.Database.ExecuteSqlCommand("Insert into tbl_dailyReport Values({0},{1},{2},{3},{4},{5},{6})",
-            //   dailyReportAdd.jobID, dailyReportAdd.date, dailyReportAdd.subJobID, dailyReportAdd.startTime, dailyReportAdd.endTime, dailyReportAdd.lunchHours, dailyReportAdd.equipment);
+            db.Database.ExecuteSqlCommand("Insert into tbl_dailyReportTimeEntry Values({0},{1})",
+               workDescAdd.dailyReportID, workDescAdd.workDescription);
 
             //--IF THE DAILY REPORT DOESN'T ALREADY EXIST...
-            db.Database.ExecuteSqlCommand("IF NOT EXISTS(SELECT * FROM tbl_dailyReportTimeEntry WHERE dailyReportID = {0}) " +
-            "BEGIN " +
+            //db.Database.ExecuteSqlCommand("IF NOT EXISTS(SELECT * FROM tbl_dailyReportTimeEntry WHERE dailyReportID = {0}) " +
+            //"BEGIN " +
 
-            "DECLARE @id INT " +
-            "DECLARE @timeEntryID INT " +
-            "INSERT INTO tbl_dailyReportTimeEntry VALUES({0}, {1}) " +
-            "SET @id = SCOPE_IDENTITY() " +
-            "INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@id, {2}) " +
+            //"DECLARE @id INT " +
+            //"DECLARE @timeEntryID INT " +
+            //"INSERT INTO tbl_dailyReportTimeEntry VALUES({0}, {1}) " +
+            //"SET @id = SCOPE_IDENTITY() " +
+            //"INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@id, {2}) " +
 
-            "END " +
+            //"END " +
 
-            //--IF THE DAILY REPORT DOES ALREADY EXIST...
-            "ELSE " +
-            "BEGIN " +
+            ////--IF THE DAILY REPORT DOES ALREADY EXIST...
+            //"ELSE " +
+            //"BEGIN " +
 
-            "SET @timeEntryID = " +
-                "(SELECT tbl_dailyReportTimeEntry.timeEntryID " +
-                "FROM tbl_dailyReportTimeEntry " +
-                "WHERE " +
+            //"SET @timeEntryID = " +
+            //    "(SELECT tbl_dailyReportTimeEntry.timeEntryID " +
+            //    "FROM tbl_dailyReportTimeEntry " +
+            //    "WHERE " +
 
-                "tbl_dailyReportTimeEntry.dailyReportID like {0}) " +
+            //    "tbl_dailyReportTimeEntry.dailyReportID like {0}) " +
 
-                //"INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@timeEntryID, {2}) END)",
-                "INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@timeEntryID, {2}) END",
+            //    //"INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@timeEntryID, {2}) END)",
+            //    "INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@timeEntryID, {2}) END",
 
 
-                workDescAdd.dailyReportID, workDescAdd.workDescription, workDescAdd.userNames);
+            //    workDescAdd.dailyReportID, workDescAdd.workDescription, workDescAdd.userNames);
+
+            //db.Database.ExecuteSqlCommand("IF NOT EXISTS(SELECT * FROM tbl_dailyReportTimeEntry WHERE dailyReportID = {0}) " +
+            //"BEGIN " +
+
+            //"DECLARE @id INT " +
+            //"DECLARE @timeEntryID INT " +
+            //"INSERT INTO tbl_dailyReportTimeEntry VALUES({0}, {1}) " +
+            //"SET @id = SCOPE_IDENTITY() " +
+            //"INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@id, {2}) " +
+
+            //"END " +
+
+            ////--IF THE DAILY REPORT DOES ALREADY EXIST...
+            //"ELSE " +
+            //"BEGIN " +
+
+            //"SET @timeEntryID = " +
+            //    "(SELECT tbl_dailyReportTimeEntry.timeEntryID " +
+            //    "FROM tbl_dailyReportTimeEntry " +
+            //    "WHERE " +
+
+            //    "tbl_dailyReportTimeEntry.dailyReportID like {0}) " +
+
+            //    //"INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@timeEntryID, {2}) END)",
+            //    "INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@timeEntryID, {2}) END",
+
+
+            //    workDescAdd.dailyReportID, workDescAdd.workDescription, workDescAdd.userNames);
 
             //db.Database.ExecuteSqlCommand("Insert into tbl_dailyReport Values({0},{1},{2},{3},{4},{5},{6})",
             //   dailyReportAdd.jobID, dailyReportAdd.date, dailyReportAdd.subJobID, dailyReportAdd.startTime, dailyReportAdd.endTime, dailyReportAdd.lunchHours, dailyReportAdd.equipment);
