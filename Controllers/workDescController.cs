@@ -264,7 +264,7 @@ namespace allpax_service_record.Controllers
                 //"INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@timeEntryID, {2}) END)",
                 "INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@timeEntryID, {2}) END",
 
-                workDescAdd.dailyReportID, workDescAdd.workDescription, workDescAdd.userNames);
+                workDescAdd.dailyReportID, workDescAdd.workDescription, workDescAdd.userName);
 
             //db.Database.ExecuteSqlCommand("IF NOT EXISTS(SELECT * FROM tbl_dailyReportTimeEntry WHERE dailyReportID = {0}) " +
             //"BEGIN " +
