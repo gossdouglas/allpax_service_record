@@ -62,13 +62,41 @@ namespace allpax_service_record.Controllers
                 workDesc.workDescription = dr1[1].ToString();
                 workDesc.timeEntryID = (int) dr1[2];
 
-                //workDesc.userName = kitsAvlblbNotInstld(mWkitsAvlblBnotInstalled.customerCode, mWkitsAvlblBnotInstalled.jobNo, mWkitsAvlblBnotInstalled.machineID);
+                workDesc.userNames = workDescUsersByTimeEntryID(workDesc.timeEntryID);
 
                 workDescs.Add(workDesc);
             }
 
             //end query for kits available, but not installed
             return View(workDescs);
+        }
+
+        public List<string> workDescUsersByTimeEntryID(int timeEntryID)
+        {
+            List<string> userNames = new List<string>();
+
+            string mainconn = ConfigurationManager.ConnectionStrings["allpaxServiceRecordEntities"].ConnectionString;
+            SqlConnection sqlconn = new SqlConnection(mainconn);
+
+            //begin query for kits available but not installed by machine
+            string sqlquery1 = "SELECT tbl_dailyReportTimeEntryUsers.userName " +
+
+            "FROM " +
+            "tbl_dailyReportTimeEntryUsers " +
+            "WHERE " +
+            "tbl_dailyReportTimeEntryUsers.timeEntryID = @timeEntryID";
+            //end query for kits available but not installed by machine
+
+            SqlCommand sqlcomm1 = new SqlCommand(sqlquery1, sqlconn);
+            sqlcomm1.Parameters.Add(new SqlParameter("timeEntryID", timeEntryID));           
+            SqlDataAdapter sda3 = new SqlDataAdapter(sqlcomm1);
+            DataTable dt1 = new DataTable();
+            sda3.Fill(dt1);
+            foreach (DataRow dr1 in dt1.Rows)
+            {
+                userNames.Add(dr1[0].ToString());
+            }
+            return userNames;
         }
 
         //public ActionResult Index(String customerCode, string name, string address, string city, string state)
@@ -200,7 +228,7 @@ namespace allpax_service_record.Controllers
                 "INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@timeEntryID, {2}) END",
 
 
-                workDescAdd.dailyReportID, workDescAdd.workDescription, workDescAdd.userName);
+                workDescAdd.dailyReportID, workDescAdd.workDescription, workDescAdd.userNames);
 
             //db.Database.ExecuteSqlCommand("Insert into tbl_dailyReport Values({0},{1},{2},{3},{4},{5},{6})",
             //   dailyReportAdd.jobID, dailyReportAdd.date, dailyReportAdd.subJobID, dailyReportAdd.startTime, dailyReportAdd.endTime, dailyReportAdd.lunchHours, dailyReportAdd.equipment);

@@ -108,14 +108,14 @@
         <table id="" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th class="th-sm">
+                    @*<th class="th-sm">
                         dailyReportID
-                    </th>
+                    </th>*@
                     <th class="th-sm">
                         Work Description
                     </th>
                     <th class="th-sm">
-                        Time Entry ID
+                        Team
                     </th>
                 </tr>
             </thead>
@@ -123,10 +123,13 @@
                 @foreach (var item in Model)
                 {
                 <tr class="record" id=@Html.DisplayFor(modelItem => item.dailyReportID)>
-                    <td id="record_item0" value=@Html.DisplayFor(modelItem => item.dailyReportID)>@Html.DisplayFor(modelItem => item.dailyReportID)</td>
                     <td id="record_item1" value=@Html.DisplayFor(modelItem => item.workDescription)>@Html.DisplayFor(modelItem => item.workDescription)</td>
-                    <td id="record_item2" value=@Html.DisplayFor(modelItem => item.timeEntryID)>@Html.DisplayFor(modelItem => item.timeEntryID)</td>
-                    <td id="record_item2" value=@Html.DisplayFor(modelItem => item.userName)>@Html.DisplayFor(modelItem => item.userName)</td>
+                    <td class="workDescUsers">
+                        @for (var i = 0; i < (item.userNames.Count); i++)
+                        {
+                            <span>@Html.DisplayFor(modelItem => item.userNames[@i]) </span>
+                        }
+                    </td>
                 </tr>
                 }
         </table>
