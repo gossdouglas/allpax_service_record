@@ -63,6 +63,7 @@ namespace allpax_service_record.Controllers
                 workDesc.timeEntryID = (int) dr1[2];
 
                 workDesc.userNames = workDescUsersByTimeEntryID(workDesc.timeEntryID);
+                workDesc.userShortNames = workDescUserShortNamesByTimeEntryID(workDesc.timeEntryID);
 
                 workDescs.Add(workDesc);
             }
@@ -97,6 +98,38 @@ namespace allpax_service_record.Controllers
                 userNames.Add(dr1[0].ToString());
             }
             return userNames;
+        }
+        public List<string> workDescUserShortNamesByTimeEntryID(int timeEntryID)
+        {
+            List<string> userShortNames = new List<string>();
+
+            string mainconn = ConfigurationManager.ConnectionStrings["allpaxServiceRecordEntities"].ConnectionString;
+            SqlConnection sqlconn = new SqlConnection(mainconn);
+
+            //begin query for kits available but not installed by machine
+            string sqlquery1 = "SELECT tbl_Users.shortName " +
+
+            "FROM " +
+            "tbl_Users " +
+
+            "INNER JOIN " +
+            "tbl_dailyReportTimeEntryUsers ON " +
+            "tbl_Users.userName = tbl_dailyReportTimeEntryUsers.userName " +
+
+            "WHERE " +
+            "tbl_dailyReportTimeEntryUsers.timeEntryID = @timeEntryID";
+            //end query for kits available but not installed by machine
+
+            SqlCommand sqlcomm1 = new SqlCommand(sqlquery1, sqlconn);
+            sqlcomm1.Parameters.Add(new SqlParameter("timeEntryID", timeEntryID));
+            SqlDataAdapter sda1 = new SqlDataAdapter(sqlcomm1);
+            DataTable dt1 = new DataTable();
+            sda1.Fill(dt1);
+            foreach (DataRow dr1 in dt1.Rows)
+            {
+                userShortNames.Add(dr1[0].ToString());
+            }
+            return userShortNames;
         }
 
         //public ActionResult Index(String customerCode, string name, string address, string city, string state)
