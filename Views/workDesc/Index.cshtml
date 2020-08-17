@@ -21,86 +21,39 @@
                 //alert($(this).parent().attr("class"))
                 //alert($(this).parents().eq(1).attr("class"))
 
-                //var addItem1 = $("#txt_dailyReportID").html();
-                //var addItem2 = $("#input_workDesc").html();
+                var addItem1 = $("#txt_dailyReportID").html();
+                var addItem2 = $("#input_workDesc").html();
 
-                //alert("dailyReportID: " + addItem1 + '\n' +
-                //    "workDescription: " + addItem2
+                alert("dailyReportID: " + addItem1 + '\n' +
+                    "workDescription: " + addItem2
 
-                //);
+                );
              
-                //function GFG_Fun() {
-                //    var arr = [];
-                    //$(".workDescTeam_").each(function () { arr.push($(this).text()) });
-                    //el_down.innerHTML = '"' + arr.join('", "') + '"';
-
-                    //$(".workDescTeam_").each(function ()
-                    //alert($(this).attr("id"));
-                var tempTeamMemberUserID
-
                 $(".workDescTeam_").each(function () {
 
-                    //var tempTeamMemberUserID = $(this).attr("id").split("workDescTeam_");
                     var tempTeamMemberUserID = $(this).attr("id").substr(13);
 
-
-                    //var tempTeamMemberUserID = this.id.substr(5);
-
                     if (tempTeamMemberUserID.length > 0) {
-                        alert(tempTeamMemberUserID);
-                        alert(tempTeamMemberUserID.length);
-                    }
-                    //alert($(this).attr("id"));
-                    //alert(tempTeamMemberUserID);
-                    //alert(tempTeamMemberUserID.length);
-                    
-                    });
-                //}
+                        //alert(tempTeamMemberUserID);
+                        //alert(tempTeamMemberUserID.length);
 
-                //alert($("#input_workDesc").html());
+                        //begin axios add post
+                        axios.post('/workDesc/AddWorkDesc', {
+                            dailyReportID: addItem1,
+                            workDescription: addItem2,
+                            //userName: 'tgoss',
+                            userNames: tempTeamMemberUserID,
 
-                //$('#element1').parents().eq(2);
-
-                //$(this).parent().find(".#txt_dailyReportID").val();
-
-                //var addItem1 = $("#addRecordItem1").val();
-                //var addItem2 = $("#addRecordItem2").val();
-                //var addItem3 = $("#addRecordItem3").val();
-                //var addItem4 = $("#addRecordItem4").val();
-                //var addItem5 = $("#addRecordItem5").val();
-                //var addItem6 = $("#addRecordItem6").val();
-
-                //alert(
-                //    "Selected for Add POST:" + '\n' +
-                //    "addItem1: " + addItem1 + '\n' +
-                //    "addItem2: " + addItem2 + '\n' +
-                //    "addItem3: " + addItem3 + '\n' +
-                //    "addItem4: " + addItem4 + '\n' +
-                //    "addItem5: " + addItem5 + '\n' +
-                //    "addItem6: " + addItem6 + '\n'
-                //);
-                //$("#addRecordItem1").val('');
-                //$("#addRecordItem2").val('');
-                //$("#addRecordItem3").val('');
-                //$("#addRecordItem4").val('');
-                //$("#addRecordItem5").val('');
-                //$("#addRecordItem6").val('');
-
-                //begin axios add post
-                //axios.post('/workDesc/AddWorkDesc', {
-                //    dailyReportID: addItem1,
-                //    workDescription: addItem2,
-                //    //userName: 'tgoss',
-
-                //})
-                //    .then(function (response) {
-                //        console.log(response);
-                //    })
-                //    .catch(function (error) {
-                //        console.log(error);
-                //    });
+                        })
+                            .then(function (response) {
+                                console.log(response);
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
                 //end axios add post
-
+                    }                                       
+                    });                          
             });
             //end n
           
