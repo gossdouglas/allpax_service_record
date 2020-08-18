@@ -231,6 +231,32 @@
             //end load team members on work description dpdwn change
 
             //begin when a team member class is clicked...
+            $(".workDescTeam_").on('click', function () {
+                //var tempTeamMemberUserID = this.id.substr(5);
+                var tempTeamMemberUserID = this.id;
+
+                //alert(tempTeamMemberUserID)
+
+                //begin DeleteTeamMember
+                //begin axios delete post
+                //axios.post('/dailyReportByReportID/DeleteTeamMember', {
+
+                //    dailyReportID: dailyReportID,
+                //    userName: tempTeamMemberUserID,
+                //})
+                //    .then(function (response) {
+                //        console.log(response);
+                //    })
+                //    .catch(function (error) {
+                //        console.log(error);
+                //    });
+                //end axios add post
+
+                $("#" + $(this).attr("id")).remove();
+            });
+            //end when a team member class is clicked...
+
+            //begin when a team member class is clicked...
             $(".team_").on('click', function () {
                 var tempTeamMemberUserID = this.id.substr(5);
 
@@ -251,7 +277,7 @@
 
                 $("#" + $(this).attr("id")).remove();
             });
-            //end DeleteTeamMember
+            //end when a team member class is clicked...
 
             //begin when a nnnnn class is clicked...
             $(".input_workDesc").on('keypress', function () {
@@ -402,7 +428,7 @@
 
                 <div class=" container pl-auto" style="margin:5px" id="contnr_workDescription">
                     <div class="row">
-                        <div class="col-4" style="padding:5px">
+                        <div class="col-8" style="padding:5px">
                             <strong>Work Description</strong>
                         </div>
                         @*<div class="col-4" style="padding:5px">
