@@ -54,9 +54,60 @@
                         //end axios add post
                     }
                 });
-                //clear the work description html in prep for a new record
+
             });
-            //end n
+
+            //begin when a work description line team member class is clicked...
+            $(".workDescLine_").on('click', function () {
+                var tempTeamMemberUserID = this.id.substr(17);
+                alert('yo');
+
+                //alert(tempTeamMemberUserID)
+
+                //begin DeleteTeamMember
+                //begin axios delete post
+                //axios.post('/dailyReportByReportID/DeleteTeamMember', {
+
+                //    dailyReportID: dailyReportID,
+                //    userName: tempTeamMemberUserID,
+                //})
+                //    .then(function (response) {
+                //        console.log(response);
+                //    })
+                //    .catch(function (error) {
+                //        console.log(error);
+                //    });
+                //end axios add post
+
+                //$("#" + $(this).attr("id")).remove();
+            });
+            //end when a team member class is clicked...
+
+            //begin when a work description line team member class is clicked...
+            $(".workDescTeamLineUserShortName_").on('click', function () {
+                var tempTeamMemberUserID = this.id.substr(31);
+                alert(tempTeamMemberUserID);
+
+                //alert(tempTeamMemberUserID)
+
+                //begin DeleteTeamMember
+                //begin axios delete post
+                //axios.post('/dailyReportByReportID/DeleteTeamMember', {
+
+                //    dailyReportID: dailyReportID,
+                //    userName: tempTeamMemberUserID,
+                //})
+                //    .then(function (response) {
+                //        console.log(response);
+                //    })
+                //    .catch(function (error) {
+                //        console.log(error);
+                //    });
+                //end axios add post
+
+                //$("#" + $(this).attr("id")).remove();
+            });
+            //end when a team member class is clicked...
 
         });//end document read jquery statements
     </script>
@@ -140,34 +191,44 @@
         </div>*@
 
     @*BEGIN WORK DESCRIPTION FOR EACH TEMPLATE*@
-    <div class="col-12" id="workDescriptionLine_template">
-        <div class="row" style="padding:5px" id="">
-            <div class="col-8" id="input_workDesc" style="padding:5px; border: 1px solid black;" contenteditable="true">
-                @*<span class="input" role="textbox" id="input_workDesc" contenteditable>kkkkk</span>*@
-            </div>
-            <div class="col-3" name="txt_teamMembersWorkDesc" id="txt_teamMembersWorkDesc" style="padding:5px">
-                <span class="workDescTeam_" id="workDescTeam_" style="padding:5px"></span>
-            </div>
-            <div class="col-1" style="padding:5px">
-                <select name="" id="workDescTeam_dpdwn" style="width:100%">
-                    <option value="">Team</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-2" style="padding:5px">
-                <div>
-                    <span><strong>Time Entry:</strong></span>
-                    <span id="txt_timeEntryID" value="">new</span>
+    @foreach (var item in Model)
+    {
+        <div class="col-12 workDescLine_" id="workDescLine_@Html.DisplayFor(modelItem => item.timeEntryID)">
+            <div class="row" style="padding:5px" id="">
+                <div class="col-8" id="input_workDesc" style="padding:5px; border: 1px solid black;" contenteditable="false">
+                    @*<span class="input" role="textbox" id="input_workDesc" contenteditable>kkkkk</span>*@
+                    @Html.DisplayFor(modelItem => item.workDescription)
+                </div>
+                <div class="col-3" name="txt_teamMembersWorkDesc" id="txt_teamMembersWorkDesc" style="padding:5px">
+                    @*<span class="workDescTeam_" id="workDescTeam_" style="padding:5px">*@
+                    @for (var i = 0; i < (item.userNames.Count); i++)
+                    {
+                        @*<span class="workDescTeam_" id=@Html.DisplayFor(modelItem => item.userShortNames[@i])> @Html.DisplayFor(modelItem => item.userShortNames[@i]) </span>*@
+                    <span class="workDescTeamLineUserShortName_" id="workDescTeamLineUserShortName_@Html.DisplayFor(modelItem => item.userNames[@i])"> @Html.DisplayFor(modelItem => item.userShortNames[@i]) </span>
+                    }
+                    @*</span>*@
+                </div>
+                <div class="col-1" style="padding:5px">
+                    <select name="" class="workDescTeam_" id="workDescTeam_dpdwn" style="width:100%" disabled>
+                        <option value="">Team</option>
+                    </select>
                 </div>
             </div>
-            <div class="col-10" style="padding:5px">
-                <button type="button" class="btn btn-primary btn-sm" id="addWorkDescBtn" style="background-color: royalblue; width: 100%">Edit Entry</button>
+            <div class="row">
+                <div class="col-2" style="padding:5px">
+                    <div>
+                        <span><strong>Time Entry:</strong></span>
+                        <span id="timeEntryIDWorkDesc_@Html.DisplayFor(modelItem => item.timeEntryID)" value="">@Html.DisplayFor(modelItem => item.timeEntryID)</span>
+                    </div>
+                </div>
+                <div class="col-10" style="padding:5px">
+                    <button type="button" class="btn btn-primary btn-sm" id="addWorkDescBtn" style="background-color: royalblue; width: 100%">Edit Entry</button>
+                </div>
             </div>
         </div>
+    }
+        @*END WORK DESCRIPTION FOR EACH TEMPLATE*@
     </div>
-    @*END WORK DESCRIPTION FOR EACH TEMPLATE*@
-</div>
 
     @*<div class="container pl-auto">*@
 
