@@ -25,7 +25,11 @@
 
             //begin fill the team names dropdown
             var team_dpdwn = $('#team_dpdwn');
-            var workDescTeam_dpdwn = $('#workDescTeam_dpdwn');
+
+            //var workDescTeam_dpdwn = $('#workDescTeam_dpdwn');
+            var workDescTeam_dpdwn = $('.workDescTeam_dpdwn');
+            var workDescTeamLine_dpdwn = $('.workDescTeamLine_dpdwn');
+
             var addWorkDescBtn = $('#addWorkDescBtn');
             var dailyReportID = $("#txt_dailyReportID").html();
             var workDescAddTeamMember=[];
@@ -102,6 +106,34 @@
                         $(data).each(function (index, item) {
                             //workDescTeam_dpdwn.append($('<option/>', { value: item.userName, text: item.name + "-" + item.shortName }))
                             workDescTeam_dpdwn.append($('<option/>', { value: item.userName, text: item.shortName }))
+
+                        });
+                        //end AddTeamMember
+                    }
+                });
+            });
+            //end load team members on work description dpdwn click
+
+            //begin load team members on work description dpdwn click
+            workDescTeamLine_dpdwn.click(function () {
+
+                workDescTeamLine_dpdwn.empty();
+                workDescTeamLine_dpdwn.append($('<option/>', { value: -1, text: 'Team' }));
+                workDescTeamLine_dpdwn.val('-1');
+
+                $.ajax({
+                    url: 'DataService.asmx/GetAllTeamNamesByReportID',
+                    method: 'post',
+                    dataType: 'json',
+                    data: { userName: '%', dailyReportID: dailyReportID },
+                    success: function (data) {
+
+                        //alert($('#team_dpdwn').val())
+                        //workDescTeam_dpdwn.append($('<option/>', { value: -1, text: 'Add' }));
+
+                        $(data).each(function (index, item) {
+                            //workDescTeam_dpdwn.append($('<option/>', { value: item.userName, text: item.name + "-" + item.shortName }))
+                            workDescTeamLine_dpdwn.append($('<option/>', { value: item.userName, text: item.shortName }))
 
                         });
                         //end AddTeamMember
@@ -229,33 +261,7 @@
                 });
             });
             //end load team members on work description dpdwn change
-
-            //begin when a team member class is clicked...
-            $(".workDescTeam_").on('click', function () {
-                //var tempTeamMemberUserID = this.id.substr(5);
-                var tempTeamMemberUserID = this.id;
-
-                //alert(tempTeamMemberUserID)
-
-                //begin DeleteTeamMember
-                //begin axios delete post
-                //axios.post('/dailyReportByReportID/DeleteTeamMember', {
-
-                //    dailyReportID: dailyReportID,
-                //    userName: tempTeamMemberUserID,
-                //})
-                //    .then(function (response) {
-                //        console.log(response);
-                //    })
-                //    .catch(function (error) {
-                //        console.log(error);
-                //    });
-                //end axios add post
-
-                $("#" + $(this).attr("id")).remove();
-            });
-            //end when a team member class is clicked...
-        
+                        
             //begin when a team member class is clicked...
             $(".team_").on('click', function () {
                 var tempTeamMemberUserID = this.id.substr(5);
@@ -404,13 +410,13 @@
                     </div>
                 </div>
             </div>
-<hr style="margin:1px"/>                              
+<hr style="margin:1px; opacity:0"/>                              
 <div class="container" id="cntnr_workDesc">
     @*WORKS*@
     @{Html.RenderAction("Index", "workDesc", new { dailyReportID = ViewBag.reportID });
     }
 </div>
-<hr style="margin:1px" />
+<hr style="margin:1px" opacity:0" />
     <div class=" container"  id="contnr_delays" hidden>
         <div class="row">
             <div class="col-10" style="padding:5px">
@@ -429,7 +435,7 @@
             </div>
         </div>
     </div>
-    <hr style="margin:1px" />
+    <hr style="margin:1px; opacity:0"" />
     <div class=" container" id="contnr_warrantyDelays" hidden>
         <div class="row">
             <div class="col-10" style="padding:5px">

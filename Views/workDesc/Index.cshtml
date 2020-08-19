@@ -12,7 +12,8 @@
         $(document).ready(function () {//begin document read jquery statements
 
             var slctd_timeEntryID;
-
+            var dailyReportID = $("#txt_dailyReportID").html()
+            //var workDescTeamLine_dpdwn = $('.workDescTeamLine_dpdwn');
 
             //begin when nnnn is clicked...
             $("#addWorkDescBtn").on('click', function () {
@@ -59,7 +60,7 @@
 
             });
 
-            $(".workDescLine_").on('mouseover', function () {
+            $(".workDescLine_").on('click', function () {
                 //var tempTeamMemberUserID = this.id.substr(17);
                 slctd_timeEntryID = this.id.substr(13);
             });
@@ -89,6 +90,103 @@
                 $("#" + $(this).attr("id")).remove();
             });
             //end when a team member class is clicked...
+
+            //begin when a team member class is clicked...
+            $(".workDescTeam_").on('click', function () {
+                //var tempTeamMemberUserID = this.id.substr(5);
+                var tempTeamMemberUserID = this.id;
+
+                //alert(tempTeamMemberUserID)
+
+                //begin DeleteTeamMember
+                //begin axios delete post
+                //axios.post('/dailyReportByReportID/DeleteTeamMember', {
+
+                //    dailyReportID: dailyReportID,
+                //    userName: tempTeamMemberUserID,
+                //})
+                //    .then(function (response) {
+                //        console.log(response);
+                //    })
+                //    .catch(function (error) {
+                //        console.log(error);
+                //    });
+                //end axios add post
+
+                $("#" + $(this).attr("id")).remove();
+            });
+            //end when a team member class is clicked...
+
+            //begin load team members on work description dpdwn change
+            $(".workDescTeamLine_dpdwn").change(function () {
+
+                //alert(slctd_timeEntryID + " " + $(this).val());
+                //workDescTeam_dpdwn.empty();
+                //workDescTeam_dpdwn.append($('<option/>', { value: -1, text: 'Add' }));
+                //workDescTeam_dpdwn.val('-1');
+                //alert($(this).val());
+
+                //var tempTeamMemberUserID = $(this).val();
+
+                //begin
+
+                $.ajax({
+                    url: 'DataService.asmx/GetAllTeamNamesByReportID',
+                    method: 'post',
+                    dataType: 'json',
+                    data: { userName: $(this).val(), dailyReportID: dailyReportID },
+                    success: function (data) {
+
+
+                        //team_dpdwn.append($('<option/>', { value: -1, text: 'Add Team Member' }));
+
+                        //console.log(data)
+
+                        $(data).each(function (index, item) {
+                            //team_dpdwn.append($('<option/>', { value: item.userName, text: item.name + "-" + item.shortName }));
+                            console.log(item.userName)
+                            console.log(item.name)
+                            console.log(item.shortName)
+
+                            var temp_userName;
+                            var temp_name;
+                            var temp_shortName;
+
+                            temp_userName = item.userName;
+                            temp_name = item.name;
+                            temp_shortName = item.shortName;
+
+                            //$("#workDescTeam_").clone(true).prop("id", "workDescTeam_" + temp_userName.toString()).appendTo("#txt_teamMembersWorkDesc");
+                            //$("#workDescTeam_" + temp_userName.toString()).text(temp_shortName);
+                            //$("#workDescTeam_" + temp_userName.toString()).removeAttr('hidden');//unhide the copy
+
+                            //$("#workDescTeam_").clone(true).prop("id", "workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).appendTo("#workDescLine_" + slctd_timeEntryID + "#txt_teamMembersWorkDescLine_" + slctd_timeEntryID);
+
+                            $("#workDescTeam_").clone(true).prop("id", "workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).appendTo("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID);
+
+                            $("#workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).prop("class", "workDescTeamLineUserShortName_")
+                            $("#workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).text(temp_shortName);
+                            $("#workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).removeAttr('hidden');//unhide the copy
+
+                            //begin AddTeamMember
+                            //begin axios add post
+                            //axios.post('/dailyReportByReportID/AddTeamMember', {
+                            //    dailyReportID: dailyReportID,
+                            //    userName: temp_userName,
+                            //})
+                            //    .then(function (response) {
+                            //        console.log(response);
+                            //    })
+                            //    .catch(function (error) {
+                            //        console.log(error);
+                            //    });
+                            //end axios add post
+                        });
+                        //end AddTeamMember
+                    }
+                });
+            });
+            //end load team members on work description dpdwn change
 
         });//end document read jquery statements
     </script>
@@ -141,7 +239,7 @@
                 <span class="workDescTeam_" id="workDescTeam_" style="padding:5px"></span>
             </div>
             <div class="col-1" style="padding:5px">
-                <select name="" id="workDescTeam_dpdwn" style="width:100%">
+                <select class="workDescTeam_dpdwn" name="" @*id="workDescTeam_dpdwn"*@ style="width:100%">
                     <option value="">Team</option>
                 </select>
             </div>
@@ -176,21 +274,21 @@
     {
     <div class="col-12 workDescLine_" id="workDescLine_@Html.DisplayFor(modelItem => item.timeEntryID)">
         <div class="row" style="padding:5px" id="">
-            <div class="col-8" id="input_workDesc" style="padding:5px; border: 1px solid black;" contenteditable="false">
+            <div class="col-8 input_workDescLine" id="" style="padding:5px; border: 1px solid black;">
                 @*<span class="input" role="textbox" id="input_workDesc" contenteditable>kkkkk</span>*@
                 @Html.DisplayFor(modelItem => item.workDescription)
             </div>
-            <div class="col-3" name="txt_teamMembersWorkDesc" id="txt_teamMembersWorkDesc" style="padding:5px">
+            <div class="col-3 txt_teamMembersWorkDescLine"  id="txt_teamMembersWorkDescLine_@Html.DisplayFor(modelItem => item.timeEntryID)" style="padding:5px">
                 @*<span class="workDescTeam_" id="workDescTeam_" style="padding:5px">*@
                 @for (var i = 0; i < (item.userNames.Count); i++)
                 {
                     @*<span class="workDescTeam_" id=@Html.DisplayFor(modelItem => item.userShortNames[@i])> @Html.DisplayFor(modelItem => item.userShortNames[@i]) </span>*@
-                    <span class="workDescTeamLineUserShortName_" id="workDescTeamLineUserShortName_@Html.DisplayFor(modelItem => item.userNames[@i])" style="pointer-events:none"> @Html.DisplayFor(modelItem => item.userShortNames[@i]) </span>
+                    <span class="workDescTeamLineUserShortName_" id="workDescTeamLineUserShortName_@Html.DisplayFor(modelItem => item.timeEntryID)_@Html.DisplayFor(modelItem => item.userNames[@i])" @*style="pointer-events:none"*@>@Html.DisplayFor(modelItem => item.userShortNames[@i])</span>
                 }
                 @*</span>*@
             </div>
             <div class="col-1" style="padding:5px">
-                <select name="" class="workDescTeam_" id="workDescTeam_dpdwn" style="width:100%" disabled>
+                <select name="" class="workDescTeamLine_dpdwn" @*id="workDescTeam_dpdwn"*@ style="width:100%" @*disabled*@>
                     <option value="">Team</option>
                 </select>
             </div>
