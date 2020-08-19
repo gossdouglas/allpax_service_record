@@ -28,7 +28,7 @@
                     "workDescription: " + addItem2
 
                 );
-             
+
                 $(".workDescTeam_").each(function () {
 
                     var tempTeamMemberUserID = $(this).attr("id").substr(13);
@@ -51,90 +51,125 @@
                             .catch(function (error) {
                                 console.log(error);
                             });
-                //end axios add post
-                    }                                       
+                        //end axios add post
+                    }
                 });
                 //clear the work description html in prep for a new record
             });
             //end n
-          
+
         });//end document read jquery statements
     </script>
 </head>
 
-@*BEGIN WORK DESCRIPTION TEMPLATE*@
-<div class="col-12" id="workDescriptionLine_template">
-    @*<div class="col-3" style="padding:5px">
-            <div>
-                <span><strong>Record No</strong></span>
-                <span id="txt_dailyReportID" value=@ViewBag.reportID>@ViewBag.reportID</span>
-            </div>
-        </div>*@
-    <div class="row" id="">
-        <div class="col-8" id="input_workDesc" style="padding:5px; border: 1px solid black;" contenteditable="true">
-            @*<span class="input" role="textbox" id="input_workDesc" contenteditable>kkkkk</span>*@
-        </div>
-        <div class="col-3" name="txt_teamMembersWorkDesc" id="txt_teamMembersWorkDesc" style="padding:5px">
-            <span class="workDescTeam_" id="workDescTeam_" style="padding:5px"></span>
-        </div>
-        <div class="col-1" style="padding:5px">
-            <select name="" id="workDescTeam_dpdwn" style="width:100%">
-                <option value="">Team</option>
-            </select>
-        </div>
-    </div>
+@*BEGIN ALLPAX TEAM*@
+<div class="container pl-auto" style="margin:5px" id="contnr_team">
     <div class="row">
         <div class="col-2" style="padding:5px">
-            <div>
-                <span><strong>Time Entry:</strong></span>
-                <span id="txt_timeEntryID" value="">new</span>
-            </div>
+            <strong>Allpax Team:</strong>
         </div>
         <div class="col-10" style="padding:5px">
-            <button type="button" class="btn btn-primary btn-sm" id="addWorkDescBtn" style="background-color: royalblue; width: 100%">Save Entry</button>
+            <div class="row" style="margin:0px;">
+                <select name="team_dpdwn" id="team_dpdwn" style="width:100%">
+                </select>
+            </div>
+            <div class="row" style="margin:0px;" name="txt_teamMembers" id="txt_teamMembers">
+                <div class="team_" id="team_" style="padding:5px; border:solid black 1px" hidden>
+                    Johnny Watkins|JW
+                </div>
+            </div>
         </div>
     </div>
 </div>
-@*END WORK DESCRIPTION TEMPLATE*@
+@*END ALLPAX TEAM*@
 
-<div class="container-fluid">
-    <div class="col-md-12" style="border:none">
-        <table id="" class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th class="th-sm">
-                        dailyReportID
-                    </th>
-                    <th class="th-sm">
-                        timeEntryID
-                    </th>
-                    <th class="th-sm">
-                        Work Description
-                    </th>
-                    <th class="th-sm">
-                        Team
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                <tr class="record" id=@Html.DisplayFor(modelItem => item.timeEntryID)>
-                    <td id="record_item1" value=@Html.DisplayFor(modelItem => item.dailyReportID)>@Html.DisplayFor(modelItem => item.dailyReportID)</td>
-                    <td id="record_item1" value=@Html.DisplayFor(modelItem => item.timeEntryID)>@Html.DisplayFor(modelItem => item.timeEntryID)</td>
-                    <td id="record_item1" value=@Html.DisplayFor(modelItem => item.workDescription)>@Html.DisplayFor(modelItem => item.workDescription)</td>
-                    <td class="workDescUsers">
-                        @for (var i = 0; i < (item.userNames.Count); i++)
-                        {
-                            <span>@Html.DisplayFor(modelItem => item.userShortNames[@i]) </span>
-                        }
-                    </td>
-                </tr>
-                }
-        </table>
+<div class=" container pl-auto" style="margin:5px" id="contnr_workDescription">
+    <div class="row">
+        <div class="col-8" style="padding:5px">
+            <strong>Work Description</strong>
+        </div>
+        @*<div class="col-4" style="padding:5px">
+                <button type="button" class="btn btn-primary btn-sm" id="addWorkDescBtn" style="background-color: royalblue;" disabled>New Entry</button>
+            </div>*@
+        <div class="col-4" style="padding:5px">
+            <strong>Team</strong>
+        </div>
+    </div>
+
+    @*BEGIN WORK DESCRIPTION TEMPLATE*@
+    <div class="col-12" id="workDescriptionLine_template">
+        @*<div class="col-3" style="padding:5px">
+                <div>
+                    <span><strong>Record No</strong></span>
+                    <span id="txt_dailyReportID" value=@ViewBag.reportID>@ViewBag.reportID</span>
+                </div>
+            </div>*@
+        <div class="row" id="">
+            <div class="col-8" id="input_workDesc" style="padding:5px; border: 1px solid black;" contenteditable="true">
+                @*<span class="input" role="textbox" id="input_workDesc" contenteditable>kkkkk</span>*@
+            </div>
+            <div class="col-3" name="txt_teamMembersWorkDesc" id="txt_teamMembersWorkDesc" style="padding:5px">
+                <span class="workDescTeam_" id="workDescTeam_" style="padding:5px"></span>
+            </div>
+            <div class="col-1" style="padding:5px">
+                <select name="" id="workDescTeam_dpdwn" style="width:100%">
+                    <option value="">Team</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2" style="padding:5px">
+                <div>
+                    <span><strong>Time Entry:</strong></span>
+                    <span id="txt_timeEntryID" value="">new</span>
+                </div>
+            </div>
+            <div class="col-10" style="padding:5px">
+                <button type="button" class="btn btn-primary btn-sm" id="addWorkDescBtn" style="background-color: royalblue; width: 100%">Save Entry</button>
+            </div>
+        </div>
     </div>
 </div>
+    @*END WORK DESCRIPTION TEMPLATE*@
 
-@*<span id="txt_dailyReportID" value="@Model.First().dailyReportID">@Model.First().dailyReportID</span>*@
+    <div class="container-fluid">
+        <div class="col-md-12" style="border:none">
+            <table id="" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th class="th-sm">
+                            dailyReportID
+                        </th>
+                        <th class="th-sm">
+                            timeEntryID
+                        </th>
+                        <th class="th-sm">
+                            Work Description
+                        </th>
+                        <th class="th-sm">
+                            Team
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="record" id=@Html.DisplayFor(modelItem => item.timeEntryID)>
+                            <td id="record_item1" value=@Html.DisplayFor(modelItem => item.dailyReportID)>@Html.DisplayFor(modelItem => item.dailyReportID)</td>
+                            <td id="record_item1" value=@Html.DisplayFor(modelItem => item.timeEntryID)>@Html.DisplayFor(modelItem => item.timeEntryID)</td>
+                            <td id="record_item1" value=@Html.DisplayFor(modelItem => item.workDescription)>@Html.DisplayFor(modelItem => item.workDescription)</td>
+                            <td class="workDescUsers">
+                                @for (var i = 0; i < (item.userNames.Count); i++)
+                                {
+                                    <span>@Html.DisplayFor(modelItem => item.userShortNames[@i]) </span>
+                                }
+                            </td>
+                        </tr>
+                    }
+            </table>
+        </div>
+    </div>
+
+    @*<span id="txt_dailyReportID" value="@Model.First().dailyReportID">@Model.First().dailyReportID</span>*@
 
 
