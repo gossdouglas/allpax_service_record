@@ -68,24 +68,26 @@
 
             //begin when a work description line team member class is clicked...
             $(".workDescTeamLineUserShortName_").on('click', function () {
-                var tempTeamMemberUserID = this.id.substr(31);
+                var tempTeamMemberUserID = this.id.substr(32);
                 //alert(tempTeamMemberUserID);
 
-                //alert(tempTeamMemberUserID)
+                alert("User name " + tempTeamMemberUserID + '\n' +
+                    "in time entry " + slctd_timeEntryID + '\n' +
+                    "has been selected for deletion.");
 
                 //begin DeleteTeamMember
                 //begin axios delete post
-                //axios.post('/dailyReportByReportID/DeleteTeamMember', {
+                axios.post('/workDesc/DeleteTeamMember', {
 
-                //    dailyReportID: dailyReportID,
-                //    userName: tempTeamMemberUserID,
-                //})
-                //    .then(function (response) {
-                //        console.log(response);
-                //    })
-                //    .catch(function (error) {
-                //        console.log(error);
-                //    });
+                    timeEntryID: slctd_timeEntryID,
+                    userName: tempTeamMemberUserID,
+                })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
                 //end axios add post
 
                 $("#" + $(this).attr("id")).remove();
@@ -264,7 +266,7 @@
                 });
             });
             //end load team members on work description dpdwn change
-
+          
         });//end document read jquery statements
     </script>
 </head>        

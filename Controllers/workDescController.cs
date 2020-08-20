@@ -169,11 +169,10 @@ namespace allpax_service_record.Controllers
         [HttpPost]
         public ActionResult AddTeamMember(vm_workDesc teamMemberAdd)
         {
-            db.Database.ExecuteSqlCommand("Insert into [tbl_dailyReportTimeEntryUsers] Values({0},{1})",
+            db.Database.ExecuteSqlCommand("Insert into tbl_dailyReportTimeEntryUsers Values({0},{1})",
                 teamMemberAdd.timeEntryID, teamMemberAdd.userName);
 
             return new EmptyResult();
-            //return RedirectToAction("SalesLanding", "Index");
         }
 
         public ActionResult DeleteWorkDesc(vm_workDesc workDescDelete)
@@ -182,6 +181,19 @@ namespace allpax_service_record.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult DeleteTeamMember(vm_workDesc teamMemberDelete)
+        {
+            db.Database.ExecuteSqlCommand("DELETE FROM tbl_dailyReportTimeEntryUsers " +
+                "WHERE " +
+                "timeEntryID=({0})" +
+                "AND userName = ({1})", teamMemberDelete.timeEntryID, teamMemberDelete.userName);
+
+            //return RedirectToAction("Index");
+            return new EmptyResult();
+        }
+
 
         protected override void Dispose(bool disposing)
         {
