@@ -263,18 +263,25 @@
 <div class=" container pl-auto" style="margin:5px" id="contnr_workDescription">
     @foreach (var item in Model)
     {
-        <div class="col-12 workDescLine_" id="workDescLine_@Html.DisplayFor(modelItem => item.timeEntryID)">
+        //BEGIN TEMPORARY LOOP VARIABLES
+        int temp_timeEntryID = item.timeEntryID;
+        List<string> temp_userNames=item.userNames;
+        List<string> temp_userShortNames = item.userShortNames;
+        string temp_workDescription = item.workDescription;
+        //END TEMPORARY LOOP VARIABLES
+
+        <div class="col-12 workDescLine_" id="workDescLine_@temp_timeEntryID">
             <div class="row" style="padding:5px" id="">
                 <div class="col-8 input_workDescLine" id="" style="padding:5px; border: 1px solid black;">
                     @*<span class="input" role="textbox" id="input_workDesc" contenteditable>kkkkk</span>*@
-                    @Html.DisplayFor(modelItem => item.workDescription)
+                    @temp_workDescription
                 </div>
-                <div class="col-3 txt_teamMembersWorkDescLine" id="txt_teamMembersWorkDescLine_@Html.DisplayFor(modelItem => item.timeEntryID)" style="padding:5px">
+                <div class="col-3 txt_teamMembersWorkDescLine" id="txt_teamMembersWorkDescLine_@temp_timeEntryID" style="padding:5px">
                     @*<span class="workDescTeam_" id="workDescTeam_" style="padding:5px">*@
-                    @for (var i = 0; i < (item.userNames.Count); i++)
+                    @for (var i = 0; i < (temp_userNames.Count); i++)
                     {
                         @*<span class="workDescTeam_" id=@Html.DisplayFor(modelItem => item.userShortNames[@i])> @Html.DisplayFor(modelItem => item.userShortNames[@i]) </span>*@
-                        <span class="workDescTeamLineUserShortName_" id="workDescTeamLineUserShortName_@Html.DisplayFor(modelItem => item.timeEntryID)_@Html.DisplayFor(modelItem => item.userNames[@i])" style="pointer-events:none">@Html.DisplayFor(modelItem => item.userShortNames[@i])</span>
+                        <span class="workDescTeamLineUserShortName_" id="workDescTeamLineUserShortName_@temp_timeEntryID+_+@temp_userNames[@i]" style="pointer-events:none">@temp_userShortNames[@i]</span>
                     }
                     @*</span>*@
                 </div>
@@ -288,7 +295,7 @@
                 <div class="col-2" style="padding:5px">
                     <div>
                         <span><strong>Time Entry:</strong></span>
-                        <span id="timeEntryIDWorkDesc_@Html.DisplayFor(modelItem => item.timeEntryID)" value="">@Html.DisplayFor(modelItem => item.timeEntryID)</span>
+                        <span id="timeEntryIDWorkDesc_@temp_timeEntryID" value="">@temp_timeEntryID</span>
                     </div>
                 </div>
                 <div class="col-10" style="padding:5px">
@@ -298,7 +305,7 @@
             <hr style="margin:1px; background-color:black" />
         </div>
     }
-@*BEGIN DISPLAY WORK DESCRIPTION RECORDS*@
+    @*BEGIN DISPLAY WORK DESCRIPTION RECORDS*@
 </div>
 
 
