@@ -158,16 +158,21 @@ namespace allpax_service_record.Controllers
                 "END",
 
                 workDescAdd.dailyReportID, workDescAdd.workDescription, workDescAdd.userName);
-
-            
-
+           
             return new EmptyResult();
             //return View();
             //return RedirectToAction("Index");
             //return RedirectToAction("Index", new { dailyReportID = workDescAdd.dailyReportID });
             //return RedirectToAction("Index", "DailyReportByReportID", new { reportID = workDescAdd.dailyReportID});
         }
-    
+
+        public ActionResult DeleteWorkDesc(vm_workDesc workDescDelete)
+        {
+            db.Database.ExecuteSqlCommand("DELETE FROM tbl_dailyReportTimeEntry WHERE timeEntryID=({0})", workDescDelete.timeEntryID);
+
+            return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
