@@ -223,7 +223,7 @@
         </div>
     </div>
 
-    @*BEGIN WORK DESCRIPTION TEMPLATE*@
+@*BEGIN WORK DESCRIPTION TEMPLATE ADD NEW WORK DESCRIPTION*@
     <div class="col-12" id="workDescriptionLine_template">
         @*<div class="col-3" style="padding:5px">
                 <div>
@@ -257,58 +257,49 @@
         </div>
     </div>
 </div>
-    @*END WORK DESCRIPTION TEMPLATE*@
+@*END WORK DESCRIPTION TEMPLATE ADD NEW WORK DESCRIPTION*@
 
+@*BEGIN DISPLAY WORK DESCRIPTION RECORDS*@
 <div class=" container pl-auto" style="margin:5px" id="contnr_workDescription">
-    @*<div class="row">
-            <div class="col-8" style="padding:5px">
-                <strong>Work Description</strong>
-            </div>
-            <div class="col-4" style="padding:5px">
-                <strong>Team</strong>
-            </div>
-        </div>*@
-
-    @*BEGIN WORK DESCRIPTION FOR EACH TEMPLATE*@
     @foreach (var item in Model)
     {
-    <div class="col-12 workDescLine_" id="workDescLine_@Html.DisplayFor(modelItem => item.timeEntryID)">
-        <div class="row" style="padding:5px" id="">
-            <div class="col-8 input_workDescLine" id="" style="padding:5px; border: 1px solid black;">
-                @*<span class="input" role="textbox" id="input_workDesc" contenteditable>kkkkk</span>*@
-                @Html.DisplayFor(modelItem => item.workDescription)
-            </div>
-            <div class="col-3 txt_teamMembersWorkDescLine"  id="txt_teamMembersWorkDescLine_@Html.DisplayFor(modelItem => item.timeEntryID)" style="padding:5px">
-                @*<span class="workDescTeam_" id="workDescTeam_" style="padding:5px">*@
-                @for (var i = 0; i < (item.userNames.Count); i++)
-                {
-                    @*<span class="workDescTeam_" id=@Html.DisplayFor(modelItem => item.userShortNames[@i])> @Html.DisplayFor(modelItem => item.userShortNames[@i]) </span>*@
-                    <span class="workDescTeamLineUserShortName_" id="workDescTeamLineUserShortName_@Html.DisplayFor(modelItem => item.timeEntryID)_@Html.DisplayFor(modelItem => item.userNames[@i])" @*style="pointer-events:none"*@>@Html.DisplayFor(modelItem => item.userShortNames[@i])</span>
-                }
-                @*</span>*@
-            </div>
-            <div class="col-1" style="padding:5px">
-                <select name="" class="workDescTeamLine_dpdwn" @*id="workDescTeam_dpdwn"*@ style="width:100%" @*disabled*@>
-                    <option value="">Team</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-2" style="padding:5px">
-                <div>
-                    <span><strong>Time Entry:</strong></span>
-                    <span id="timeEntryIDWorkDesc_@Html.DisplayFor(modelItem => item.timeEntryID)" value="">@Html.DisplayFor(modelItem => item.timeEntryID)</span>
+        <div class="col-12 workDescLine_" id="workDescLine_@Html.DisplayFor(modelItem => item.timeEntryID)">
+            <div class="row" style="padding:5px" id="">
+                <div class="col-8 input_workDescLine" id="" style="padding:5px; border: 1px solid black;">
+                    @*<span class="input" role="textbox" id="input_workDesc" contenteditable>kkkkk</span>*@
+                    @Html.DisplayFor(modelItem => item.workDescription)
+                </div>
+                <div class="col-3 txt_teamMembersWorkDescLine" id="txt_teamMembersWorkDescLine_@Html.DisplayFor(modelItem => item.timeEntryID)" style="padding:5px">
+                    @*<span class="workDescTeam_" id="workDescTeam_" style="padding:5px">*@
+                    @for (var i = 0; i < (item.userNames.Count); i++)
+                    {
+                        @*<span class="workDescTeam_" id=@Html.DisplayFor(modelItem => item.userShortNames[@i])> @Html.DisplayFor(modelItem => item.userShortNames[@i]) </span>*@
+                        <span class="workDescTeamLineUserShortName_" id="workDescTeamLineUserShortName_@Html.DisplayFor(modelItem => item.timeEntryID)_@Html.DisplayFor(modelItem => item.userNames[@i])" style="pointer-events:none">@Html.DisplayFor(modelItem => item.userShortNames[@i])</span>
+                    }
+                    @*</span>*@
+                </div>
+                <div class="col-1" style="padding:5px">
+                    <select name="" class="workDescTeamLine_dpdwn" @*id="workDescTeam_dpdwn"*@ style="width:100%" disabled>
+                        <option value="">Team</option>
+                    </select>
                 </div>
             </div>
-            <div class="col-10" style="padding:5px">
-                <button type="button" class="btn btn-primary btn-sm" id="addWorkDescBtn" style="background-color: grey; width: 100%">Edit Entry</button>
+            <div class="row">
+                <div class="col-2" style="padding:5px">
+                    <div>
+                        <span><strong>Time Entry:</strong></span>
+                        <span id="timeEntryIDWorkDesc_@Html.DisplayFor(modelItem => item.timeEntryID)" value="">@Html.DisplayFor(modelItem => item.timeEntryID)</span>
+                    </div>
+                </div>
+                <div class="col-10" style="padding:5px">
+                    <button type="button" class="btn btn-primary btn-sm" id="addWorkDescBtn" style="background-color: grey; width: 100%">Edit Entry</button>
+                </div>
             </div>
+            <hr style="margin:1px; background-color:black" />
         </div>
-        <hr style="margin:1px; background-color:black" />
-    </div>
     }
-        @*END WORK DESCRIPTION FOR EACH TEMPLATE*@
-    </div>
+@*BEGIN DISPLAY WORK DESCRIPTION RECORDS*@
+</div>
 
 
 
