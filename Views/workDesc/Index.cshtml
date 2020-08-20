@@ -3,50 +3,253 @@
     Layout = null;
 }
 
-    <head>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        @*JQuery*@
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<head>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    @*JQuery*@
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-        <script>
-            $(document).ready(function () {//begin document read jquery statements
+    <script>
+        $(document).ready(function () {//begin document read jquery statements
 
-                var slctd_timeEntryID;
-                var dailyReportID = $("#txt_dailyReportID").html()
-                //var workDescTeamLine_dpdwn = $('.workDescTeamLine_dpdwn_');
+            $("#contnr_team :input").prop("disabled", true);
 
-                //begin when nnnn is clicked...
-                $("#addWorkDescBtn").on('click', function () {
+            var slctd_timeEntryID;
+            var dailyReportID = $("#txt_dailyReportID").html()
+            //var workDescTeamLine_dpdwn = $('.workDescTeamLine_dpdwn_');
 
-                    //alert('hghghgh');
+            //begin when nnnn is clicked...
+            $("#addWorkDescBtn").on('click', function () {
 
-                    //console.log($(this).attr("id"))
-                    //console.log($(this).attr("class"))
-                    //alert($(this).parent().attr("class"))
-                    //alert($(this).parents().eq(1).attr("class"))
+                //alert('hghghgh');
 
-                    var addItem1 = $("#txt_dailyReportID").html();
-                    var addItem2 = $("#input_workDesc").html();
+                //console.log($(this).attr("id"))
+                //console.log($(this).attr("class"))
+                //alert($(this).parent().attr("class"))
+                //alert($(this).parents().eq(1).attr("class"))
 
-                    alert("dailyReportID: " + addItem1 + '\n' +
-                        "workDescription: " + addItem2
-                    );
+                var addItem1 = $("#txt_dailyReportID").html();
+                var addItem2 = $("#input_workDesc").html();
 
-                    $(".workDescTeam_").each(function () {
+                alert("dailyReportID: " + addItem1 + '\n' +
+                    "workDescription: " + addItem2
+                );
 
-                        var tempTeamMemberUserID = $(this).attr("id").substr(13);
+                $(".workDescTeam_").each(function () {
 
-                        if (tempTeamMemberUserID.length > 0) {
-                            //alert(tempTeamMemberUserID);
-                            //alert(tempTeamMemberUserID.length);
+                    var tempTeamMemberUserID = $(this).attr("id").substr(13);
 
+                    if (tempTeamMemberUserID.length > 0) {
+                        //alert(tempTeamMemberUserID);
+                        //alert(tempTeamMemberUserID.length);
+
+                        //begin axios add post
+                        axios.post('/workDesc/AddWorkDesc', {
+                            dailyReportID: addItem1,
+                            workDescription: addItem2,
+                            //userName: 'tgoss',
+                            userName: tempTeamMemberUserID,
+
+                        })
+                            .then(function (response) {
+                                console.log(response);
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                        //end axios add post
+                    }
+                });
+
+            });
+
+            //$(".workDescLine_").on('click', function () {
+            //    slctd_timeEntryID = this.id.substr(13);
+            //});
+
+            //begin when a work description line team member class is clicked...
+            $(".workDescTeamLineUserShortName_").on('click', function () {
+                var tempTeamMemberUserID = this.id.substr(31);
+                //alert(tempTeamMemberUserID);
+
+                //alert(tempTeamMemberUserID)
+
+                //begin DeleteTeamMember
+                //begin axios delete post
+                //axios.post('/dailyReportByReportID/DeleteTeamMember', {
+
+                //    dailyReportID: dailyReportID,
+                //    userName: tempTeamMemberUserID,
+                //})
+                //    .then(function (response) {
+                //        console.log(response);
+                //    })
+                //    .catch(function (error) {
+                //        console.log(error);
+                //    });
+                //end axios add post
+
+                $("#" + $(this).attr("id")).remove();
+            });
+            //end when a team member class is clicked...
+
+            //begin when a team member class is clicked...
+            $(".workDescTeam_").on('click', function () {
+                //var tempTeamMemberUserID = this.id.substr(5);
+                var tempTeamMemberUserID = this.id;
+
+                //alert(tempTeamMemberUserID)
+
+                //begin DeleteTeamMember
+                //begin axios delete post
+                //axios.post('/dailyReportByReportID/DeleteTeamMember', {
+
+                //    dailyReportID: dailyReportID,
+                //    userName: tempTeamMemberUserID,
+                //})
+                //    .then(function (response) {
+                //        console.log(response);
+                //    })
+                //    .catch(function (error) {
+                //        console.log(error);
+                //    });
+                //end axios add post
+
+                $("#" + $(this).attr("id")).remove();
+            });
+            //end when a team member class is clicked...
+
+            //begin when a team member class is clicked...
+            $(".editWorkDescLineBtn_").on('click', function () {
+                //var tempTeamMemberUserID = this.id.substr(5);
+                slctd_timeEntryID = this.id.substr(20);
+                //alert(slctd_timeEntryID);
+
+                //$("#workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).removeAttr('hidden');//unhide the copy
+                $("#input_workDescLine_" + slctd_timeEntryID).attr("contentEditable", "true");//set the work description line to editable
+                $("#input_workDescLine_" + slctd_timeEntryID).css("color", "red");//set the work description line to editable
+
+                $("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID).children().css('pointer-events', 'auto');//set the line team to editable
+                $("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID).children().css('color', 'red');//set the line team to editable
+
+                $("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).removeAttr("disabled");//set the work description line to editable
+                $("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).css('color', 'red');//set the line team to editable
+
+                $(this).attr("disabled", "true");
+                $("#lockWorkDescLineBtn_" + slctd_timeEntryID).removeAttr("disabled");//
+
+                //$("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).prop("disabled", false);
+
+            });
+            //end when a team member class is clicked...
+
+            //begin when a team member class is clicked...
+            $(".lockWorkDescLineBtn_").on('click', function () {
+                //var tempTeamMemberUserID = this.id.substr(5);
+                slctd_timeEntryID = this.id.substr(20);
+                //alert(slctd_timeEntryID);
+
+                $("#input_workDescLine_" + slctd_timeEntryID).attr("contentEditable", "false");//set the work description line to editable
+                $("#input_workDescLine_" + slctd_timeEntryID).css("color", "black");//set the work description line to editable
+
+                $("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID).children().css('pointer-events', 'none');//set the line team to editable
+                $("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID).children().css('color', 'black');//set the line team to editable
+
+                //$("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).removeAttr("disabled");//set the work description line to editable
+                $("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).attr("disabled", "true");//set the work description line to editable
+                $("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).css('color', 'black');//set the line team to editable
+
+                $(this).attr("disabled", "true");
+                $("#editWorkDescLineBtn_" + slctd_timeEntryID).removeAttr("disabled");//
+
+                //$("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).prop("disabled", false);
+
+            });
+            //end when a team member class is clicked...
+
+            //begin when a team member class is clicked...
+            $(".deleteWorkDescLineBtn_").on('click', function () {
+                //var tempTeamMemberUserID = this.id.substr(5);
+                slctd_timeEntryID = this.id.substr(22);
+                //alert(slctd_timeEntryID);
+
+                //var addItem1 = $("#txt_dailyReportID").html();
+                //var addItem2 = $("#input_workDesc").html();
+
+                alert("deleting time entry id: " + slctd_timeEntryID);
+
+                //begin axios delete post
+                axios.post('/workDesc/DeleteWorkDesc', {
+                    timeEntryID: slctd_timeEntryID,
+                })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                //end axios delete post
+            });
+            //end when a team member class is clicked...
+
+            //begin load team members on work description dpdwn change
+            $(".workDescTeamLine_dpdwn_").change(function () {
+
+                //alert(slctd_timeEntryID + " " + $(this).val());
+                //workDescTeam_dpdwn.empty();
+                //workDescTeam_dpdwn.append($('<option/>', { value: -1, text: 'Add' }));
+                //workDescTeam_dpdwn.val('-1');
+                //alert($(this).val());
+
+                //var tempTeamMemberUserID = $(this).val();
+
+                //begin
+
+                $.ajax({
+                    url: 'DataService.asmx/GetAllTeamNamesByReportID',
+                    method: 'post',
+                    dataType: 'json',
+                    data: { userName: $(this).val(), dailyReportID: dailyReportID },
+                    success: function (data) {
+
+
+                        //team_dpdwn.append($('<option/>', { value: -1, text: 'Add Team Member' }));
+
+                        //console.log(data)
+
+                        $(data).each(function (index, item) {
+                            //team_dpdwn.append($('<option/>', { value: item.userName, text: item.name + "-" + item.shortName }));
+                            console.log(item.userName)
+                            console.log(item.name)
+                            console.log(item.shortName)
+                            console.log(slctd_timeEntryID)
+
+                            var temp_userName;
+                            var temp_name;
+                            var temp_shortName;
+
+                            temp_userName = item.userName;
+                            temp_name = item.name;
+                            temp_shortName = item.shortName;
+
+                            //$("#workDescTeam_").clone(true).prop("id", "workDescTeam_" + temp_userName.toString()).appendTo("#txt_teamMembersWorkDesc");
+                            //$("#workDescTeam_" + temp_userName.toString()).text(temp_shortName);
+                            //$("#workDescTeam_" + temp_userName.toString()).removeAttr('hidden');//unhide the copy
+
+                            //$("#workDescTeam_").clone(true).prop("id", "workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).appendTo("#workDescLine_" + slctd_timeEntryID + "#txt_teamMembersWorkDescLine_" + slctd_timeEntryID);
+
+                            $("#workDescTeam_").clone(true).prop("id", "workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).appendTo("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID);
+
+                            $("#workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).prop("class", "workDescTeamLineUserShortName_")
+                            $("#workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).text(temp_shortName);
+                            $("#workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName).css('color', 'red');
+
+                            $("#workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).removeAttr('hidden');//unhide the copy
+
+                            //begin AddTeamMember
                             //begin axios add post
-                            axios.post('/workDesc/AddWorkDesc', {
-                                dailyReportID: addItem1,
-                                workDescription: addItem2,
-                                //userName: 'tgoss',
-                                userName: tempTeamMemberUserID,
-
+                            axios.post('/workDesc/AddTeamMember', {
+                                timeEntryID: slctd_timeEntryID,
+                                userName: temp_userName,
                             })
                                 .then(function (response) {
                                     console.log(response);
@@ -55,189 +258,16 @@
                                     console.log(error);
                                 });
                             //end axios add post
-                        }
-                    });
-
-                });
-
-                //$(".workDescLine_").on('click', function () {
-                //    slctd_timeEntryID = this.id.substr(13);
-                //});
-
-                //begin when a work description line team member class is clicked...
-                $(".workDescTeamLineUserShortName_").on('click', function () {
-                    var tempTeamMemberUserID = this.id.substr(31);
-                    //alert(tempTeamMemberUserID);
-
-                    //alert(tempTeamMemberUserID)
-
-                    //begin DeleteTeamMember
-                    //begin axios delete post
-                    //axios.post('/dailyReportByReportID/DeleteTeamMember', {
-
-                    //    dailyReportID: dailyReportID,
-                    //    userName: tempTeamMemberUserID,
-                    //})
-                    //    .then(function (response) {
-                    //        console.log(response);
-                    //    })
-                    //    .catch(function (error) {
-                    //        console.log(error);
-                    //    });
-                    //end axios add post
-
-                    $("#" + $(this).attr("id")).remove();
-                });
-                //end when a team member class is clicked...
-
-                //begin when a team member class is clicked...
-                $(".workDescTeam_").on('click', function () {
-                    //var tempTeamMemberUserID = this.id.substr(5);
-                    var tempTeamMemberUserID = this.id;
-
-                    //alert(tempTeamMemberUserID)
-
-                    //begin DeleteTeamMember
-                    //begin axios delete post
-                    //axios.post('/dailyReportByReportID/DeleteTeamMember', {
-
-                    //    dailyReportID: dailyReportID,
-                    //    userName: tempTeamMemberUserID,
-                    //})
-                    //    .then(function (response) {
-                    //        console.log(response);
-                    //    })
-                    //    .catch(function (error) {
-                    //        console.log(error);
-                    //    });
-                    //end axios add post
-
-                    $("#" + $(this).attr("id")).remove();
-                });
-                //end when a team member class is clicked...
-
-                //begin when a team member class is clicked...
-                $(".editWorkDescLineBtn_").on('click', function () {
-                    //var tempTeamMemberUserID = this.id.substr(5);
-                    slctd_timeEntryID = this.id.substr(20);
-                    //alert(slctd_timeEntryID);
-
-                    //$("#workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).removeAttr('hidden');//unhide the copy
-                    $("#input_workDescLine_" + slctd_timeEntryID).attr("contentEditable", "true");//set the work description line to editable
-                    $("#input_workDescLine_" + slctd_timeEntryID).css("color", "red");//set the work description line to editable
-
-                    $("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID).children().css('pointer-events', 'auto');//set the line team to editable
-                    $("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID).children().css('color', 'red');//set the line team to editable
-
-                    $("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).removeAttr("disabled");//set the work description line to editable
-
-                    $(this).attr("disabled", "true");
-                    $("#lockWorkDescLineBtn_" + slctd_timeEntryID).removeAttr("disabled");//
-
-                    //$("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).prop("disabled", false);
-
-                });
-                //end when a team member class is clicked...
-
-                //begin when a team member class is clicked...
-                $(".deleteWorkDescLineBtn_").on('click', function () {
-                    //var tempTeamMemberUserID = this.id.substr(5);
-                    slctd_timeEntryID = this.id.substr(22);
-                    //alert(slctd_timeEntryID);
-
-                    //var addItem1 = $("#txt_dailyReportID").html();
-                    //var addItem2 = $("#input_workDesc").html();
-
-                    alert("deleting time entry id: " + slctd_timeEntryID);
-
-                    //begin axios delete post
-                    axios.post('/workDesc/DeleteWorkDesc', {
-                        timeEntryID: slctd_timeEntryID,
-                    })
-                        .then(function (response) {
-                            console.log(response);
-                        })
-                        .catch(function (error) {
-                            console.log(error);
                         });
-                    //end axios delete post
+                        //end AddTeamMember
+                    }
                 });
-                //end when a team member class is clicked...
+            });
+            //end load team members on work description dpdwn change
 
-                //begin load team members on work description dpdwn change
-                $(".workDescTeamLine_dpdwn_").change(function () {
-
-                    //alert(slctd_timeEntryID + " " + $(this).val());
-                    //workDescTeam_dpdwn.empty();
-                    //workDescTeam_dpdwn.append($('<option/>', { value: -1, text: 'Add' }));
-                    //workDescTeam_dpdwn.val('-1');
-                    //alert($(this).val());
-
-                    //var tempTeamMemberUserID = $(this).val();
-
-                    //begin
-
-                    $.ajax({
-                        url: 'DataService.asmx/GetAllTeamNamesByReportID',
-                        method: 'post',
-                        dataType: 'json',
-                        data: { userName: $(this).val(), dailyReportID: dailyReportID },
-                        success: function (data) {
-
-
-                            //team_dpdwn.append($('<option/>', { value: -1, text: 'Add Team Member' }));
-
-                            //console.log(data)
-
-                            $(data).each(function (index, item) {
-                                //team_dpdwn.append($('<option/>', { value: item.userName, text: item.name + "-" + item.shortName }));
-                                console.log(item.userName)
-                                console.log(item.name)
-                                console.log(item.shortName)
-
-                                var temp_userName;
-                                var temp_name;
-                                var temp_shortName;
-
-                                temp_userName = item.userName;
-                                temp_name = item.name;
-                                temp_shortName = item.shortName;
-
-                                //$("#workDescTeam_").clone(true).prop("id", "workDescTeam_" + temp_userName.toString()).appendTo("#txt_teamMembersWorkDesc");
-                                //$("#workDescTeam_" + temp_userName.toString()).text(temp_shortName);
-                                //$("#workDescTeam_" + temp_userName.toString()).removeAttr('hidden');//unhide the copy
-
-                                //$("#workDescTeam_").clone(true).prop("id", "workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).appendTo("#workDescLine_" + slctd_timeEntryID + "#txt_teamMembersWorkDescLine_" + slctd_timeEntryID);
-
-                                $("#workDescTeam_").clone(true).prop("id", "workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).appendTo("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID);
-
-                                $("#workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).prop("class", "workDescTeamLineUserShortName_")
-                                $("#workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).text(temp_shortName);
-                                $("#workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).removeAttr('hidden');//unhide the copy
-
-                                //begin AddTeamMember
-                                //begin axios add post
-                                //axios.post('/dailyReportByReportID/AddTeamMember', {
-                                //    dailyReportID: dailyReportID,
-                                //    userName: temp_userName,
-                                //})
-                                //    .then(function (response) {
-                                //        console.log(response);
-                                //    })
-                                //    .catch(function (error) {
-                                //        console.log(error);
-                                //    });
-                                //end axios add post
-                            });
-                            //end AddTeamMember
-                        }
-                    });
-                });
-                //end load team members on work description dpdwn change
-
-            });//end document read jquery statements
-        </script>
-    </head>
+        });//end document read jquery statements
+    </script>
+</head>        
 
 @*BEGIN ALLPAX TEAM*@
 <div class="container pl-auto" style="margin:5px" id="contnr_team">

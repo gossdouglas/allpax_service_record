@@ -166,6 +166,16 @@ namespace allpax_service_record.Controllers
             //return RedirectToAction("Index", "DailyReportByReportID", new { reportID = workDescAdd.dailyReportID});
         }
 
+        [HttpPost]
+        public ActionResult AddTeamMember(vm_workDesc teamMemberAdd)
+        {
+            db.Database.ExecuteSqlCommand("Insert into [tbl_dailyReportTimeEntryUsers] Values({0},{1})",
+                teamMemberAdd.timeEntryID, teamMemberAdd.userName);
+
+            return new EmptyResult();
+            //return RedirectToAction("SalesLanding", "Index");
+        }
+
         public ActionResult DeleteWorkDesc(vm_workDesc workDescDelete)
         {
             db.Database.ExecuteSqlCommand("DELETE FROM tbl_dailyReportTimeEntry WHERE timeEntryID=({0})", workDescDelete.timeEntryID);
