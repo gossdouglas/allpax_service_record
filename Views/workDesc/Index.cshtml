@@ -14,6 +14,7 @@
             $("#contnr_team :input").prop("disabled", true);
 
             var slctd_timeEntryID;
+            var slctd_workDescText;
             var dailyReportID = $("#txt_dailyReportID").html()
             //var workDescTeamLine_dpdwn = $('.workDescTeamLine_dpdwn_');
 
@@ -138,6 +139,7 @@
 
                 $(this).attr("disabled", "true");
                 $("#lockWorkDescLineBtn_" + slctd_timeEntryID).removeAttr("disabled");//
+                $("#saveWorkDescLineBtn_" + slctd_timeEntryID).removeAttr("disabled");//
 
                 //$("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).prop("disabled", false);
 
@@ -266,6 +268,47 @@
                 });
             });
             //end load team members on work description dpdwn change
+
+            //begin when a team member class is clicked...
+            $(".saveWorkDescLineBtn_").on('click', function () {
+                //var tempTeamMemberUserID = this.id.substr(5);
+                slctd_timeEntryID = this.id.substr(20);
+                slctd_workDescText = $("#input_workDescLine_" + slctd_timeEntryID).html()
+
+                //alert(slctd_timeEntryID);
+
+                //alert($("#input_workDescLine_" + slctd_timeEntryID).html()); //set the work description line to editable);
+
+                $("#input_workDescLine_" + slctd_timeEntryID).attr("contentEditable", "false");//set the work description line to editable
+                $("#input_workDescLine_" + slctd_timeEntryID).css("color", "black");//set the work description line to editable
+
+                $("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID).children().css('pointer-events', 'none');//set the line team to editable
+                $("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID).children().css('color', 'black');//set the line team to editable
+
+                //$("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).attr("disabled", "true");//set the work description line to editable
+                //$("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).removeAttr("disabled");//set the work description line to editable
+                $("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).css('color', 'black');//set the line team to editable
+                $("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).prop("disabled", true);
+
+                $(this).attr("disabled", "true");
+                $("#lockWorkDescLineBtn_" + slctd_timeEntryID).prop("disabled", true);
+                $("#editWorkDescLineBtn_" + slctd_timeEntryID).removeAttr("disabled");//
+                //$("#saveWorkDescLineBtn_" + slctd_timeEntryID).removeAttr("disabled");//
+
+                //begin axios delete post
+                axios.post('/workDesc/UpdateWorkDesc', {
+                    timeEntryID: slctd_timeEntryID,
+                    workDescription: slctd_workDescText
+                })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                //end axios delete post
+            });
+            //end when a team member class is clicked...
           
         });//end document read jquery statements
     </script>

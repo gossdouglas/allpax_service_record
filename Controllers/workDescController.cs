@@ -194,6 +194,14 @@ namespace allpax_service_record.Controllers
             return new EmptyResult();
         }
 
+        public ActionResult UpdateWorkDesc(vm_workDesc workDescUpdate)
+        {
+            db.Database.ExecuteSqlCommand("UPDATE tbl_dailyReportTimeEntry SET workDescription={1} WHERE timeEntryID={0}",
+                  workDescUpdate.timeEntryID, workDescUpdate.workDescription);
+
+            return RedirectToAction("Index");
+        }
+
 
         protected override void Dispose(bool disposing)
         {
