@@ -13,7 +13,7 @@
 
             var slctd_timeEntryID;
             var dailyReportID = $("#txt_dailyReportID").html()
-            //var workDescTeamLine_dpdwn = $('.workDescTeamLine_dpdwn');
+            //var workDescTeamLine_dpdwn = $('.workDescTeamLine_dpdwn_');
 
             //begin when nnnn is clicked...
             $("#addWorkDescBtn").on('click', function () {
@@ -60,10 +60,9 @@
 
             });
 
-            $(".workDescLine_").on('click', function () {
-                //var tempTeamMemberUserID = this.id.substr(17);
-                slctd_timeEntryID = this.id.substr(13);
-            });
+            //$(".workDescLine_").on('click', function () {
+            //    slctd_timeEntryID = this.id.substr(13);
+            //});
 
             //begin when a work description line team member class is clicked...
             $(".workDescTeamLineUserShortName_").on('click', function () {
@@ -117,9 +116,29 @@
             });
             //end when a team member class is clicked...
 
-            //begin load team members on work description dpdwn change
-            $(".workDescTeamLine_dpdwn").change(function () {
+            //begin when a team member class is clicked...
+            $(".editWorkDescLineBtn_").on('click', function () {
+                //var tempTeamMemberUserID = this.id.substr(5);
+                slctd_timeEntryID = this.id.substr(20);
+                //alert(slctd_timeEntryID);
 
+                //$("#workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).removeAttr('hidden');//unhide the copy
+                $("#input_workDescLine_" + slctd_timeEntryID).attr("contentEditable", "true");//set the work description line to editable
+                $("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID).children().css('pointer-events', 'auto');//set the line team to editable
+
+                $("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).removeAttr("disabled");//set the work description line to editable
+                //$("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).removeAttr("disabled").remove();//set the work description line to editable
+
+                //$("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).prop("disabled", false);
+
+                //$("#" + $(this).attr("id")).remove();
+
+            });
+            //end when a team member class is clicked...
+
+            //begin load team members on work description dpdwn change
+            $(".workDescTeamLine_dpdwn_").change(function () {
+                
                 //alert(slctd_timeEntryID + " " + $(this).val());
                 //workDescTeam_dpdwn.empty();
                 //workDescTeam_dpdwn.append($('<option/>', { value: -1, text: 'Add' }));
@@ -272,7 +291,7 @@
 
         <div class="col-12 workDescLine_" id="workDescLine_@temp_timeEntryID">
             <div class="row" style="padding:5px" id="">
-                <div class="col-8 input_workDescLine" id="" style="padding:5px; border: 1px solid black;">
+                <div class="col-8 input_workDescLine_" id="input_workDescLine_@temp_timeEntryID" style="padding:5px; border: 1px solid black;" contenteditable="false">
                     @*<span class="input" role="textbox" id="input_workDesc" contenteditable>kkkkk</span>*@
                     @temp_workDescription
                 </div>
@@ -281,12 +300,12 @@
                     @for (var i = 0; i < (temp_userNames.Count); i++)
                     {
                         @*<span class="workDescTeam_" id=@Html.DisplayFor(modelItem => item.userShortNames[@i])> @Html.DisplayFor(modelItem => item.userShortNames[@i]) </span>*@
-                        <span class="workDescTeamLineUserShortName_" id="workDescTeamLineUserShortName_@temp_timeEntryID+_+@temp_userNames[@i]" style="pointer-events:none">@temp_userShortNames[@i]</span>
+                        <span class="workDescTeamLineUserShortName_" id="workDescTeamLineUserShortName_@temp_timeEntryID@temp_userNames[@i]" style="pointer-events:none">@temp_userShortNames[@i]</span>
                     }
                     @*</span>*@
                 </div>
                 <div class="col-1" style="padding:5px">
-                    <select name="" class="workDescTeamLine_dpdwn" @*id="workDescTeam_dpdwn"*@ style="width:100%" disabled>
+                    <select name="" class="workDescTeamLine_dpdwn_" id="workDescTeamLine_dpdwn_@temp_timeEntryID" style="width:100%" disabled>
                         <option value="">Team</option>
                     </select>
                 </div>
@@ -298,8 +317,11 @@
                         <span id="timeEntryIDWorkDesc_@temp_timeEntryID" value="">@temp_timeEntryID</span>
                     </div>
                 </div>
-                <div class="col-10" style="padding:5px">
-                    <button type="button" class="btn btn-primary btn-sm" id="addWorkDescBtn" style="background-color: grey; width: 100%">Edit Entry</button>
+                <div class="col-5" style="padding:5px">
+                    <button type="button" class="btn btn-primary btn-sm deleteWorkDescLineBtn_" id="deleteWorkDescLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%">Delete Entry</button>
+                </div>
+                <div class="col-5" style="padding:5px">
+                    <button type="button" class="btn btn-primary btn-sm editWorkDescLineBtn_" id="editWorkDescLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%">Edit Entry</button>
                 </div>
             </div>
             <hr style="margin:1px; background-color:black" />
