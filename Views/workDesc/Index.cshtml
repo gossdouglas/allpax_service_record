@@ -124,14 +124,17 @@
 
                     //$("#workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).removeAttr('hidden');//unhide the copy
                     $("#input_workDescLine_" + slctd_timeEntryID).attr("contentEditable", "true");//set the work description line to editable
+                    $("#input_workDescLine_" + slctd_timeEntryID).css("color", "red");//set the work description line to editable
+
                     $("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID).children().css('pointer-events', 'auto');//set the line team to editable
+                    $("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID).children().css('color', 'red');//set the line team to editable
 
                     $("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).removeAttr("disabled");//set the work description line to editable
-                    //$("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).removeAttr("disabled").remove();//set the work description line to editable
+
+                    $(this).attr("disabled", "true");
+                    $("#lockWorkDescLineBtn_" + slctd_timeEntryID).removeAttr("disabled");//
 
                     //$("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).prop("disabled", false);
-
-                    //$("#" + $(this).attr("id")).remove();
 
                 });
                 //end when a team member class is clicked...
@@ -342,15 +345,21 @@
                         <span id="timeEntryIDWorkDesc_@temp_timeEntryID" value="">@temp_timeEntryID</span>
                     </div>
                 </div>
-                <div class="col-3" style="padding:5px">
-                    <button type="button" class="btn btn-primary btn-sm deleteWorkDescLineBtn_" id="deleteWorkDescLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%">Delete Entry</button>
+                <div class="col-1" style="padding:5px">
+                    <button type="button" class="btn btn-primary btn-sm deleteWorkDescLineBtn_" id="deleteWorkDescLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%">Delete</button>
                 </div>
-                <div class="col-3" style="padding:5px">
-                    <button type="button" class="btn btn-primary btn-sm editWorkDescLineBtn_" id="editWorkDescLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%">Edit Entry</button>
+                <div class="col-2" style="padding:5px">
+                    <button type="button" class="btn btn-primary btn-sm editWorkDescLineBtn_" id="editWorkDescLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%;">Unlock for Edit</button>
                 </div>
-                <div class="col-4" style="padding:5px">
+                <div class="col-2" style="padding:5px">
+                    <button type="button" class="btn btn-primary btn-sm lockWorkDescLineBtn_" id="lockWorkDescLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%;" disabled>Lock for Edit</button>
+                </div>
+                <div class="col-2" style="padding:5px">
+                    <button type="button" class="btn btn-primary btn-sm saveWorkDescLineBtn_" id="saveWorkDescLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%;" disabled>Save Edits</button>
+                </div>
+                @*<div class="col-2" style="padding:5px">
                     <button type="button" class="example2 btn btn-primary btn-sm" id="" style="background-color: grey; width: 100%">confirm test</button>
-                </div>               
+                </div>*@
             </div>
             <hr style="margin:1px; background-color:black" />
         </div>
