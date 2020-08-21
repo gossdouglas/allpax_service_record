@@ -11,45 +11,40 @@
     <script>
         $(document).ready(function () {//begin document read jquery statements
 
-            $("#contnr_team :input").prop("disabled", true);
+            $("#contnr_team :input").prop("disabled", true);//disable the daily log section
 
+            //begin this partial view's variable declaration section
             var slctd_timeEntryID;
             var slctd_workDescText;
             var dailyReportID = $("#txt_dailyReportID").html()
-            //var workDescTeamLine_dpdwn = $('.workDescTeamLine_dpdwn_');
+            //end this partial view's variable declaration section
 
-            //begin when nnnn is clicked...
+            //begin a new work description is added for a given daily report...
             $("#addWorkDescBtn").on('click', function () {
 
-                //alert('hghghgh');
-
-                //console.log($(this).attr("id"))
-                //console.log($(this).attr("class"))
-                //alert($(this).parent().attr("class"))
-                //alert($(this).parents().eq(1).attr("class"))
-
+                //begin suck in variables for eventual axios post
                 var addItem1 = $("#txt_dailyReportID").html();
                 var addItem2 = $("#input_workDesc").html();
+                //end suck in variables for eventual axios post
 
+                //begin tattler pop up
                 alert("dailyReportID: " + addItem1 + '\n' +
                     "workDescription: " + addItem2
                 );
+                //end tattler pop up
 
+                //begin adding team members to a new work description time entry
                 $(".workDescTeam_").each(function () {
 
-                    var tempTeamMemberUserID = $(this).attr("id").substr(13);
+                    var tempTeamMemberUserID = $(this).attr("id").substr(13);//suck out the team member's userName
 
-                    if (tempTeamMemberUserID.length > 0) {
-                        //alert(tempTeamMemberUserID);
-                        //alert(tempTeamMemberUserID.length);
+                    if (tempTeamMemberUserID.length > 0) {//if that userName is greater than 0
 
                         //begin axios add post
                         axios.post('/workDesc/AddWorkDesc', {
                             dailyReportID: addItem1,
                             workDescription: addItem2,
-                            //userName: 'tgoss',
                             userName: tempTeamMemberUserID,
-
                         })
                             .then(function (response) {
                                 console.log(response);
@@ -60,12 +55,9 @@
                         //end axios add post
                     }
                 });
-
+                //begin adding team members to a new work description time entry
             });
-
-            //$(".workDescLine_").on('click', function () {
-            //    slctd_timeEntryID = this.id.substr(13);
-            //});
+            //end a new work description is added for a given daily report...
 
             //begin when a work description line team member class is clicked...
             $(".workDescTeamLineUserShortName_").on('click', function () {
