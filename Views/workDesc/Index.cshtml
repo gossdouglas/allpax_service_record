@@ -62,39 +62,6 @@
             });
             //end a new work description is added for a given daily report...
 
-            //begin when a line team member class is clicked for the purpose of deletion...
-            $(".workDescTeamLineUserShortName_").on('click', function () {
-                //begin suck in variables for eventual axios post
-                var tempTeamMemberUserID = this.id.substr(32);
-                //end suck in variables for eventual axios post
-
-                //begin tattler pop up
-                alert("User name " + tempTeamMemberUserID + '\n' +
-                    "in time entry " + slctd_timeEntryID + '\n' +
-                    "has been selected for deletion.");
-                //end tattler pop up
-
-                //begin deleting team member from a time entry
-                //begin axios delete post
-                axios.post('/workDesc/DeleteTeamMember', {
-
-                    timeEntryID: slctd_timeEntryID,
-                    userName: tempTeamMemberUserID,
-                })
-                    .then(function (response) {
-                        console.log(response);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-                //end axios add post
-                //end deleting team member from a time entry
-
-                //remove it from the view after it has been deleted from the database
-                $("#" + $(this).attr("id")).remove();
-            });
-            //end when a line team member class is clicked for the purpose of deletion...
-
             //begin remove team member from being included in the creation of a new description entry
             $(".workDescTeam_").on('click', function () {
 
@@ -105,6 +72,30 @@
                 $("#" + $(this).attr("id")).remove();
             });
             //end remove team member from being included in the creation of a new description entry
+
+            //begin when the line delete button is pressed
+            $(".deleteWorkDescLineBtn_").on('click', function () {
+                //begin suck in variables
+                slctd_timeEntryID = this.id.substr(22);
+                //end suck in variables
+
+                //begin tattler pop up
+                alert("deleting time entry id: " + slctd_timeEntryID);
+                //end tattler pop up
+
+                //begin axios delete post
+                axios.post('/workDesc/DeleteWorkDesc', {
+                    timeEntryID: slctd_timeEntryID,
+                })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                //end axios delete post
+            });
+            //end when the line delete button is pressed
 
             //begin when the edit line button is pressed
             $(".editWorkDescLineBtn_").on('click', function () {
@@ -148,30 +139,6 @@
             });
             //begin when the line lock button is pressed
 
-            //begin when the line delete button is pressed
-            $(".deleteWorkDescLineBtn_").on('click', function () {
-                //begin suck in variables
-                slctd_timeEntryID = this.id.substr(22);
-                //end suck in variables
-
-                //begin tattler pop up
-                alert("deleting time entry id: " + slctd_timeEntryID);
-                //end tattler pop up
-
-                //begin axios delete post
-                axios.post('/workDesc/DeleteWorkDesc', {
-                    timeEntryID: slctd_timeEntryID,
-                })
-                    .then(function (response) {
-                        console.log(response);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-                //end axios delete post
-            });
-            //end when the line delete button is pressed
-
             //begin load team members on line dpdwn change
             $(".workDescTeamLine_dpdwn_").change(function () {
 
@@ -212,12 +179,45 @@
                                     console.log(error);
                                 });
                             //end axios add post
-                        }); 
+                        });
                     }
                 });
             });
             //end load team members on line dpdwn change
-             
+
+            //begin when a line team member class is clicked for the purpose of deletion...
+            $(".workDescTeamLineUserShortName_").on('click', function () {
+                //begin suck in variables for eventual axios post
+                var tempTeamMemberUserID = this.id.substr(32);
+                //end suck in variables for eventual axios post
+
+                //begin tattler pop up
+                alert("User name " + tempTeamMemberUserID + '\n' +
+                    "in time entry " + slctd_timeEntryID + '\n' +
+                    "has been selected for deletion.");
+                //end tattler pop up
+
+                //begin deleting team member from a time entry
+                //begin axios delete post
+                axios.post('/workDesc/DeleteTeamMember', {
+
+                    timeEntryID: slctd_timeEntryID,
+                    userName: tempTeamMemberUserID,
+                })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                //end axios add post
+                //end deleting team member from a time entry
+
+                //remove it from the view after it has been deleted from the database
+                $("#" + $(this).attr("id")).remove();
+            });
+            //end when a line team member class is clicked for the purpose of deletion...
+        
             //begin when the line save button is pressed
             $(".saveWorkDescLineBtn_").on('click', function () {
                 //begin suck in variables
