@@ -129,11 +129,13 @@ namespace allpax_service_record.Controllers
                 "WHERE " +
                 "dailyReportID = {0} " +
                 "AND " +
-                "workDescription = {1}) " +
+                "workDescription = {1} " +
+                "AND " +
+                "workDescriptionCategory ={3}) " +
 
                 "BEGIN " +
 
-                "INSERT INTO tbl_dailyReportTimeEntry VALUES({0}, {1}) " +
+                "INSERT INTO tbl_dailyReportTimeEntry VALUES({0}, {1}, {3}, {4}) " +
                 "SET @id = SCOPE_IDENTITY() " +
                 "INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@id, {2}) " +
 
@@ -150,14 +152,15 @@ namespace allpax_service_record.Controllers
 
                     "tbl_dailyReportTimeEntry.dailyReportID like {0} " +
                     "AND " +
-
-                    "workDescription = {1}) " +
+                    "workDescription = {1} " +
+                    "AND " +
+                    "workDescriptionCategory = {3}) " +
 
                     "INSERT INTO tbl_dailyReportTimeEntryUsers(timeEntryID, userName) VALUES(@timeEntryID, {02}) " +
 
                 "END",
 
-                workDescAdd.dailyReportID, workDescAdd.workDescription, workDescAdd.userName);
+                workDescAdd.dailyReportID, workDescAdd.workDescription, workDescAdd.userName, workDescAdd.workDescriptionCategory, workDescAdd.hours);
            
             return new EmptyResult();
             //return View();
