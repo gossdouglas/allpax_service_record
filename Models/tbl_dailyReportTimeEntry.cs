@@ -20,6 +20,10 @@ namespace allpax_service_record.Models
         [StringLength(1024)]
         public string workDescription { get; set; }
 
+        public int workDescriptionCategory { get; set; }
+
+        public int? hours { get; set; }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public byte timeEntryID { get; set; }

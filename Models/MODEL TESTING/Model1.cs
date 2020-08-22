@@ -13,21 +13,11 @@ namespace allpax_service_record.Models.MODEL_TESTING
         }
 
         public virtual DbSet<tbl_dailyReportTimeEntry> tbl_dailyReportTimeEntry { get; set; }
-        public virtual DbSet<tbl_dailyReportTimeEntryUsers> tbl_dailyReportTimeEntryUsers { get; set; }
-        public virtual DbSet<tbl_dailyReportUsers> tbl_dailyReportUsers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<tbl_dailyReportTimeEntry>()
                 .Property(e => e.workDescription)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<tbl_dailyReportTimeEntryUsers>()
-                .Property(e => e.userName)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<tbl_dailyReportUsers>()
-                .Property(e => e.userName)
                 .IsUnicode(false);
         }
     }
