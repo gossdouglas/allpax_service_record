@@ -13,7 +13,7 @@ using allpax_service_record.Models.View_Models;
 
 namespace allpax_service_record.Controllers
 {
-    public class workDescController : Controller
+    public class workDescDelaysController : Controller
     {
         private allpaxServiceRecordEntities db = new allpaxServiceRecordEntities();
 
@@ -33,9 +33,9 @@ namespace allpax_service_record.Controllers
 
                 "FROM tbl_dailyReportTimeEntry " +
                 "WHERE " +
-                "tbl_dailyReportTimeEntry.dailyReportID = @dailyReportID "+
+                "tbl_dailyReportTimeEntry.dailyReportID = @dailyReportID " +
                 "AND " +
-                "tbl_dailyReportTimeEntry.workDescriptionCategory = '1'"; 
+                "tbl_dailyReportTimeEntry.workDescriptionCategory = '2'";
 
             SqlCommand sqlcomm1 = new SqlCommand(sqlquery1, sqlconn);
             sqlcomm1.Parameters.AddWithValue("@dailyReportID", dailyReportID);

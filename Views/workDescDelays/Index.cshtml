@@ -3,7 +3,7 @@
     Layout = null;
 }
 
-@*WORK DESCRIPTION PAGE*@
+@*DELAYS PAGE*@
 
 <head>
     @*Axios CDN*@
@@ -14,7 +14,7 @@
     <script>
         $(document).ready(function () {//begin document jquery statements
 
-            $("#contnr_team :input").prop("disabled", true);//disable the daily log section
+            //$("#contnr_team :input").prop("disabled", true);//disable the daily log section
 
             //begin this partial view's variable declaration section
             var slctd_timeEntryID;
@@ -221,7 +221,7 @@
                 $("#" + $(this).attr("id")).remove();
             });
             //end when a line team member class is clicked for the purpose of deletion...
-
+        
             //begin when the line save button is pressed
             $(".saveWorkDescLineBtn_").on('click', function () {
                 //begin suck in variables
@@ -234,7 +234,7 @@
 
                 $("#teamWorkDescLine" + slctd_timeEntryID).children().css('pointer-events', 'none');//set the line team to non-editable
                 $("#teamWorkDescLine" + slctd_timeEntryID).children().css('color', 'black');//set the line team text to black to demonstrate non-edit mode
-
+                
                 $("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).prop("disabled", true);//set the line team dropdown to non-editable
                 $("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).css('color', 'black');//set the line team dropdown text to black to demonstrate non-edit mode
 
@@ -255,44 +255,27 @@
                     });
                 //end axios delete post
             });
-            //end when the line save button is pressed.
-
+            //end when the line save button is pressed. 
+            
         });//end document jquery statements
     </script>
-</head>
+</head>        
 
 @*BEGIN ALLPAX TEAM*@
-<div class="container pl-auto" style="margin:5px" id="contnr_team">
-    <div class="row">
-        <div class="col-2" style="padding:5px">
-            <strong>Allpax Team:</strong>
-        </div>
-        <div class="col-10" style="padding:5px">
-            <div class="row" style="margin:0px;">
-                <select name="team_dpdwn" id="team_dpdwn" style="width:100%">
-                </select>
-            </div>
-            <div class="row" style="margin:0px;" name="txt_teamMembers" id="txt_teamMembers">
-                <div class="team_" id="team_" style="padding:5px; border:solid black 1px" hidden>
-                    Johnny Watkins|JW
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 @*END ALLPAX TEAM*@
 
 <div class=" container pl-auto" style="margin:5px" id="contnr_workDescription">
     <div class="row">
         <div class="col-8" style="padding:5px">
-            <strong>Work Description</strong>
+            <strong>Delays</strong>
         </div>
         <div class="col-4" style="padding:5px">
             <strong>Team</strong>
         </div>
     </div>
 
-    @*BEGIN WORK DESCRIPTION TEMPLATE ADD NEW WORK DESCRIPTION*@
+@*BEGIN WORK DESCRIPTION TEMPLATE ADD NEW WORK DESCRIPTION*@
     <div class="col-12" id="workDescriptionLine_template">
         @*<div class="col-3" style="padding:5px">
                 <div>
@@ -334,7 +317,7 @@
     {
         //BEGIN TEMPORARY LOOP VARIABLES
         int temp_timeEntryID = item.timeEntryID;
-        List<string> temp_userNames = item.userNames;
+        List<string> temp_userNames=item.userNames;
         List<string> temp_userShortNames = item.userShortNames;
         string temp_workDescription = item.workDescription;
         //END TEMPORARY LOOP VARIABLES
@@ -380,8 +363,8 @@
                     <button type="button" class="btn btn-primary btn-sm saveWorkDescLineBtn_" id="saveWorkDescLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%;" disabled>Save Edits</button>
                 </div>
                 @*<div class="col-2" style="padding:5px">
-                        <button type="button" class="example2 btn btn-primary btn-sm" id="" style="background-color: grey; width: 100%">confirm test</button>
-                    </div>*@
+                    <button type="button" class="example2 btn btn-primary btn-sm" id="" style="background-color: grey; width: 100%">confirm test</button>
+                </div>*@
             </div>
         </div>
     }
