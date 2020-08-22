@@ -107,8 +107,8 @@
                 $("#input_workDescLine_" + slctd_timeEntryID).attr("contentEditable", "true");//set the  description input to editable
                 $("#input_workDescLine_" + slctd_timeEntryID).css("color", "red");//set the  description input text to red to demonstrate edit mode
 
-                $("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID).children().css('pointer-events', 'auto');//set the line team to editable
-                $("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID).children().css('color', 'red');//set the line team text to red to demonstrate edit mode
+                $("#teamWorkDescLine" + slctd_timeEntryID).children().css('pointer-events', 'auto');//set the line team to editable
+                $("#teamWorkDescLine" + slctd_timeEntryID).children().css('color', 'red');//set the line team text to red to demonstrate edit mode
 
                 $("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).removeAttr("disabled");//set the line team dropdown to editable
                 $("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).css('color', 'red');//set the line team dropdown text to red to demonstrate edit mode
@@ -128,8 +128,8 @@
                 $("#input_workDescLine_" + slctd_timeEntryID).attr("contentEditable", "false");//set the  description input to non-editable
                 $("#input_workDescLine_" + slctd_timeEntryID).css("color", "black");//set the  description input text to red to demonstrate normal mode
 
-                $("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID).children().css('pointer-events', 'none');//set the line team to non-editable
-                $("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID).children().css('color', 'black');//set the line team text to red to demonstrate non-edit mode
+                $("#teamWorkDescLine" + slctd_timeEntryID).children().css('pointer-events', 'none');//set the line team to non-editable
+                $("#teamWorkDescLine" + slctd_timeEntryID).children().css('color', 'black');//set the line team text to red to demonstrate non-edit mode
 
                 $("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).attr("disabled", "true");//set the line team dropdown to non-editable
                 $("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).css('color', 'black');//set the line team dropdown text to red to demonstrate non-edit mode
@@ -157,9 +157,9 @@
                             //end suck in variables
 
                             //clone an invisible template, adjust it's ID and append it
-                            $("#workDescTeam_").clone(true).prop("id", "workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).appendTo("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID);
+                            $("#workDescTeam_").clone(true).prop("id", "workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).appendTo("#teamWorkDescLine" + slctd_timeEntryID);
                             //ammend the class property of this newly created element
-                            $("#workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).prop("class", "workDescTeamLineUserShortName_")
+                            $("#workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).prop("class", "workDescTeamLineUserName_")
                             //ammend the text property of this newly created element
                             $("#workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).text(temp_shortName);
                             //ammend the text color of this newly created element to red to indicate it is in edit mode
@@ -186,7 +186,7 @@
             //end load team members on line dpdwn change
 
             //begin when a line team member class is clicked for the purpose of deletion...
-            $(".workDescTeamLineUserShortName_").on('click', function () {
+            $(".workDescTeamLineUserName__").on('click', function () {
                 //begin suck in variables for eventual axios post
                 var tempTeamMemberUserID = this.id.substr(32);
                 //end suck in variables for eventual axios post
@@ -228,8 +228,8 @@
                 $("#input_workDescLine_" + slctd_timeEntryID).attr("contentEditable", "false");//set the description input to non-editable
                 $("#input_workDescLine_" + slctd_timeEntryID).css("color", "black");//set the  description input text to black to demonstrate non-edit mode
 
-                $("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID).children().css('pointer-events', 'none');//set the line team to non-editable
-                $("#txt_teamMembersWorkDescLine_" + slctd_timeEntryID).children().css('color', 'black');//set the line team text to black to demonstrate non-edit mode
+                $("#teamWorkDescLine" + slctd_timeEntryID).children().css('pointer-events', 'none');//set the line team to non-editable
+                $("#teamWorkDescLine" + slctd_timeEntryID).children().css('color', 'black');//set the line team text to black to demonstrate non-edit mode
                 
                 $("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).prop("disabled", true);//set the line team dropdown to non-editable
                 $("#workDescTeamLine_dpdwn_" + slctd_timeEntryID).css('color', 'black');//set the line team dropdown text to black to demonstrate non-edit mode
@@ -341,12 +341,12 @@
                     @*<span class="input" role="textbox" id="input_workDesc" contenteditable>kkkkk</span>*@
                     @temp_workDescription
                 </div>
-                <div class="col-3 txt_teamMembersWorkDescLine" id="txt_teamMembersWorkDescLine_@temp_timeEntryID" style="padding:5px">
+                <div class="col-3 teamWorkDescLine" id="teamWorkDescLine_@temp_timeEntryID" style="padding:5px">
                     @*<span class="workDescTeam_" id="workDescTeam_" style="padding:5px">*@
                     @for (var i = 0; i < (temp_userNames.Count); i++)
                     {
                         @*<span class="workDescTeam_" id=@Html.DisplayFor(modelItem => item.userShortNames[@i])> @Html.DisplayFor(modelItem => item.userShortNames[@i]) </span>*@
-                        <span class="workDescTeamLineUserShortName_" id="workDescTeamLineUserShortName_@temp_timeEntryID@temp_userNames[@i]" style="pointer-events:none">@temp_userShortNames[@i]</span>
+                        <span class="workDescTeamLineUserName_" id="workDescTeamLineUserName_@temp_timeEntryID@temp_userNames[@i]" style="pointer-events:none">@temp_userShortNames[@i]</span>
                     }
                     @*</span>*@
                 </div>
