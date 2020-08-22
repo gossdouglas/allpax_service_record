@@ -322,23 +322,23 @@
         string temp_workDescription = item.workDescription;
         //END TEMPORARY LOOP VARIABLES
 
-        <div class="col-12 workDescLine_" id="workDescLine_@temp_timeEntryID">
+        <div class="col-12 workDescLineDelays_" id="workDescLine_@temp_timeEntryID">
             <div class="row" style="padding:5px" id="">
-                <div class="col-8 input_workDescLine_" id="input_workDescLine_@temp_timeEntryID" style="padding:5px; border: 1px solid black;" contenteditable="false">
+                <div class="col-8 input_workDescLineDelays_" id="input_workDescLine_@temp_timeEntryID" style="padding:5px; border: 1px solid black;" contenteditable="false">
                     @*<span class="input" role="textbox" id="input_workDesc" contenteditable>kkkkk</span>*@
                     @temp_workDescription
                 </div>
-                <div class="col-3 teamWorkDescLine" id="teamWorkDescLine_@temp_timeEntryID" style="padding:5px">
+                <div class="col-3 teamWorkDescDelaysLine" id="teamWorkDescLine_@temp_timeEntryID" style="padding:5px">
                     @*<span class="workDescTeam_" id="workDescTeam_" style="padding:5px">*@
                     @for (var i = 0; i < (temp_userNames.Count); i++)
                     {
                         @*<span class="workDescTeam_" id=@Html.DisplayFor(modelItem => item.userShortNames[@i])> @Html.DisplayFor(modelItem => item.userShortNames[@i]) </span>*@
-                        <span class="workDescTeamLineUserName_" id="workDescTeamLineUserName_@temp_timeEntryID@temp_userNames[@i]" style="pointer-events:none">@temp_userShortNames[@i]</span>
+                        <span class="workDescDelaysTeamLineUserName_" id="workDescTeamLineUserName_@temp_timeEntryID@temp_userNames[@i]" style="pointer-events:none">@temp_userShortNames[@i]</span>
                     }
                     @*</span>*@
                 </div>
                 <div class="col-1" style="padding:5px">
-                    <select name="" class="workDescTeamLine_dpdwn_" id="workDescTeamLine_dpdwn_@temp_timeEntryID" style="width:100%" disabled>
+                    <select name="" class="workDescDelaysTeamLine_dpdwn_" id="workDescTeamLine_dpdwn_@temp_timeEntryID" style="width:100%" disabled>
                         <option value="">Team</option>
                     </select>
                 </div>
@@ -347,20 +347,20 @@
                 <div class="col-2" style="padding:5px">
                     <div>
                         <span><strong>Time Entry:</strong></span>
-                        <span id="timeEntryIDWorkDesc_@temp_timeEntryID" value="">@temp_timeEntryID</span>
+                        <span id="timeEntryIDWorkDescDelays_@temp_timeEntryID" value="">@temp_timeEntryID</span>
                     </div>
                 </div>
                 <div class="col-1" style="padding:5px">
-                    <button type="button" class="btn btn-primary btn-sm deleteWorkDescLineBtn_" id="deleteWorkDescLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%">Delete</button>
+                    <button type="button" class="btn btn-primary btn-sm deleteWorkDescDelaysLineBtn_" id="deleteWorkDescLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%">Delete</button>
                 </div>
                 <div class="col-2" style="padding:5px">
-                    <button type="button" class="btn btn-primary btn-sm editWorkDescLineBtn_" id="editWorkDescLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%;">Unlock for Edit</button>
+                    <button type="button" class="btn btn-primary btn-sm editWorkDescDelaysLineBtn_" id="editWorkDescLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%;">Unlock for Edit</button>
                 </div>
                 <div class="col-2" style="padding:5px">
-                    <button type="button" class="btn btn-primary btn-sm lockWorkDescLineBtn_" id="lockWorkDescLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%;" disabled>Lock for Edit</button>
+                    <button type="button" class="btn btn-primary btn-sm lockWorkDescDelaysLineBtn_" id="lockWorkDescLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%;" disabled>Lock for Edit</button>
                 </div>
                 <div class="col-2" style="padding:5px">
-                    <button type="button" class="btn btn-primary btn-sm saveWorkDescLineBtn_" id="saveWorkDescLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%;" disabled>Save Edits</button>
+                    <button type="button" class="btn btn-primary btn-sm saveWorkDescDelaysLineBtn_" id="saveWorkDescLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%;" disabled>Save Edits</button>
                 </div>
                 @*<div class="col-2" style="padding:5px">
                     <button type="button" class="example2 btn btn-primary btn-sm" id="" style="background-color: grey; width: 100%">confirm test</button>
