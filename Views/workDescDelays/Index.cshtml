@@ -20,6 +20,8 @@
             var slctd_timeEntryID;
             var slctd_workDescText;
             var dailyReportID = $("#txt_dailyReportID").html()
+            var workDescDelaysTeam_dpdwn = $('.workDescDelaysTeam_dpdwn');
+            var workDescDelaysTeamLine_dpdwn = $('.workDescDelaysTeamLine_dpdwn_');
             //end this partial view's variable declaration section
 
             //begin a new work description is added for a given daily report...
@@ -40,18 +42,18 @@
                 $(".workDescDelaysTeam_").each(function () {
 
                     //begin suck in variables for eventual axios post
-                    var tempTeamMemberUserID = $(this).attr("id").substr(13);//suck out the team member's userName
+                    var tempTeamMemberUserID = $(this).attr("id").substr(19);//suck out the team member's userName
                     //end suck in variables for eventual axios post
 
                     if (tempTeamMemberUserID.length > 0) {//if that userName is greater than 0
 
                         //begin axios add post
-                        axios.post('/workDesc/AddWorkDesc', {
+                        axios.post('/workDescDelays/AddWorkDesc', {
                             dailyReportID: addItem1,
                             workDescription: addItem2,
                             userName: tempTeamMemberUserID,
-                            workDescriptionCategory: '1',
-                            hours: '0'
+                            workDescriptionCategory: '2',
+                            hours: '1'
                         })
                             .then(function (response) {
                                 console.log(response);
@@ -77,75 +79,33 @@
             });
             //end remove team member from being included in the creation of a new description entry
 
-            //begin when the line delete button is pressed
-            $(".deleteWorkDescDelaysLineBtn_").on('click', function () {
-                //begin suck in variables
-                slctd_timeEntryID = this.id.substr(22);
-                //end suck in variables
+            //begin load team members on work description dpdwn click
+            workDescDelaysTeam_dpdwn.click(function () {
 
-                //begin tattler pop up
-                alert("deleting time entry id: " + slctd_timeEntryID);
-                //end tattler pop up
+                workDescDelaysTeam_dpdwn.empty();
+                workDescDelaysTeam_dpdwn.append($('<option/>', { value: -1, text: 'Team' }));
+                workDescDelaysTeam_dpdwn.val('-1');
 
-                //begin axios delete post
-                axios.post('/workDesc/DeleteWorkDesc', {
-                    timeEntryID: slctd_timeEntryID,
-                })
-                    .then(function (response) {
-                        console.log(response);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-                //end axios delete post
+                $.ajax({
+                    url: 'DataService.asmx/GetAllTeamNamesByReportID',
+                    method: 'post',
+                    dataType: 'json',
+                    data: { userName: '%', dailyReportID: dailyReportID },
+                    success: function (data) {
+
+                        $(data).each(function (index, item) {
+                            workDescDelaysTeam_dpdwn.append($('<option/>', { value: item.userName, text: item.shortName }))
+                        });
+                        //end AddTeamMember
+                    }
+                });
             });
-            //end when the line delete button is pressed
+            //end load team members on work description dpdwn click
 
-            //begin when the edit line button is pressed
-            $(".editWorkDescDelaysLineBtn_").on('click', function () {
+            //begin load team members on work description dpdwn change
+            workDescDelaysTeam_dpdwn.change(function () {
 
-                //begin suck in variables
-                slctd_timeEntryID = this.id.substr(20);
-                //end suck in variables
-
-                $("#input_workDescLineDelays_" + slctd_timeEntryID).attr("contentEditable", "true");//set the  description input to editable
-                $("#input_workDescLineDelays_" + slctd_timeEntryID).css("color", "red");//set the  description input text to red to demonstrate edit mode
-
-                $("#teamWorkDescDelaysLine" + slctd_timeEntryID).children().css('pointer-events', 'auto');//set the line team to editable
-                $("#teamWorkDescDelaysLine" + slctd_timeEntryID).children().css('color', 'red');//set the line team text to red to demonstrate edit mode
-
-                $("#workDescDelaysTeamLine_dpdwn_" + slctd_timeEntryID).removeAttr("disabled");//set the line team dropdown to editable
-                $("#workDescDelaysTeamLine_dpdwn_" + slctd_timeEntryID).css('color', 'red');//set the line team dropdown text to red to demonstrate edit mode
-
-                $(this).attr("disabled", "true");//disable the line edit button
-                $("#lockWorkDescDelaysLineBtn_" + slctd_timeEntryID).removeAttr("disabled");//enable the line lock button
-                $("#saveWorkDescLineBtn_" + slctd_timeEntryID).removeAttr("disabled");//enable the line save button
-            });
-            //end when the edit line button is pressed
-
-            //begin when the line lock button is pressed
-            $(".lockWorkDescDelaysLineBtn_").on('click', function () {
-                //begin suck in variables
-                slctd_timeEntryID = this.id.substr(20);
-                //end suck in variables
-
-                $("#input_workDescLineDelays_" + slctd_timeEntryID).attr("contentEditable", "false");//set the  description input to non-editable
-                $("#input_workDescLineDelays_" + slctd_timeEntryID).css("color", "black");//set the  description input text to red to demonstrate normal mode
-
-                $("#teamWorkDescDelaysLine" + slctd_timeEntryID).children().css('pointer-events', 'none');//set the line team to non-editable
-                $("#teamWorkDescDelaysLine" + slctd_timeEntryID).children().css('color', 'black');//set the line team text to red to demonstrate non-edit mode
-
-                $("#workDescDelaysTeamLine_dpdwn_" + slctd_timeEntryID).attr("disabled", "true");//set the line team dropdown to non-editable
-                $("#workDescDelaysTeamLine_dpdwn_" + slctd_timeEntryID).css('color', 'black');//set the line team dropdown text to red to demonstrate non-edit mode
-
-                $(this).attr("disabled", "true");//disable the line lock button
-                $("#editWorkDescDelaysLineBtn_" + slctd_timeEntryID).removeAttr("disabled");//enable the line edit button
-            });
-            //begin when the line lock button is pressed
-
-            //begin load team members on line dpdwn change
-            $(".workDescDelaysTeamLine_dpdwn_").change(function () {
-
+                //begin
                 $.ajax({
                     url: 'DataService.asmx/GetAllTeamNamesByReportID',
                     method: 'post',
@@ -154,11 +114,74 @@
                     success: function (data) {
 
                         $(data).each(function (index, item) {
+
+                            var temp_userName;
+                            var temp_name;
+                            var temp_shortName;
+
+                            temp_userName = item.userName;
+                            temp_name = item.name;
+                            temp_shortName = item.shortName;
+
+                            $("#workDescDelaysTeam_").clone(true).prop("id", "workDescDelaysTeam_" + temp_userName.toString()).appendTo("#txt_teamMembersWorkDescDelays");
+                            $("#workDescDelaysTeam_" + temp_userName.toString()).text(temp_shortName);
+                            $("#workDescDelaysTeam_" + temp_userName.toString()).removeAttr('hidden');//unhide the copy
+
+                        });
+                        //end AddTeamMember
+                    }
+                });
+            });
+            //end load team members on work description dpdwn change
+
+            //begin load team members on work description dpdwn click
+            workDescDelaysTeamLine_dpdwn.click(function () {
+
+                //alert(this.id)
+
+                workDescDelaysTeamLine_dpdwn.empty();
+                workDescDelaysTeamLine_dpdwn.append($('<option/>', { value: -1, text: 'Team' }));
+                workDescDelaysTeamLine_dpdwn.val('-1');
+
+                $.ajax({
+                    url: 'DataService.asmx/GetAllTeamNamesByReportID',
+                    method: 'post',
+                    dataType: 'json',
+                    data: { userName: '%', dailyReportID: dailyReportID },
+                    success: function (data) {
+
+                        $(data).each(function (index, item) {
+                            workDescDelaysTeamLine_dpdwn.append($('<option/>', { value: item.userName, text: item.shortName }))
+                        });
+                        //end AddTeamMember
+                    }
+                });
+            });
+            //end load team members on work description dpdwn click
+
+            //begin load team members on line dpdwn change
+            $(".workDescDelaysTeamLine_dpdwn_").change(function () {
+
+                //alert($(this).val())
+                var tempUserName1 = $(this).val();
+                alert(this.id)
+                alert(dailyReportID)
+                $.ajax({
+                    url: 'DataService.asmx/GetAllTeamNamesByReportID',
+                    method: 'post',
+                    dataType: 'json',
+                    //data: { userName: $(this).val(), dailyReportID: dailyReportID },
+                    data: { userName: tempUserName1, dailyReportID: dailyReportID },
+                    success: function (data) {
+
+                        $(data).each(function (index, item) {
                             //begin suck in variables
                             var temp_userName = item.userName;
                             var temp_name = item.name;
                             var temp_shortName = item.shortName;
                             //end suck in variables
+
+                            workDescDelaysTeamLineUserName_86abundy
 
                             //clone an invisible template, adjust it's ID and append it
                             $("#workDescDelaysTeam_").clone(true).prop("id", "workDescTeamLine_" + slctd_timeEntryID + "_" + temp_userName.toString()).appendTo("#teamWorkDescDelaysLine" + slctd_timeEntryID);
@@ -189,8 +212,74 @@
             });
             //end load team members on line dpdwn change
 
+            //begin when the line delete button is pressed
+            $(".deleteWorkDescDelaysLineBtn_").on('click', function () {
+                //begin suck in variables
+                slctd_timeEntryID = this.id.substr(28);
+                //end suck in variables
+
+                //begin tattler pop up
+                alert("deleting time entry id: " + slctd_timeEntryID);
+                //end tattler pop up
+
+                //begin axios delete post
+                axios.post('/workDesc/DeleteWorkDesc', {
+                    timeEntryID: slctd_timeEntryID,
+                })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                //end axios delete post
+            });
+            //end when the line delete button is pressed
+
+            //begin when the edit line button is pressed
+            $(".editWorkDescDelaysLineBtn_").on('click', function () {
+
+                //begin suck in variables
+                slctd_timeEntryID = this.id.substr(26);
+                //end suck in variables
+
+                $("#input_workDescLineDelays_" + slctd_timeEntryID).attr("contentEditable", "true");//set the  description input to editable
+                $("#input_workDescLineDelays_" + slctd_timeEntryID).css("color", "red");//set the  description input text to red to demonstrate edit mode
+
+                $("#teamWorkDescDelaysLine" + slctd_timeEntryID).children().css('pointer-events', 'auto');//set the line team to editable
+                $("#teamWorkDescDelaysLine" + slctd_timeEntryID).children().css('color', 'red');//set the line team text to red to demonstrate edit mode
+
+                $("#workDescDelaysTeamLine_dpdwn_" + slctd_timeEntryID).removeAttr("disabled");//set the line team dropdown to editable
+                $("#workDescDelaysTeamLine_dpdwn_" + slctd_timeEntryID).css('color', 'red');//set the line team dropdown text to red to demonstrate edit mode
+
+                $(this).attr("disabled", "true");//disable the line edit button
+                $("#lockWorkDescDelaysLineBtn_" + slctd_timeEntryID).removeAttr("disabled");//enable the line lock button
+                $("#saveWorkDescDelaysLineBtn_" + slctd_timeEntryID).removeAttr("disabled");//enable the line save button
+            });
+            //end when the edit line button is pressed
+
+            //begin when the line lock button is pressed
+            $(".lockWorkDescDelaysLineBtn_").on('click', function () {
+                //begin suck in variables
+                slctd_timeEntryID = this.id.substr(26);
+                //end suck in variables
+
+                $("#input_workDescLineDelays_" + slctd_timeEntryID).attr("contentEditable", "false");//set the  description input to non-editable
+                $("#input_workDescLineDelays_" + slctd_timeEntryID).css("color", "black");//set the  description input text to red to demonstrate normal mode
+
+                $("#teamWorkDescDelaysLine" + slctd_timeEntryID).children().css('pointer-events', 'none');//set the line team to non-editable
+                $("#teamWorkDescDelaysLine" + slctd_timeEntryID).children().css('color', 'black');//set the line team text to red to demonstrate non-edit mode
+
+                $("#workDescDelaysTeamLine_dpdwn_" + slctd_timeEntryID).attr("disabled", "true");//set the line team dropdown to non-editable
+                $("#workDescDelaysTeamLine_dpdwn_" + slctd_timeEntryID).css('color', 'black');//set the line team dropdown text to red to demonstrate non-edit mode
+
+                $(this).attr("disabled", "true");//disable the line lock button
+                $("#editWorkDescDelaysLineBtn_" + slctd_timeEntryID).removeAttr("disabled");//enable the line edit button
+            });
+            //begin when the line lock button is pressed
+         
             //begin when a line team member class is clicked for the purpose of deletion...
-            $(".workDescDelaysTeamLineUserName__").on('click', function () {
+            $(".workDescDelaysTeamLineUserName_").on('click', function () {
                 //begin suck in variables for eventual axios post
                 var tempTeamMemberUserID = this.id.substr(32);
                 //end suck in variables for eventual axios post
@@ -223,11 +312,15 @@
             //end when a line team member class is clicked for the purpose of deletion...
         
             //begin when the line save button is pressed
-            $(".saveWorkDescLineBtn_").on('click', function () {
+            $(".saveWorkDescDelaysLineBtn_").on('click', function () {
                 //begin suck in variables
-                slctd_timeEntryID = this.id.substr(20);
+                slctd_timeEntryID = this.id.substr(26);
                 slctd_workDescText = $("#input_workDescLineDelays_" + slctd_timeEntryID).html()
                 //end suck in variables
+
+                alert(this.id)
+                alert(slctd_timeEntryID)
+                alert(slctd_workDescText)
 
                 $("#input_workDescLineDelays_" + slctd_timeEntryID).attr("contentEditable", "false");//set the description input to non-editable
                 $("#input_workDescLineDelays_" + slctd_timeEntryID).css("color", "black");//set the  description input text to black to demonstrate non-edit mode
@@ -243,7 +336,7 @@
                 $("#editWorkDescDelaysLineBtn_" + slctd_timeEntryID).removeAttr("disabled");//enable the line edit button
 
                 //begin axios delete post
-                axios.post('/workDesc/UpdateWorkDesc', {
+                axios.post('/workDescDelays/UpdateWorkDesc', {
                     timeEntryID: slctd_timeEntryID,
                     workDescription: slctd_workDescText
                 })
@@ -360,7 +453,7 @@
                     <button type="button" class="btn btn-primary btn-sm lockWorkDescDelaysLineBtn_" id="lockWorkDescDelaysLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%;" disabled>Lock for Edit</button>
                 </div>
                 <div class="col-2" style="padding:5px">
-                    <button type="button" class="btn btn-primary btn-sm saveWorkDescDelaysLineBtn_" id="saveWorkDescLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%;" disabled>Save Edits</button>
+                    <button type="button" class="btn btn-primary btn-sm saveWorkDescDelaysLineBtn_" id="saveWorkDescDelaysLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%;" disabled>Save Edits</button>
                 </div>
                 @*<div class="col-2" style="padding:5px">
                     <button type="button" class="example2 btn btn-primary btn-sm" id="" style="background-color: grey; width: 100%">confirm test</button>
