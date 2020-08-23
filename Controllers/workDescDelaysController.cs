@@ -29,7 +29,7 @@ namespace allpax_service_record.Controllers
             //begin
             string sqlquery1 =
                 "SELECT tbl_dailyReportTimeEntry.dailyReportID, tbl_dailyReportTimeEntry.workDescription, " +
-                "tbl_dailyReportTimeEntry.timeEntryID " +
+                "tbl_dailyReportTimeEntry.hours, tbl_dailyReportTimeEntry.timeEntryID " +
 
                 "FROM tbl_dailyReportTimeEntry " +
                 "WHERE " +
@@ -48,7 +48,9 @@ namespace allpax_service_record.Controllers
 
                 workDesc.dailyReportID = (int) dr1[0];
                 workDesc.workDescription = dr1[1].ToString();
-                workDesc.timeEntryID = (int) dr1[2];
+                workDesc.hours = (int)dr1[2];
+                workDesc.timeEntryID = (int)dr1[3];
+                //workDesc.timeEntryID = (int) dr1[2];
 
                 workDesc.userNames = workDescUsersByTimeEntryID(workDesc.timeEntryID);
                 workDesc.userShortNames = workDescUserShortNamesByTimeEntryID(workDesc.timeEntryID);
