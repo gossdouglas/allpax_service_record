@@ -32,6 +32,10 @@
                 //begin suck in variables for eventual axios post
                 var addItem1 = $("#txt_dailyReportID").html();
                 var addItem2 = $("#input_workDesc").html();
+                addItem2 = addItem2.replace(/^[\s]+ /, "");//clean up the work description section
+                addItem2 = addItem2.replace(/&amp;/, " ");//wipe out leading white space characters
+                addItem2 = addItem2.replace(/nbsp;/, " ");//and amp and nbsp
+
                 //end suck in variables for eventual axios post
 
                 //begin tattler pop up
@@ -350,6 +354,9 @@
                 //begin suck in variables
                 slctd_timeEntryID = this.id.substr(20);
                 slctd_workDescText = $("#input_workDescLine_" + slctd_timeEntryID).html()
+                slctd_workDescText = slctd_workDescText.replace(/^[\s]+ /, "");//clean up the work description section
+                slctd_workDescText = slctd_workDescText.replace(/&amp;/, " ");//wipe out leading white space characters
+                slctd_workDescText = slctd_workDescText.replace(/nbsp;/, " ");//and amp and nbsp
                 //end suck in variables
 
                 $("#input_workDescLine_" + slctd_timeEntryID).attr("contentEditable", "false");//set the description input to non-editable

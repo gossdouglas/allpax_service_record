@@ -203,8 +203,8 @@ namespace allpax_service_record.Controllers
 
         public ActionResult UpdateWorkDesc(vm_workDesc workDescUpdate)
         {
-            db.Database.ExecuteSqlCommand("UPDATE tbl_dailyReportTimeEntry SET workDescription={1} WHERE timeEntryID={0}",
-                  workDescUpdate.timeEntryID, workDescUpdate.workDescription);
+            db.Database.ExecuteSqlCommand("UPDATE tbl_dailyReportTimeEntry SET workDescription={1}, workDescriptionCategory={2}, hours={3} WHERE timeEntryID={0}",
+                  workDescUpdate.timeEntryID, workDescUpdate.workDescription, workDescUpdate.workDescriptionCategory, workDescUpdate.hours);
 
             return RedirectToAction("Index");
         }
