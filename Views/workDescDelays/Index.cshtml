@@ -48,7 +48,8 @@
                 $(".workDescDelaysTeam_").each(function () {
 
                     //begin suck in variables for eventual axios post
-                    var tempTeamMemberUserID = $(this).attr("id").substr(19);//suck out the team member's userName
+                    //var tempTeamMemberUserID = $(this).attr("id").substr(19);//suck out the team member's userName
+                    var tempTeamMemberUserID = this.id.replace(/workDescDelaysTeam_/i, "");//suck out the team member's userName
                     //end suck in variables for eventual axios post
 
                     if (tempTeamMemberUserID.length > 0) {//if that userName is greater than 0
@@ -248,7 +249,7 @@
             //begin when the line delete button is pressed
             $(".deleteWorkDescDelaysLineBtn_").on('click', function () {
                 //begin suck in variables
-                slctd_timeEntryID = this.id.substr(28);
+                slctd_timeEntryID = this.id.replace(/deleteWorkDescDelaysLineBtn_/i, "");//suck out the time entry ID
                 //end suck in variables
 
                 //begin tattler pop up

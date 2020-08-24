@@ -33,7 +33,6 @@
                 addItem2 = addItem2.replace(/^[\s]+ /, "");//clean up the work description section
                 addItem2 = addItem2.replace(/&amp;/, " ");//wipe out leading white space characters
                 addItem2 = addItem2.replace(/nbsp;/, " ");//and amp and nbsp
-
                 //end suck in variables for eventual axios post
 
                 //begin tattler pop up
@@ -46,7 +45,8 @@
                 $(".workDescTeam_").each(function () {
 
                     //begin suck in variables for eventual axios post
-                    var tempTeamMemberUserID = $(this).attr("id").substr(13);//suck out the team member's userName
+                    //var tempTeamMemberUserID = $(this).attr("id").substr(13);//suck out the team member's userName
+                    var tempTeamMemberUserID = this.id.replace(/workDescTeam_/i, "");//suck out the team member's userName
                     //end suck in variables for eventual axios post
 
                     if (tempTeamMemberUserID.length > 0) {//if that userName is greater than 0
@@ -284,7 +284,7 @@
             //begin when the line delete button is pressed
             $(".deleteWorkDescLineBtn_").on('click', function () {
                 //begin suck in variables
-                slctd_timeEntryID = this.id.substr(22);
+                slctd_timeEntryID = this.id.replace(/deleteWorkDescLineBtn_/i, "");//suck out the time entry ID
                 //end suck in variables
 
                 //begin tattler pop up
