@@ -20,10 +20,8 @@
             var slctd_timeEntryID;
             var slctd_workDescText;
             var dailyReportID = $("#txt_dailyReportID").html()
-
             var workDescTeam_dpdwn = $('.workDescTeam_dpdwn');
             var workDescTeamLine_dpdwn = $('.workDescTeamLine_dpdwn_');
-
             //end this partial view's variable declaration section
 
             //begin a new work description is added for a given daily report...
@@ -391,27 +389,6 @@
     </script>
 </head>
 
-@*BEGIN ALLPAX TEAM*@
-<div class="container pl-auto" style="margin:5px" id="contnr_team">
-    <div class="row">
-        <div class="col-2" style="padding:5px">
-            <strong>Allpax Team:</strong>
-        </div>
-        <div class="col-10" style="padding:5px">
-            <div class="row" style="margin:0px;">
-                <select name="team_dpdwn" id="team_dpdwn" style="width:100%">
-                </select>
-            </div>
-            <div class="row" style="margin:0px;" name="txt_teamMembers" id="txt_teamMembers">
-                <div class="team_" id="team_" style="padding:5px; border:solid black 1px" hidden>
-                    Johnny Watkins|JW
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@*END ALLPAX TEAM*@
-
 <div class=" container pl-auto" style="margin:5px" id="contnr_workDescription">
     <div class="row">
         <div class="col-8" style="padding:5px">
@@ -424,21 +401,14 @@
 
     @*BEGIN WORK DESCRIPTION TEMPLATE ADD NEW WORK DESCRIPTION*@
     <div class="col-12" id="workDescriptionLine_template">
-        @*<div class="col-3" style="padding:5px">
-                <div>
-                    <span><strong>Record No</strong></span>
-                    <span id="txt_dailyReportID" value=@ViewBag.reportID>@ViewBag.reportID</span>
-                </div>
-            </div>*@
         <div class="row" id="">
             <div class="col-8" id="input_workDesc" style="padding:5px; border: 1px solid black;" contenteditable="true">
-                @*<span class="input" role="textbox" id="input_workDesc" contenteditable>kkkkk</span>*@
             </div>
             <div class="col-3" name="txt_teamMembersWorkDesc" id="txt_teamMembersWorkDesc" style="padding:5px">
                 <span class="workDescTeam_" id="workDescTeam_" style="padding:5px"></span>
             </div>
             <div class="col-1" style="padding:5px">
-                <select class="workDescTeam_dpdwn" name="" @*id="workDescTeam_dpdwn"*@ style="width:100%">
+                <select class="workDescTeam_dpdwn" name="" style="width:100%">
                     <option value="">Team</option>
                 </select>
             </div>
@@ -472,17 +442,13 @@
         <div class="col-12 workDescLine_" id="workDescLine_@temp_timeEntryID">
             <div class="row" style="padding:5px" id="">
                 <div class="col-8 input_workDescLine_" id="input_workDescLine_@temp_timeEntryID" style="padding:5px; border: 1px solid black;" contenteditable="false">
-                    @*<span class="input" role="textbox" id="input_workDesc" contenteditable>kkkkk</span>*@
                     @temp_workDescription
                 </div>
                 <div class="col-3 teamWorkDescLine" id="teamWorkDescLine_@temp_timeEntryID" style="padding:5px">
-                    @*<span class="workDescTeam_" id="workDescTeam_" style="padding:5px">*@
                     @for (var i = 0; i < (temp_userNames.Count); i++)
                     {
-                        @*<span class="workDescTeam_" id=@Html.DisplayFor(modelItem => item.userShortNames[@i])> @Html.DisplayFor(modelItem => item.userShortNames[@i]) </span>*@
                         <span class="workDescTeamLineUserName_" id="workDescTeamLineUserName_@temp_timeEntryID@temp_userNames[@i]" style="pointer-events:none">@temp_userShortNames[@i]</span>
                     }
-                    @*</span>*@
                 </div>
                 <div class="col-1" style="padding:5px">
                     <select name="" class="workDescTeamLine_dpdwn_" id="workDescTeamLine_dpdwn_@temp_timeEntryID" style="width:100%" disabled>
@@ -509,9 +475,6 @@
                 <div class="col-2" style="padding:5px">
                     <button type="button" class="btn btn-primary btn-sm saveWorkDescLineBtn_" id="saveWorkDescLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%;" disabled>Save Edits</button>
                 </div>
-                @*<div class="col-2" style="padding:5px">
-                        <button type="button" class="example2 btn btn-primary btn-sm" id="" style="background-color: grey; width: 100%">confirm test</button>
-                    </div>*@
             </div>
         </div>
     }
