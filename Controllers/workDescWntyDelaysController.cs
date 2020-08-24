@@ -35,7 +35,7 @@ namespace allpax_service_record.Controllers
                 "WHERE " +
                 "tbl_dailyReportTimeEntry.dailyReportID = @dailyReportID " +
                 "AND " +
-                "tbl_dailyReportTimeEntry.workDescriptionCategory = '2'";
+                "tbl_dailyReportTimeEntry.workDescriptionCategory = '3'";
 
             SqlCommand sqlcomm1 = new SqlCommand(sqlquery1, sqlconn);
             sqlcomm1.Parameters.AddWithValue("@dailyReportID", dailyReportID);
@@ -167,10 +167,6 @@ namespace allpax_service_record.Controllers
                 workDescAdd.dailyReportID, workDescAdd.workDescription, workDescAdd.userName, workDescAdd.workDescriptionCategory, workDescAdd.hours);
            
             return new EmptyResult();
-            //return View();
-            //return RedirectToAction("Index");
-            //return RedirectToAction("Index", new { dailyReportID = workDescAdd.dailyReportID });
-            //return RedirectToAction("Index", "DailyReportByReportID", new { reportID = workDescAdd.dailyReportID});
         }
 
         [HttpPost]

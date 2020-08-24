@@ -256,53 +256,19 @@
 </div>
 @*END ALLPAX TEAM*@
 <hr style="margin:1px; opacity:0" />
-<div class="container" id="cntnr_workDesc">
+<div class="container" id="">
     @{Html.RenderAction("Index", "workDesc", new { dailyReportID = ViewBag.reportID });
     }
 </div>
 <hr style="margin:1px; opacity:0" />
-<div class="container" id="cntnr_workDesc">
+<div class="container" id="">
     @{Html.RenderAction("Index", "workDescDelays", new { dailyReportID = ViewBag.reportID });
     }
 </div>
-<hr style="margin:1px" opacity:0" />
-<div class=" container" id="contnr_delays" hidden>
-    <div class="row">
-        <div class="col-10" style="padding:5px">
-            <strong>Delays</strong>
-        </div>
-        <div class="col-2" style="padding:5px">Team</div>
-    </div>
-    <div class="row">
-        <div class="col-10" style="padding:5px">
-            <input type="text" value="Water recovery system....." id="" name="" style="width:100%">
-        </div>
-        <div class="col-2" style="padding:5px">
-            <select name="" id="" style="width:100%">
-                <option value="">All</option>
-            </select>
-        </div>
-    </div>
-</div>
 <hr style="margin:1px; opacity:0" />
-<div class=" container" id="contnr_warrantyDelays" hidden>
-    <div class="row">
-        <div class="col-10" style="padding:5px">
-            <strong>Warranty Delays</strong>
-        </div>
-        <div class="col-2" style="padding:5px">Team</div>
-    </div>
-    <div class="row">
-        <div class="col-10" style="padding:5px">
-            <input type="text" value="Water recovery system....." id="" name="" style="width:100%">
-        </div>
-        <div class="col-2" style="padding:5px">
-            <select name="" id="" style="width:100%">
-                <option value="">All</option>
-            </select>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary btn-sm" id="addButton" style="background-color: royalblue;" disabled>Save Record</button>
+<div class="container" id="">
+    @{Html.RenderAction("Index", "workDescWntyDelays", new { dailyReportID = ViewBag.reportID });
+    }
 </div>
 
 
