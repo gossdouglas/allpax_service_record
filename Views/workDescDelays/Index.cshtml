@@ -391,12 +391,6 @@
 
 @*BEGIN WORK DESCRIPTION TEMPLATE ADD NEW WORK DESCRIPTION*@
     <div class="col-12" id="workDescriptionDelaysLine_template">
-        @*<div class="col-3" style="padding:5px">
-                <div>
-                    <span><strong>Record No</strong></span>
-                    <span id="txt_dailyReportID" value=@ViewBag.reportID>@ViewBag.reportID</span>
-                </div>
-            </div>*@
         <div class="row" id="">
             <div class="col-7" id="input_workDescDelays" style="padding:5px; border: 1px solid black;" contenteditable="true">
             </div>
@@ -442,7 +436,6 @@
         <div class="col-12 workDescLineDelays_" id="workDescLineDelays_@temp_timeEntryID">
             <div class="row" style="padding:5px" id="">
                 <div class="col-7 input_workDescLineDelays_" id="input_workDescLineDelays_@temp_timeEntryID" style="padding:5px; border: 1px solid black;" contenteditable="false">
-                    @*<span class="input" role="textbox" id="input_workDesc" contenteditable>kkkkk</span>*@
                     @temp_workDescription
                 </div>
                 <div class="col-1" style="padding:5px">
@@ -480,9 +473,6 @@
                 <div class="col-2" style="padding:5px">
                     <button type="button" class="btn btn-primary btn-sm saveWorkDescDelaysLineBtn_" id="saveWorkDescDelaysLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%;" disabled>Save Edits</button>
                 </div>
-                @*<div class="col-2" style="padding:5px">
-                    <button type="button" class="example2 btn btn-primary btn-sm" id="" style="background-color: grey; width: 100%">confirm test</button>
-                </div>*@
             </div>
         </div>
     }

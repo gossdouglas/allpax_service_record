@@ -70,7 +70,7 @@
             });
             //});
             //end load team members on page load
-          
+
             //begin add team member on drop down change
             team_dpdwn.change(function () {
 
@@ -131,7 +131,7 @@
 
                 $("#" + $(this).attr("id")).remove();
             });
-            //end when a team member class is clicked...            
+            //end when a team member class is clicked...
             //end when a record class is clicked...
 
         });//end document read jquery statements
@@ -235,14 +235,33 @@
     </div>
 </div>
 <hr style="margin:1px; opacity:0" />
+@*BEGIN ALLPAX TEAM*@
+<div class="container" id="contnr_team">
+    <div class="row">
+        <div class="col-2" style="padding:5px">
+            <strong>Allpax Team:</strong>
+        </div>
+        <div class="col-10" style="padding:5px">
+            <div class="row" style="margin:0px;">
+                <select name="team_dpdwn" id="team_dpdwn" style="width:100%">
+                </select>
+            </div>
+            <div class="row" style="margin:0px;" name="txt_teamMembers" id="txt_teamMembers">
+                <div class="team_" id="team_" style="padding:5px; border:solid black 1px" hidden>
+                    Johnny Watkins|JW
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*END ALLPAX TEAM*@
+<hr style="margin:1px; opacity:0" />
 <div class="container" id="cntnr_workDesc">
-    @*WORKS*@
     @{Html.RenderAction("Index", "workDesc", new { dailyReportID = ViewBag.reportID });
     }
 </div>
 <hr style="margin:1px; opacity:0" />
 <div class="container" id="cntnr_workDesc">
-    @*WORKS*@
     @{Html.RenderAction("Index", "workDescDelays", new { dailyReportID = ViewBag.reportID });
     }
 </div>
@@ -285,8 +304,6 @@
     </div>
     <button type="submit" class="btn btn-primary btn-sm" id="addButton" style="background-color: royalblue;" disabled>Save Record</button>
 </div>
-
-@*</div>*@
 
 
 
