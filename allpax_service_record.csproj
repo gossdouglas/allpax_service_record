@@ -178,6 +178,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\workDescController.cs" />
+    <Compile Include="Controllers\workDescWntyDelaysController.cs" />
     <Compile Include="Controllers\workDescDelaysController.cs" />
     <Compile Include="DataService.asmx.cs">
       <DependentUpon>DataService.asmx</DependentUpon>
@@ -449,6 +450,7 @@
     <Content Include="Views\Shared\_workDescByTimeEntryID.cshtml" />
     <Content Include="Views\workDesc\Index.cshtml" />
     <Content Include="Views\workDescDelays\Index.cshtml" />
+    <Content Include="Views\workDescWntyDelays\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
