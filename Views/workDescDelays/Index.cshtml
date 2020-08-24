@@ -397,10 +397,10 @@
             <div class="col-1" style="padding:5px">
                 <input type="text" class="form-control form-control-sm" id="inputHours_workDescDelays" value="">
             </div>
-            <div class="col-3" name="txt_teamMembersWorkDescDelays" id="txt_teamMembersWorkDescDelays" style="padding:5px">
+            <div class="col-2" name="txt_teamMembersWorkDescDelays" id="txt_teamMembersWorkDescDelays" style="padding:5px">
                 <span class="workDescDelaysTeam_" id="workDescDelaysTeam_" style="padding:5px"></span>
             </div>
-            <div class="col-1" style="padding:5px">
+            <div class="col-2" style="padding:5px">
                 <select class="workDescDelaysTeam_dpdwn" name="" style="width:100%">
                     <option value="">Team</option>
                 </select>
@@ -441,14 +441,14 @@
                 <div class="col-1" style="padding:5px">
                     <input type="text" class="form-control form-control-sm" id="inputHours_workDescDelays_@temp_timeEntryID" value="@temp_hours" disabled>
                 </div>
-                <div class="col-3 teamWorkDescDelaysLine_" id="teamWorkDescDelaysLine_@temp_timeEntryID" style="padding:5px">
+                <div class="col-2 teamWorkDescDelaysLine_" id="teamWorkDescDelaysLine_@temp_timeEntryID" style="padding:5px">
                     @for (var i = 0; i < (temp_userNames.Count); i++)
                     {
 
                         <span class="workDescDelaysTeamLineUserName_" id="workDescDelaysTeamLineUserName_@temp_timeEntryID@temp_userNames[@i]" style="pointer-events:none">@temp_userShortNames[@i]</span>
                     }
                 </div>
-                <div class="col-1" style="padding:5px">
+                <div class="col-2" style="padding:5px">
                     <select name="" class="workDescDelaysTeamLine_dpdwn_" id="workDescDelaysTeamLine_dpdwn_@temp_timeEntryID" style="width:100%" disabled>
                         <option value="">Team</option>
                     </select>
