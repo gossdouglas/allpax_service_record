@@ -30,11 +30,17 @@
                 //begin suck in variables for eventual axios post
                 var addItem1 = $("#txt_dailyReportID").html();
                 var addItem2 = $("#input_workDescDelays").html();
+                addItem2 = addItem2.replace(/^[\s]+ /, "");//clean up the work description section
+                addItem2 = addItem2.replace(/&amp;/, " ");//wipe out leading white space characters
+                addItem2 = addItem2.replace(/nbsp;/, " ");//and amp and nbsp
+                var addItem3 = $("#inputHours_workDescDelays").val();
+
                 //end suck in variables for eventual axios post
 
                 //begin tattler pop up
                 alert("dailyReportID: " + addItem1 + '\n' +
-                    "workDescription: " + addItem2
+                    "workDescription: " + addItem2 + '\n' +
+                    "hours:" + addItem3
                 );
                 //end tattler pop up
 
@@ -53,7 +59,7 @@
                             workDescription: addItem2,
                             userName: tempTeamMemberUserID,
                             workDescriptionCategory: '2',
-                            hours: '1'
+                            hours: addItem3
                         })
                             .then(function (response) {
                                 console.log(response);
@@ -274,6 +280,9 @@
                 $("#input_workDescLineDelays_" + slctd_timeEntryID).attr("contentEditable", "true");//set the  description input to editable
                 $("#input_workDescLineDelays_" + slctd_timeEntryID).css("color", "red");//set the  description input text to red to demonstrate edit mode
 
+                $("#inputHours_workDescDelays_" + slctd_timeEntryID).removeAttr("disabled");//set the  hours input to editable
+                $("#inputHours_workDescDelays_" + slctd_timeEntryID).css("color", "red");//set the  hours input text to red to demonstrate edit mode
+
                 $("#teamWorkDescDelaysLine_" + slctd_timeEntryID).children().css('pointer-events', 'auto');//set the line team to editable
                 $("#teamWorkDescDelaysLine_" + slctd_timeEntryID).children().css('color', 'red');//set the line team text to red to demonstrate edit mode
 
@@ -295,6 +304,9 @@
                 $("#input_workDescLineDelays_" + slctd_timeEntryID).attr("contentEditable", "false");//set the  description input to non-editable
                 $("#input_workDescLineDelays_" + slctd_timeEntryID).css("color", "black");//set the  description input text to red to demonstrate normal mode
 
+                $("#inputHours_workDescDelays_" + slctd_timeEntryID).attr("disabled", "true");//set the  hours input to non-editable
+                $("#inputHours_workDescDelays_" + slctd_timeEntryID).css("color", "black");//set the  hours input text to black to demonstrate non-edit mode
+
                 $("#teamWorkDescDelaysLine_" + slctd_timeEntryID).children().css('pointer-events', 'none');//set the line team to non-editable
                 $("#teamWorkDescDelaysLine_" + slctd_timeEntryID).children().css('color', 'black');//set the line team text to red to demonstrate non-edit mode
 
@@ -311,10 +323,23 @@
                 //begin suck in variables
                 slctd_timeEntryID = this.id.substr(26);
                 slctd_workDescText = $("#input_workDescLineDelays_" + slctd_timeEntryID).html()
+
+                slctd_workDescText = slctd_workDescText.replace(/^[\s]+ /, "");
+                slctd_workDescText = slctd_workDescText.replace(/&amp;/, " ");
+                slctd_workDescText = slctd_workDescText.replace(/nbsp;/, " ");
+
+                slctd_hours = $("#inputHours_workDescDelays_" + slctd_timeEntryID).val();
                 //end suck in variables
+
+                //var tempTeamMemberUserID = this.id.replace(/workDescDelaysTeamLineUserName_[0-9]*/i, "");
+
+                //^ [\t]+ 
 
                 $("#input_workDescLineDelays_" + slctd_timeEntryID).attr("contentEditable", "false");//set the description input to non-editable
                 $("#input_workDescLineDelays_" + slctd_timeEntryID).css("color", "black");//set the  description input text to black to demonstrate non-edit mode
+
+                $("#inputHours_workDescDelays_" + slctd_timeEntryID).attr("disabled", "true");//set the  hours input to non-editable
+                $("#inputHours_workDescDelays_" + slctd_timeEntryID).css("color", "black");//set the  hours input text to black to demonstrate non-edit mode
 
                 $("#teamWorkDescDelaysLine_" + slctd_timeEntryID).children().css('pointer-events', 'none');//set the line team to non-editable
                 $("#teamWorkDescDelaysLine_" + slctd_timeEntryID).children().css('color', 'black');//set the line team text to black to demonstrate non-edit mode
@@ -329,7 +354,9 @@
                 //begin axios delete post
                 axios.post('/workDescDelays/UpdateWorkDesc', {
                     timeEntryID: slctd_timeEntryID,
-                    workDescription: slctd_workDescText
+                    workDescription: slctd_workDescText,
+                    workDescriptionCategory: '2',
+                    hours: slctd_hours
                 })
                     .then(function (response) {
                         console.log(response);
@@ -374,13 +401,13 @@
             <div class="col-7" id="input_workDescDelays" style="padding:5px; border: 1px solid black;" contenteditable="true">
             </div>
             <div class="col-1" style="padding:5px">
-                <input type="text" class="form-control form-control-sm" id="" value="">
+                <input type="text" class="form-control form-control-sm" id="inputHours_workDescDelays" value="">
             </div>
             <div class="col-3" name="txt_teamMembersWorkDescDelays" id="txt_teamMembersWorkDescDelays" style="padding:5px">
                 <span class="workDescDelaysTeam_" id="workDescDelaysTeam_" style="padding:5px"></span>
             </div>
             <div class="col-1" style="padding:5px">
-                <select class="workDescDelaysTeam_dpdwn" name="" @*id="workDescDelaysTeam_dpdwn"*@ style="width:100%">
+                <select class="workDescDelaysTeam_dpdwn" name="" style="width:100%">
                     <option value="">Team</option>
                 </select>
             </div>
@@ -419,7 +446,7 @@
                     @temp_workDescription
                 </div>
                 <div class="col-1" style="padding:5px">
-                    <input type="text" class="form-control form-control-sm" id="" value="@temp_hours">
+                    <input type="text" class="form-control form-control-sm" id="inputHours_workDescDelays_@temp_timeEntryID" value="@temp_hours" disabled>
                 </div>
                 <div class="col-3 teamWorkDescDelaysLine_" id="teamWorkDescDelaysLine_@temp_timeEntryID" style="padding:5px">
                     @for (var i = 0; i < (temp_userNames.Count); i++)
