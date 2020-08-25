@@ -215,6 +215,12 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\normalize.css" />
+    <Content Include="assets\css\skeleton.css" />
+    <Content Include="assets\images\cat1.jpg" />
+    <Content Include="assets\images\cat2.jpg" />
+    <Content Include="assets\images\cat3.jpg" />
+    <Content Include="assets\images\print.png" />
     <Content Include="bin\allpax_service_record.dll" />
     <Content Include="bin\allpax_service_record.pdb" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -272,6 +278,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\printThis.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\methods\defaults.js" />
     <Content Include="Scripts\src\methods\destroy.js" />
