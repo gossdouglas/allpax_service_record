@@ -96,10 +96,22 @@
             <tbody>
                 @foreach (var item in Model)
                 {
+
+                    //BEGIN TEMPORARY LOOP VARIABLES
+
+                    string temp_date = String.Format("{0:yyyy-MM-dd}", item.date);
+
+                    //END TEMPORARY LOOP VARIABLES
+
                 <tr class="record" id=@Html.DisplayFor(modelItem => item.dailyReportID)>
                     <td id="record_item0" value=@Html.DisplayFor(modelItem => item.dailyReportID)>@Html.DisplayFor(modelItem => item.dailyReportID)</td>
                     <td id="record_item1" value=@Html.DisplayFor(modelItem => item.active)>@Html.DisplayFor(modelItem => item.active)</td>
-                    <td id="record_item2" value=@Html.DisplayFor(modelItem => item.date)>@Html.DisplayFor(modelItem => item.date)</td>
+
+                    @*<td id="record_item2" value=@Html.DisplayFor(modelItem => item.date)>@Html.DisplayFor(modelItem => item.date)</td>*@
+                    <td id="record_item2" value=@temp_date>@temp_date</td>
+
+                    @*vm_dailyReportByReportID.date = String.Format("{0:yyyy-MM-dd}", dr1[3]);*@
+
                     <td id="record_item3" value=@Html.DisplayFor(modelItem => item.jobID)>@Html.DisplayFor(modelItem => item.jobID)</td>
                     <td id="record_item4" value=@Html.DisplayFor(modelItem => item.description)>@Html.DisplayFor(modelItem => item.description)</td>
                     <td id="record_item5" value=@Html.DisplayFor(modelItem => item.customerName)>@Html.DisplayFor(modelItem => item.customerName)</td>
