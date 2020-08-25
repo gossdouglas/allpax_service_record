@@ -391,7 +391,6 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\dailyReportAll\Index.cshtml" />
-    <Content Include="Views\dailyReport\Edit.cshtml" />
     <Content Include="Views\dailyReportByReportID\Index.cshtml" />
     <Content Include="Views\Shared\_workDesc.cshtml" />
     <Content Include="Views\Shared\_workDescByTimeEntryID.cshtml" />
