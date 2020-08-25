@@ -97,13 +97,8 @@
                     data: { userName: '%', dailyReportID: dailyReportID },
                     success: function (data) {
 
-                        //alert($('#team_dpdwn').val())
-                        //workDescTeam_dpdwn.append($('<option/>', { value: -1, text: 'Add' }));
-
                         $(data).each(function (index, item) {
-                            //workDescTeam_dpdwn.append($('<option/>', { value: item.userName, text: item.name + "-" + item.shortName }))
                             workDescTeam_dpdwn.append($('<option/>', { value: item.userName, text: item.shortName }))
-
                         });
                         //end AddTeamMember
                     }

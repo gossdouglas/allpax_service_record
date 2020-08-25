@@ -13,6 +13,7 @@ using allpax_service_record.Models.View_Models;
 
 namespace allpax_service_record.Controllers
 {
+    [Authorize]
     public class workDescController : Controller
     {
         private allpaxServiceRecordEntities db = new allpaxServiceRecordEntities();
