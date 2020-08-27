@@ -173,6 +173,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\dailyReportAllController.cs" />
+    <Compile Include="Controllers\dailyReportByReportIDPrintController.cs" />
     <Compile Include="Controllers\dailyReportByReportIDController.cs" />
     <Compile Include="Controllers\dailyReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -404,8 +405,9 @@
     <Content Include="Views\workDesc\Index.cshtml" />
     <Content Include="Views\workDescDelays\Index.cshtml" />
     <Content Include="Views\workDescWntyDelays\Index.cshtml" />
-    <Content Include="Views\Shared\_Layout - Copy.cshtml" />
-    <Content Include="Views\dailyReportByReportID\Index - Copy.cshtml" />
+    <Content Include="Views\dailyReportByReportID\PrintDailyReport.cshtml" />
+    <Content Include="Views\dailyReportByReportIDPrint\Index.cshtml" />
+    <Content Include="Views\dailyReportByReportIDPrint\PrintDailyReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
