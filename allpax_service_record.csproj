@@ -404,6 +404,8 @@
     <Content Include="Views\workDesc\Index.cshtml" />
     <Content Include="Views\workDescDelays\Index.cshtml" />
     <Content Include="Views\workDescWntyDelays\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout - Copy.cshtml" />
+    <Content Include="Views\dailyReportByReportID\Index - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
