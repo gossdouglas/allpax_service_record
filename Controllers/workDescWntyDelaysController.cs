@@ -202,7 +202,7 @@ namespace allpax_service_record.Controllers
             db.Database.ExecuteSqlCommand("UPDATE tbl_dailyReportTimeEntry SET workDescription={1}, workDescriptionCategory={2}, hours={3} WHERE timeEntryID={0}",
                   workDescUpdate.timeEntryID, workDescUpdate.workDescription, workDescUpdate.workDescriptionCategory, workDescUpdate.hours);
 
-            return RedirectToAction("Index");
+            return new EmptyResult();
         }
 
 
