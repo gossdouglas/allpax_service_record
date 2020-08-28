@@ -324,6 +324,3 @@ C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\Microsof
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\goss\Documents\Github\service_record\allpax_service_record\obj\Debug\allpax_service_record.csprojAssemblyReference.cache
-C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\RazorEngine.dll
-C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\RazorEngine.pdb
-C:\Users\goss\Documents\Github\service_record\allpax_service_record\bin\RazorEngine.xml
