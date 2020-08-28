@@ -184,6 +184,7 @@
     <Compile Include="Controllers\dailyReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PrintDailyRptController.cs" />
     <Compile Include="Controllers\workDescPrintController.cs" />
     <Compile Include="Controllers\workDescController.cs" />
     <Compile Include="Controllers\workDescDelaysPrintController.cs" />
@@ -422,9 +423,12 @@
     <Content Include="Views\workDescWntyDelaysPrint\Index.cshtml" />
     <Content Include="Views\Emails\_ViewStart.cshtml" />
     <Content Include="Views\Emails\Web.config" />
+    <Content Include="Views\Emails\DailyRptEmail.cshtml" />
+    <Content Include="Views\Emails\DailyRptEmail.Html.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\PrintDailyRpt\" />
     <Folder Include="Views\workDescByTimeEntryID\" />
   </ItemGroup>
   <ItemGroup>
