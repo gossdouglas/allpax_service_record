@@ -48,9 +48,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Postal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=45719375b8b4d528, processorArchitecture=MSIL">
-      <HintPath>packages\Postal.Mvc5.1.2.0\lib\net45\Postal.dll</HintPath>
-    </Reference>
     <Reference Include="RazorEngine, Version=3.4.1.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
       <HintPath>packages\RazorEngine.3.4.1\lib\net45\RazorEngine.dll</HintPath>
     </Reference>
@@ -184,7 +181,6 @@
     <Compile Include="Controllers\dailyReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\PrintDailyRptController.cs" />
     <Compile Include="Controllers\workDescPrintController.cs" />
     <Compile Include="Controllers\workDescController.cs" />
     <Compile Include="Controllers\workDescDelaysPrintController.cs" />
@@ -421,10 +417,6 @@
     <Content Include="Views\workDescPrint\Index.cshtml" />
     <Content Include="Views\workDescDelaysPrint\Index.cshtml" />
     <Content Include="Views\workDescWntyDelaysPrint\Index.cshtml" />
-    <Content Include="Views\Emails\_ViewStart.cshtml" />
-    <Content Include="Views\Emails\Web.config" />
-    <Content Include="Views\Emails\DailyRptEmail.cshtml" />
-    <Content Include="Views\Emails\DailyRptEmail.Html.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
