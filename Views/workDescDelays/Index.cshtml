@@ -7,9 +7,9 @@
 
 <head>
     @*Axios CDN*@
-    @*<script src="https://unpkg.com/axios/dist/axios.min.js"></script>*@
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     @*JQuery CDN*@
-    @*<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>*@
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script>
         $(document).ready(function () {//begin document jquery statements
@@ -38,10 +38,10 @@
                 //end suck in variables for eventual axios post
 
                 //begin tattler pop up
-                //alert("dailyReportID: " + addItem1 + '\n' +
-                //    "workDescription: " + addItem2 + '\n' +
-                //    "hours:" + addItem3
-                //);
+                alert("dailyReportID: " + addItem1 + '\n' +
+                    "workDescription: " + addItem2 + '\n' +
+                    "hours:" + addItem3
+                );
                 //end tattler pop up
 
                 //begin adding team members to a new work description time entry
@@ -169,38 +169,32 @@
             $(".workDescDelaysTeamLineUserName_").on('click', function () {
                 //begin suck in variables for eventual axios post
                 var tempTeamMemberUserID = this.id.replace(/workDescDelaysTeamLineUserName_[0-9]*/i, "");
-                var tempworkDescDelaysTeamLineUserName_ = "#" + $(this).attr("id");
                 //end suck in variables for eventual axios post
 
-                $.confirm({
-                    title: 'Delete Team Member?',
-                    content: '',
-                    buttons: {
-                        confirm: function () {
+                //begin tattler pop up
+                alert("User name " + tempTeamMemberUserID + '\n' +
+                    "in time entry " + slctd_timeEntryID + '\n' +
+                    "has been selected for deletion.");
+                //end tattler pop up
 
-                            //begin deleting team member from a time entry
-                            //begin axios delete post
-                            axios.post('/workDescDelays/DeleteTeamMember', {
+                //begin deleting team member from a time entry
+                //begin axios delete post
+                axios.post('/workDescDelays/DeleteTeamMember', {
 
-                                timeEntryID: slctd_timeEntryID,
-                                userName: tempTeamMemberUserID,
-                            })
-                                .then(function (response) {
-                                    console.log(response);
-                                })
-                                .catch(function (error) {
-                                    console.log(error);
-                                });
-                            //end axios add post
-                            //end deleting team member from a time entry
-                            $(tempworkDescDelaysTeamLineUserName_).remove();
-                            $.alert(tempTeamMemberUserID + ' has been deleted.');
-                            //remove it from the view after it has been deleted from the database                            
-                        },
-                        cancel: function () {
-                        }
-                    }
-                }); 
+                    timeEntryID: slctd_timeEntryID,
+                    userName: tempTeamMemberUserID,
+                })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                //end axios add post
+                //end deleting team member from a time entry
+
+                //remove it from the view after it has been deleted from the database
+                $("#" + $(this).attr("id")).remove();
             });
             //end when a line team member class is clicked for the purpose of deletion...
 
@@ -259,29 +253,20 @@
                 //end suck in variables
 
                 //begin tattler pop up
-                //alert("deleting time entry id: " + slctd_timeEntryID);
+                alert("deleting time entry id: " + slctd_timeEntryID);
                 //end tattler pop up
 
-                $.confirm({
-                    title: 'Delete Time Entry ' + slctd_timeEntryID + '?',
-                    content: '',
-                    buttons: {
-                        confirm: function () {
-                            //begin axios delete post
-                            axios.post('/workDescDelays/DeleteWorkDesc', {
-                                timeEntryID: slctd_timeEntryID,
-                            })
-                                .then(function (response) {
-                                    console.log(response);
-                                })
-                                .catch(function (error) {
-                                });
-                            //end axios delete post                        
-                        },
-                        cancel: function () {
-                        }
-                    }
-                });
+                //begin axios delete post
+                axios.post('/workDesc/DeleteWorkDesc', {
+                    timeEntryID: slctd_timeEntryID,
+                })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                //end axios delete post
             });
             //end when the line delete button is pressed
 
@@ -391,7 +376,7 @@
 
 @*END ALLPAX TEAM*@
 
-<div class=" container pl-auto printable" style="margin:5px" id="contnr_workDescription">
+<div class=" container pl-auto" style="margin:5px" id="contnr_workDescription">
     <div class="row">
         <div class="col-7" style="padding:5px">
             <strong>Delays</strong>
@@ -437,7 +422,7 @@
 @*END WORK DESCRIPTION TEMPLATE ADD NEW WORK DESCRIPTION*@
 
 @*BEGIN DISPLAY WORK DESCRIPTION RECORDS*@
-<div class=" container pl-auto printable" style="margin:5px" id="contnr_workDescription">
+<div class=" container pl-auto" style="margin:5px" id="contnr_workDescription">
     @foreach (var item in Model)
     {
         //BEGIN TEMPORARY LOOP VARIABLES

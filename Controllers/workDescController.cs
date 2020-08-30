@@ -184,7 +184,7 @@ namespace allpax_service_record.Controllers
         {
             db.Database.ExecuteSqlCommand("DELETE FROM tbl_dailyReportTimeEntry WHERE timeEntryID=({0})", workDescDelete.timeEntryID);
 
-            return new EmptyResult();
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -204,7 +204,7 @@ namespace allpax_service_record.Controllers
             db.Database.ExecuteSqlCommand("UPDATE tbl_dailyReportTimeEntry SET workDescription={1} WHERE timeEntryID={0}",
                   workDescUpdate.timeEntryID, workDescUpdate.workDescription);
 
-            return new EmptyResult();
+            return RedirectToAction("Index");
         }
 
 
