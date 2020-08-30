@@ -94,10 +94,6 @@
                     dataType: 'json',
                     data: { userName: '%', dailyReportID: dailyReportID },
                     success: function (data) {
-<<<<<<< HEAD
-=======
-
->>>>>>> authorization
                         $(data).each(function (index, item) {
                             workDescTeam_dpdwn.append($('<option/>', { value: item.userName, text: item.shortName }))
                         });
