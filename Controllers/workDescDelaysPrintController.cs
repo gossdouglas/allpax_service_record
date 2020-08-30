@@ -13,7 +13,7 @@ using allpax_service_record.Models.View_Models;
 
 namespace allpax_service_record.Controllers
 {
-    public class workDescDelaysController : Controller
+    public class workDescDelaysPrintController : Controller
     {
         private allpaxServiceRecordEntities db = new allpaxServiceRecordEntities();
 
@@ -186,7 +186,7 @@ namespace allpax_service_record.Controllers
         {
             db.Database.ExecuteSqlCommand("DELETE FROM tbl_dailyReportTimeEntry WHERE timeEntryID=({0})", workDescDelete.timeEntryID);
 
-            return new EmptyResult();
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

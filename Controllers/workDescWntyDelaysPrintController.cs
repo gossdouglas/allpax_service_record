@@ -13,7 +13,7 @@ using allpax_service_record.Models.View_Models;
 
 namespace allpax_service_record.Controllers
 {
-    public class workDescDelaysController : Controller
+    public class workDescWntyDelaysPrintController : Controller
     {
         private allpaxServiceRecordEntities db = new allpaxServiceRecordEntities();
 
@@ -35,7 +35,7 @@ namespace allpax_service_record.Controllers
                 "WHERE " +
                 "tbl_dailyReportTimeEntry.dailyReportID = @dailyReportID " +
                 "AND " +
-                "tbl_dailyReportTimeEntry.workDescriptionCategory = '2'";
+                "tbl_dailyReportTimeEntry.workDescriptionCategory = '3'";
 
             SqlCommand sqlcomm1 = new SqlCommand(sqlquery1, sqlconn);
             sqlcomm1.Parameters.AddWithValue("@dailyReportID", dailyReportID);
@@ -167,10 +167,6 @@ namespace allpax_service_record.Controllers
                 workDescAdd.dailyReportID, workDescAdd.workDescription, workDescAdd.userName, workDescAdd.workDescriptionCategory, workDescAdd.hours);
            
             return new EmptyResult();
-            //return View();
-            //return RedirectToAction("Index");
-            //return RedirectToAction("Index", new { dailyReportID = workDescAdd.dailyReportID });
-            //return RedirectToAction("Index", "DailyReportByReportID", new { reportID = workDescAdd.dailyReportID});
         }
 
         [HttpPost]
@@ -186,7 +182,7 @@ namespace allpax_service_record.Controllers
         {
             db.Database.ExecuteSqlCommand("DELETE FROM tbl_dailyReportTimeEntry WHERE timeEntryID=({0})", workDescDelete.timeEntryID);
 
-            return new EmptyResult();
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

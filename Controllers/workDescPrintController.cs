@@ -13,7 +13,7 @@ using allpax_service_record.Models.View_Models;
 
 namespace allpax_service_record.Controllers
 {
-    public class workDescDelaysController : Controller
+    public class workDescPrintController : Controller
     {
         private allpaxServiceRecordEntities db = new allpaxServiceRecordEntities();
 
@@ -29,13 +29,13 @@ namespace allpax_service_record.Controllers
             //begin
             string sqlquery1 =
                 "SELECT tbl_dailyReportTimeEntry.dailyReportID, tbl_dailyReportTimeEntry.workDescription, " +
-                "tbl_dailyReportTimeEntry.hours, tbl_dailyReportTimeEntry.timeEntryID " +
+                "tbl_dailyReportTimeEntry.timeEntryID " +
 
                 "FROM tbl_dailyReportTimeEntry " +
                 "WHERE " +
-                "tbl_dailyReportTimeEntry.dailyReportID = @dailyReportID " +
+                "tbl_dailyReportTimeEntry.dailyReportID = @dailyReportID "+
                 "AND " +
-                "tbl_dailyReportTimeEntry.workDescriptionCategory = '2'";
+                "tbl_dailyReportTimeEntry.workDescriptionCategory = '1'"; 
 
             SqlCommand sqlcomm1 = new SqlCommand(sqlquery1, sqlconn);
             sqlcomm1.Parameters.AddWithValue("@dailyReportID", dailyReportID);
@@ -48,9 +48,7 @@ namespace allpax_service_record.Controllers
 
                 workDesc.dailyReportID = (int) dr1[0];
                 workDesc.workDescription = dr1[1].ToString();
-                workDesc.hours = (int)dr1[2];
-                workDesc.timeEntryID = (int)dr1[3];
-                //workDesc.timeEntryID = (int) dr1[2];
+                workDesc.timeEntryID = (int) dr1[2];
 
                 workDesc.userNames = workDescUsersByTimeEntryID(workDesc.timeEntryID);
                 workDesc.userShortNames = workDescUserShortNamesByTimeEntryID(workDesc.timeEntryID);
@@ -186,7 +184,7 @@ namespace allpax_service_record.Controllers
         {
             db.Database.ExecuteSqlCommand("DELETE FROM tbl_dailyReportTimeEntry WHERE timeEntryID=({0})", workDescDelete.timeEntryID);
 
-            return new EmptyResult();
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -203,8 +201,8 @@ namespace allpax_service_record.Controllers
 
         public ActionResult UpdateWorkDesc(vm_workDesc workDescUpdate)
         {
-            db.Database.ExecuteSqlCommand("UPDATE tbl_dailyReportTimeEntry SET workDescription={1}, workDescriptionCategory={2}, hours={3} WHERE timeEntryID={0}",
-                  workDescUpdate.timeEntryID, workDescUpdate.workDescription, workDescUpdate.workDescriptionCategory, workDescUpdate.hours);
+            db.Database.ExecuteSqlCommand("UPDATE tbl_dailyReportTimeEntry SET workDescription={1} WHERE timeEntryID={0}",
+                  workDescUpdate.timeEntryID, workDescUpdate.workDescription);
 
             return new EmptyResult();
         }

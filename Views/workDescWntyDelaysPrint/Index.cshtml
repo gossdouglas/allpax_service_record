@@ -159,44 +159,32 @@
             $(".workDescWntyDelaysTeamLineUserName_").on('click', function () {
                 //begin suck in variables for eventual axios post
                 var tempTeamMemberUserID = this.id.replace(/workDescWntyDelaysTeamLineUserName_[0-9]*/i, "");
-                var tempworkDescWntyDelaysTeamLineUserName_ = "#" + $(this).attr("id");
                 //end suck in variables for eventual axios post
 
                 //begin tattler pop up
-                //alert("User name " + tempTeamMemberUserID + '\n' +
-                //    "in time entry " + slctd_timeEntryID + '\n' +
-                //    "has been selected for deletion.");
+                alert("User name " + tempTeamMemberUserID + '\n' +
+                    "in time entry " + slctd_timeEntryID + '\n' +
+                    "has been selected for deletion.");
                 //end tattler pop up
 
-                $.confirm({
-                    title: 'Delete Team Member?',
-                    content: '',
-                    buttons: {
-                        confirm: function () {
+                //begin deleting team member from a time entry
+                //begin axios delete post
+                axios.post('/workDescWntyDelays/DeleteTeamMember', {
 
-                            //begin deleting team member from a time entry
-                            //begin axios delete post
-                            axios.post('/workDescWntyDelays/DeleteTeamMember', {
+                    timeEntryID: slctd_timeEntryID,
+                    userName: tempTeamMemberUserID,
+                })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                //end axios add post
+                //end deleting team member from a time entry
 
-                                timeEntryID: slctd_timeEntryID,
-                                userName: tempTeamMemberUserID,
-                            })
-                                .then(function (response) {
-                                    console.log(response);
-                                })
-                                .catch(function (error) {
-                                    console.log(error);
-                                });
-                            //end axios add post
-                            //end deleting team member from a time entry
-                            $(tempworkDescWntyDelaysTeamLineUserName_).remove();
-                            $.alert(tempTeamMemberUserID + ' has been deleted.');
-                            //remove it from the view after it has been deleted from the database                            
-                        },
-                        cancel: function () {
-                        }
-                    }
-                }); 
+                //remove it from the view after it has been deleted from the database
+                $("#" + $(this).attr("id")).remove();
             });
             //end when a line team member class is clicked for the purpose of deletion...
 
@@ -253,29 +241,20 @@
                 //end suck in variables
 
                 //begin tattler pop up
-                //alert("deleting time entry id: " + slctd_timeEntryID);
+                alert("deleting time entry id: " + slctd_timeEntryID);
                 //end tattler pop up
 
-                $.confirm({
-                    title: 'Delete Time Entry ' + slctd_timeEntryID + '?',
-                    content: '',
-                    buttons: {
-                        confirm: function () {
-                            //begin axios delete post
-                            axios.post('/workDescWntyDelays/DeleteWorkDesc', {
-                                timeEntryID: slctd_timeEntryID,
-                            })
-                                .then(function (response) {
-                                    console.log(response);
-                                })
-                                .catch(function (error) {
-                                });
-                            //end axios delete post                        
-                        },
-                        cancel: function () {
-                        }
-                    }
-                });
+                //begin axios delete post
+                axios.post('/workDescWntyDelays/DeleteWorkDesc', {
+                    timeEntryID: slctd_timeEntryID,
+                })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                //end axios delete post
             });
             //end when the line delete button is pressed
 
@@ -398,7 +377,7 @@
     </div>
 
 @*BEGIN WORK DESCRIPTION TEMPLATE ADD NEW WORK DESCRIPTION*@
-    <div class="col-12" id="workDescriptionWntyDelaysLine_template">
+    @*<div class="col-12" id="workDescriptionWntyDelaysLine_template">
         <div class="row" id="">
             <div class="col-7" id="input_workDescWntyDelays" style="padding:5px; border: 1px solid black;" contenteditable="true">
             </div>
@@ -425,12 +404,12 @@
                 <button type="button" class="btn btn-primary btn-sm" id="addWorkDescWntyDelaysBtn" style="background-color: royalblue; width: 100%">Save Entry</button>
             </div>
         </div>
-    </div>
+    </div>*@
 </div>
 @*END WORK DESCRIPTION TEMPLATE ADD NEW WORK DESCRIPTION*@
 
 @*BEGIN DISPLAY WORK DESCRIPTION RECORDS*@
-<div class=" container pl-auto printable" style="margin:5px" id="contnr_workDescription">
+<div class=" container pl-auto printable" style="margin:0px" id="contnr_workDescription">
     @foreach (var item in Model)
     {
         //BEGIN TEMPORARY LOOP VARIABLES
@@ -455,13 +434,13 @@
                         <span class="workDescWntyDelaysTeamLineUserName_" id="workDescWntyDelaysTeamLineUserName_@temp_timeEntryID@temp_userNames[@i]" style="pointer-events:none">@temp_userShortNames[@i]</span>
                     }
                 </div>
-                <div class="col-2" style="padding:5px">
+                @*<div class="col-2" style="padding:5px">
                     <select name="" class="workDescWntyDelaysTeamLine_dpdwn_" id="workDescWntyDelaysTeamLine_dpdwn_@temp_timeEntryID" style="width:100%" disabled>
                         <option value="">Team</option>
                     </select>
-                </div>
+                </div>*@
             </div>
-            <div class="row">
+            @*<div class="row">
                 <div class="col-2" style="padding:5px">
                     <div>
                         <span><strong>Time Entry:</strong></span>
@@ -480,7 +459,7 @@
                 <div class="col-2" style="padding:5px">
                     <button type="button" class="btn btn-primary btn-sm saveWorkDescWntyDelaysLineBtn_" id="saveWorkDescWntyDelaysLineBtn_@temp_timeEntryID" style="background-color: grey; width: 100%;" disabled>Save Edits</button>
                 </div>
-            </div>
+            </div>*@
         </div>
     }
     @*BEGIN DISPLAY WORK DESCRIPTION RECORDS*@

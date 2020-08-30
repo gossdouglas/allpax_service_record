@@ -2,10 +2,10 @@
 @*@model IEnumerable<allpax_service_record.Models.View_Models.vm_dailyReportByReportID>*@
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Print Daily Report";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@*DAILY REPORT BY REPORT ID PAGE*@
+@*PRINT DAILY REPORT PAGE*@
     <script>
         $(document).ready(function () {//begin document read jquery statements
 
@@ -14,20 +14,20 @@
             var addWorkDescBtn = $('#addWorkDescBtn');
             var dailyReportID = $("#txt_dailyReportID").html();
 
-            $.ajax({
-                url: 'DataService.asmx/GetAllTeamNames',
-                method: 'post',
-                dataType: 'json',
-                data: { userName: '%' },
-                success: function (data) {
+            //$.ajax({
+            //    url: 'DataService.asmx/GetAllTeamNames',
+            //    method: 'post',
+            //    dataType: 'json',
+            //    data: { userName: '%' },
+            //    success: function (data) {
 
-                    team_dpdwn.append($('<option/>', { value: -1, text: 'Add Team Member' }));
+            //        team_dpdwn.append($('<option/>', { value: -1, text: 'Add Team Member' }));
 
-                    $(data).each(function (index, item) {
-                        team_dpdwn.append($('<option/>', { value: item.userName, text: item.name + "-" + item.shortName }));
-                    });
-                }
-            });
+            //        $(data).each(function (index, item) {
+            //            team_dpdwn.append($('<option/>', { value: item.userName, text: item.name + "-" + item.shortName }));
+            //        });
+            //    }
+            //});
             ////end fill the team names dropdown
 
             //begin load team members on page load
@@ -35,7 +35,8 @@
                 url: 'DataService.asmx/GetAllTeamNamesByReportID',
                 method: 'post',
                 dataType: 'json',
-                data: { userName: '%', dailyReportID: dailyReportID },
+                //data: { userName: '%', dailyReportID: dailyReportID },
+                data: { userName: '%', dailyReportID: '50' },
                 success: function (data) {
 
                     $(data).each(function (index, item) {
@@ -120,8 +121,12 @@
             //end when a team member class is clicked...
             //end when a record class is clicked...
 
-            $("#printDailyReport").click(function () {//when a record's edit button is clicked...
-                window.location = '/DailyReportByReportIDPrint?reportID=' + dailyReportID;
+            $("#printDailyReport").click(function () {
+                //$("#nama").printThis({
+                $(".printable").printThis({
+                    importCSS: true,
+                    importStyle: true,
+                });
             });
 
         });//end document read jquery statements
@@ -256,7 +261,7 @@
     }
 </div>
 
-<button id="printDailyReport">PRINTABLE VERSION</button>
+<button id="printDailyReport">PRINT</button>
 
 
 
