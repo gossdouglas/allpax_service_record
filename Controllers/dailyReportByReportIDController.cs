@@ -15,6 +15,7 @@ using allpax_service_record.Models.MODEL_TESTING;
 
 namespace allpax_service_record.Controllers
 {
+    [Authorize]
     public class dailyReportByReportIDController : Controller
     {
         private allpaxServiceRecordEntities db = new allpaxServiceRecordEntities();
