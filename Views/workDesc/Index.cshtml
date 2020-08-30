@@ -14,8 +14,6 @@
     <script>
         $(document).ready(function () {//begin document jquery statements
 
-            $("#contnr_team :input").prop("disabled", true);//disable the daily log section
-
             //begin this partial view's variable declaration section
             var slctd_timeEntryID;
             var slctd_workDescText;
@@ -24,6 +22,9 @@
             var workDescTeamLine_dpdwn = $('.workDescTeamLine_dpdwn_');
             //end this partial view's variable declaration section
 
+            $("#contnr_team :input").prop("disabled", true);//disable the daily log section
+            //$(workDescTeam_dpdwn).prop("disabled", true);//disable the daily log section
+          
             //begin when a new work description is added for a given daily report...
             $("#addWorkDescBtn").on('click', function () {
 
@@ -49,6 +50,7 @@
                     //end suck in variables for eventual axios post
 
                     if (tempTeamMemberUserID.length > 0) {//if that userName is greater than 0
+
                         //begin axios add post
                         axios.post('/workDesc/AddWorkDesc', {
                             dailyReportID: addItem1,
@@ -389,7 +391,7 @@
                 </div>
             </div>
             <div class="col-10" style="padding:5px">
-                <button type="button" class="btn btn-primary btn-sm" id="addWorkDescBtn" style="background-color: royalblue; width: 100%">Save Entry</button>
+                <button type="button" class="btn btn-primary btn-sm" id="addWorkDescBtn" style="background-color: royalblue; width: 100%">Save Work Description</button>
             </div>
         </div>
     </div>
