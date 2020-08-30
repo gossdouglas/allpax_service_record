@@ -11,8 +11,6 @@ using allpax_service_record.Models.View_Models;
 
 namespace allpax_service_record.Controllers
 {
-    [Authorize]
-    //[Authorize(Roles = "Admin")]
     public class dailyReportAllController : Controller
     {
         private allpaxServiceRecordEntities db = new allpaxServiceRecordEntities();
